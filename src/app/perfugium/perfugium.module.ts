@@ -15,7 +15,8 @@ import { FooterComponent } from './component/footer/footer.component';
   ],
   exports: [
     CharacterListComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ]
 })
 export class PerfugiumModule { }

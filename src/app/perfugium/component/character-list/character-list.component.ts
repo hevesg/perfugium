@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Character} from '../../interface/character';
 
 @Component({
   selector: 'prf-character-list',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./character-list.component.scss']
 })
 export class CharacterListComponent implements OnInit {
+
+  @Input()
+  public characters: Character[];
 
   constructor() { }
 

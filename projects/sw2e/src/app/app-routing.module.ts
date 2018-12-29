@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {CharacterListComponent} from '../../../../src/app/perfugium/component/character-list/character-list.component';
+import {Sw2eCharacterListComponent} from './component/sw2e-character-list/sw2e-character-list.component';
 
 const routes: Routes = [
   {
     path: 'character',
-    component: CharacterListComponent
+    component: Sw2eCharacterListComponent
   },
   {
     path: '**',

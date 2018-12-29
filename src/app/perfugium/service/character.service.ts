@@ -44,17 +44,6 @@ export abstract class CharacterService {
     localStorage.removeItem(this._data.id);
   }
 
-  public list(game: string): Character[] {
-    const list: Character[] = [];
-    Object.keys(localStorage).forEach((x) => {
-      const char: Character = JSON.parse(localStorage.getItem(x));
-      if (char.game === game) {
-        list.push();
-      }
-    });
-    return list;
-  }
-
   private getUniqueId(): string {
     const id: string = md5(new Date().getTime());
     if (localStorage.getItem(id) !== null) {

@@ -1,4 +1,4 @@
-import {D6Attribute} from '../../../../d6/src/lib/interface/d6-attribute';
+import {D6Attribute} from '../../../../../src/app/d6/interface/d6-attribute';
 
 export interface Sw2eAttributes {
   dexterity: D6Attribute;

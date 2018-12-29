@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Sw2eCharacter} from '../interface/sw2e-character';
-import {D6CharacterService} from '../../../../d6/src/lib/service/d6-character.service';
+import {D6CharacterService} from '../../../../../src/app/d6/service/d6-character.service';
 
 @Injectable({
   providedIn: 'root'

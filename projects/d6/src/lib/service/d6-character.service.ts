@@ -1,4 +1,4 @@
-import {CharacterService} from '../../../../../src/app/service/character.service';
+import {CharacterService} from '../../../../../src/app/perfugium/service/character.service';
 import {D6Attribute} from '../interface/d6-attribute';
 
 export abstract class D6CharacterService extends CharacterService {

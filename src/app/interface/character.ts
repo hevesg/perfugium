@@ -1,5 +1,6 @@
 export interface Character {
   id: string;
+  game: string;
   name: string;
   description: string;
   created: number;

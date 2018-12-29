@@ -1,6 +1,7 @@
 import {Sw2eCharacter} from '../interface/sw2e-character';
 
 const testCharacter: Sw2eCharacter = {
+  id: '78e731027d8fd50ed642340b7c9a63b3',
   name: 'Gippy Betany',
   description: 'Test character',
   created: 1546043351146,

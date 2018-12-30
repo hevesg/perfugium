@@ -7,6 +7,21 @@ export const adiGallia: Sw2eCharacter = {
   description: 'A human jedi from Coruscant',
   created: 1546043351146,
   modified: 1546043351146,
+  general: {
+    gender: 'Female',
+    species: 'human',
+    homeWorld: 'Coruscant',
+    age: 26,
+    height: 184,
+    weight: 85,
+    physicalDescription: 'Gallia was a tall human female with a trim build. She bore an exotic beauty and wore an odd headdress draped ' +
+      'with organic tentacles. The Force runs strongly in Gallia\'s family. A close relative of hers is also a Jedi Knight.',
+    personality: 'Gallia was a superb pilot and skillful warrior. Unlike most Jedi, Gallia adopted an unorthodox reverse one-handed grip ' +
+      'when wielding her lightsaber.',
+    background: '',
+    objectives: '',
+    quote: ''
+  },
   attributes: {
     dexterity: {
       value: 9,

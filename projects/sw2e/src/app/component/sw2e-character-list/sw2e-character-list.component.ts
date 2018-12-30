@@ -15,7 +15,7 @@ export class Sw2eCharacterListComponent implements OnInit {
 
   ngOnInit() {
     this.characters = this.game.list();
-    console.log(this.characters);
+    // localStorage.setItem('78e731027d8fd50ed642340b7c9a63b3', JSON.stringify(corporateSecurityGuard));
   }
 
 }

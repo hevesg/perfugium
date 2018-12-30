@@ -15,7 +15,7 @@ export class GameService {
     Object.keys(localStorage).forEach((x) => {
       const char: Character = JSON.parse(localStorage.getItem(x));
       if (char.game === this._gameId) {
-        list.push();
+        list.push(char);
       }
     });
     return list;

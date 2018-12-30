@@ -1,6 +1,6 @@
 import {Sw2eCharacter} from '../interface/sw2e-character';
 
-const testCharacter: Sw2eCharacter = {
+export const corporateSecurityGuard: Sw2eCharacter = {
   id: '78e731027d8fd50ed642340b7c9a63b3',
   game: 'sw2e',
   name: 'Gippy Betany',

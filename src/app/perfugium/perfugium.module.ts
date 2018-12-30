@@ -4,6 +4,7 @@ import {CharacterListComponent} from './component/character-list/character-list.
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { FooterComponent } from './component/footer/footer.component';
 import {RouterModule} from '@angular/router';
+import {BsModule} from '../bs/bs.module';
 
 @NgModule({
   declarations: [
@@ -13,12 +14,14 @@ import {RouterModule} from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    BsModule
   ],
   exports: [
     CharacterListComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    BsModule
   ]
 })
 export class PerfugiumModule { }

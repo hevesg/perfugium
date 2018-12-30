@@ -13,6 +13,10 @@ export class Sw2eCharacterService extends D6CharacterService {
     super('sw2e');
   }
 
+  public get data(): Sw2eCharacter {
+    return this._data;
+  }
+
   create(): void {
     super.create();
     this.createAttributes();

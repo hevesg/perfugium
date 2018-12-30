@@ -1,10 +1,12 @@
-<div class="card mb-4">
-  <div class="card-body">
-    <h5 class="card-title mb-0">{{ title }}</h5>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
-</div>
+<h5 class="d-flex">
+  <span class="flex-grow-1 ">{{ title }}</span>
+  <span>{{ attribute.value }}</span>
+</h5>
+<ul class="list-unstyled" *ngIf="attribute.skills.length">
+  <li class="d-flex" *ngFor="let skill of attribute.skills">
+    <span>{{ skill.name }}</span>
+    <span class="flex-grow-1 border-bottom"></span>
+    <span>{{ skill.value }}</span>
+  </li>
+</ul>
+

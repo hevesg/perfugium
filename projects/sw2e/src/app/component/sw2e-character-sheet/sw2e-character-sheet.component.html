@@ -39,34 +39,7 @@
     </div>
     <div class="col-lg-6">
       <prf-card>
-        <h5>Equipment</h5>
-        <div class="row">
-          <div class="col-sm-6 d-flex">
-            <span>Blaster</span>
-            <span class="flex-grow-1 border-bottom"></span>
-            <span>1</span>
-          </div>
-          <div class="col-sm-6 d-flex">
-            <span>Uniform</span>
-            <span class="flex-grow-1 border-bottom"></span>
-            <span>2</span>
-          </div>
-          <div class="col-sm-6 d-flex">
-            <span>Blaster</span>
-            <span class="flex-grow-1 border-bottom"></span>
-            <span>1</span>
-          </div>
-          <div class="col-sm-6 d-flex">
-            <span>Uniform</span>
-            <span class="flex-grow-1 border-bottom"></span>
-            <span>2</span>
-          </div>
-          <div class="col-sm-6 d-flex">
-            <span>Credits</span>
-            <span class="flex-grow-1 border-bottom"></span>
-            <span>{{ 15028 | currency : ' ' }}</span>
-          </div>
-        </div>
+        <sw2e-equipment [equipment]="data.equipment" [credits]="data.credits"></sw2e-equipment>
       </prf-card>
     </div>
   </div>

@@ -33,6 +33,50 @@
           </div>
         </div>
       </prf-card>
+      <prf-card>
+        <h5>Special Abilities</h5>
+        <ul class="list-inline">
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Force sensitive</strong>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Force points:</strong>
+            <span class="pr-2">{{ data.force.points }}</span>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Dark side points:</strong>
+            <span class="pr-2">{{ data.force.darkSide }}</span>
+          </li>
+        </ul>
+        <dl *ngIf="data.force.abilities.length">
+          <ng-container *ngFor="let ability of data.force.abilities">
+            <dt class="d-flex border-bottom">
+              <span class="flex-grow-1">{{ ability.name }}</span>
+              <span *ngIf="ability.value">{{ ability.value | pip}}</span>
+            </dt>
+            <p *ngIf="ability.description" class="small">{{ ability.description }}</p>
+            <dd *ngIf="ability.list" class="d-flex small">
+              <ul class="list-inline">
+                <li class="list-inline-item" *ngFor="let item of ability.list">{{ item }}</li>
+              </ul>
+            </dd>
+          </ng-container>
+        </dl>
+        <dl *ngIf="data.abilities.length">
+          <ng-container *ngFor="let ability of data.abilities">
+            <dt class="d-flex border-bottom">
+              <span class="flex-grow-1">{{ ability.name }}</span>
+              <span *ngIf="ability.value">{{ ability.value | pip}}</span>
+            </dt>
+            <p *ngIf="ability.description" class="small">{{ ability.description }}</p>
+            <dd *ngIf="ability.list" class="d-flex small">
+              <ul class="list-inline">
+                <li class="list-inline-item" *ngFor="let item of ability.list">{{ item }}</li>
+              </ul>
+            </dd>
+          </ng-container>
+        </dl>
+      </prf-card>
     </div>
     <div class="col-lg-6">
       <prf-card>

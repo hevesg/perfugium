@@ -90,5 +90,49 @@ export const adiGallia: Sw2eCharacter = {
     { name: 'Knife', difficulty: D6Difficulty.VeryEasy, damage: 3, strength: true }
   ],
   credits: 1000,
+  force: {
+    sensitive: true,
+    points: 2,
+    darkSide: 0,
+    abilities: [
+      { name: 'Control', value: 25,
+        list: ['Absorb/Dissipate Energy',
+          'Accelerate Healing',
+          'Concentration',
+          'Control Pain',
+          'Enhance Attribute',
+          'Hibernation Trance',
+          'Resist Stun'
+        ]},
+      { name: 'Sense', value: 27,
+        list: ['Combat Sense',
+          'Danger Sense',
+          'Life Detection',
+          'Life Sense',
+          'Magnify Senses',
+          'Receptive Telepathy',
+          'Sense Force'
+        ]},
+      { name: 'Alter', value: 24,
+        list: ['Telekinesis']},
+      { name: 'Control and Sense',
+        list: ['Lightsaber Combat',
+          'Projective Telepathy'
+        ]},
+      { name: 'Control and Alter',
+        list: ['Accelerate Another\'s Healing',
+          'Control Another\'s Pain'
+        ]},
+      { name: 'Sense and Alter',
+        list: ['Lesser Force Shield']},
+      { name: 'Control, Sense and Alter',
+        list: ['Affect Mind',
+          'Projected Fighting'
+        ]}
+    ]
+  },
+  abilities: [
+    { name: 'Gills', description: 'Can breath underwater' }
+  ],
   speed: 10
 };

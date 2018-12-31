@@ -1,4 +1,5 @@
 import {Sw2eCharacter} from '../interface/sw2e-character';
+import {D6Difficulty} from '../../../../../src/app/d6/enum/d6-difficulty.enum';
 
 export const adiGallia: Sw2eCharacter = {
   id: '78e731027d8fd50ed642340b7c9a63b3',
@@ -82,6 +83,11 @@ export const adiGallia: Sw2eCharacter = {
     { name: 'Jedi Robes' },
     { name: 'Utility Belt' },
     { name: 'Thermal detonator', quantity: 2 }
+  ],
+  weapons: [
+    { name: 'Blaster', damage: 12, range: {pb: 3, short: 25, medium: 50, long: 250 }, charge: 100 },
+    { name: 'Lightsaber', difficulty: D6Difficulty.VeryHard, damage: 15 },
+    { name: 'Knife', difficulty: D6Difficulty.VeryEasy, damage: 3, strength: true }
   ],
   credits: 1000,
   speed: 10

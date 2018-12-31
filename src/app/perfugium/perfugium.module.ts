@@ -5,12 +5,14 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { FooterComponent } from './component/footer/footer.component';
 import {RouterModule} from '@angular/router';
 import {BsModule} from '../bs/bs.module';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
     CharacterListComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    TimeAgoPipe
   ],
   imports: [
     CommonModule,

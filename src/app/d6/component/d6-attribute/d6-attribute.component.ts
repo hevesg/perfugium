@@ -9,7 +9,7 @@ import {D6Attribute} from '../../interface/d6-attribute';
 export class D6AttributeComponent implements OnInit {
 
   @Input()
-  public title: string;
+  public label = 'Label';
 
   @Input()
   public attribute: D6Attribute;

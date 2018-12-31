@@ -37,20 +37,7 @@
     <div class="col-lg-6">
       <prf-card>
         <sw2e-equipment [equipment]="data.equipment" [credits]="data.credits"></sw2e-equipment>
-        <h5>Weapons</h5>
-        <table class="table table-borderless">
-          <tr>
-            <td>Blaster</td>
-            <td>3-25/50/250</td>
-            <td>{{ 15 | pip}}</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>Lightsaber</td>
-            <td>VH</td>
-            <td colspan="2">{{ 15 | pip}}</td>
-          </tr>
-        </table>
+        <sw2e-weapons [weapons]="data.weapons"></sw2e-weapons>
       </prf-card>
       <prf-card>
         <ul class="list-inline">

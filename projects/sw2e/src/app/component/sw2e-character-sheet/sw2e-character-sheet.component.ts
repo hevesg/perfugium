@@ -28,7 +28,7 @@ export class Sw2eCharacterSheetComponent implements OnInit {
   }
 
   openEquipmentDialog() {
-    this.dialog.open(Sw2eEquipmentDialogComponent);
+    this.dialog.open(Sw2eEquipmentDialogComponent, { data: this.data.inventory });
   }
 
 }

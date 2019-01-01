@@ -1,3 +1,25 @@
 <prf-modal label="Equipment" (close)="close()">
-  ...
+  <ul class="list-unstyled">
+    <li class="d-sm-flex">
+      <div class="flex-grow-1 p-2 align-self-center">
+        <input type="texxt" class="form-control" />
+      </div>
+      <div class="p-2 align-self-center"></div>
+      <div class="btn-group p-2 align-self-center">
+        <button type="button" class="btn btn-secondary">-</button>
+        <button type="button" class="btn btn-secondary">+</button>
+      </div>
+      <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary">add</button></div>
+    </li>
+    <li class="d-sm-flex" *ngFor="let equipment of data.equipment">
+      <div class="flex-grow-1 p-2 align-self-center">{{ equipment.name }}</div>
+      <div class="p-2 align-self-center">{{ equipment.quantity }}</div>
+      <div class="btn-group p-2 align-self-center">
+        <button type="button" class="btn btn-secondary">-</button>
+        <button type="button" class="btn btn-secondary">+</button>
+      </div>
+      <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary">remove</button></div>
+    </li>
+  </ul>
+  <p>{{ data.credits }}</p>
 </prf-modal>

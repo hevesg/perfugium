@@ -34,7 +34,7 @@
         </div>
       </prf-card>
       <prf-card>
-        <h5>Special Abilities</h5>
+        <h5>Special Abilities <span class="fa fa-angle-left"></span> </h5>
         <ul class="list-inline">
           <li class="pr-2 list-inline-item">
             <strong class="pr-2">Force sensitive</strong>
@@ -83,8 +83,8 @@
         <div (click)="openEquipmentDialog()" class="clickable">
           <h5>Equipment</h5>
           <ul class="list-inline">
-            <li class="list-inline-item" *ngFor="let equipment of data.equipment">{{ equipment.name }} <span *ngIf="equipment.quantity && equipment.quantity > 0">({{ equipment.quantity }})</span></li>
-            <li class="list-inline-item">{{ data.credits | currency }}</li>
+            <li class="list-inline-item" *ngFor="let equipment of data.inventory.equipment">{{ equipment.name }} <span *ngIf="equipment.quantity && equipment.quantity > 0">({{ equipment.quantity }})</span></li>
+            <li class="list-inline-item">{{ data.inventory.credits | currency }}</li>
           </ul>
         </div>
         <sw2e-weapons [weapons]="data.weapons"></sw2e-weapons>

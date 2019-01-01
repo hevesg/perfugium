@@ -1,5 +1,6 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Sw2eInventory} from '../../interface/sw2e-inventory';
 
 @Component({
   selector: 'sw2e-equipment-dialog',
@@ -9,7 +10,8 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 export class Sw2eEquipmentDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<Sw2eEquipmentDialogComponent>
+    public dialogRef: MatDialogRef<Sw2eEquipmentDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Sw2eInventory
   ) { }
 
   public close() {

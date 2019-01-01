@@ -78,18 +78,20 @@ export const adiGallia: Sw2eCharacter = {
       ]
     }
   },
-  equipment: [
-    { name: 'Blue Lightsaber' },
-    { name: 'Jedi Robes' },
-    { name: 'Utility Belt' },
-    { name: 'Thermal detonator', quantity: 2 }
-  ],
+  inventory: {
+    equipment: [
+      { name: 'Blue Lightsaber' },
+      { name: 'Jedi Robes' },
+      { name: 'Utility Belt' },
+      { name: 'Thermal detonator', quantity: 2 }
+    ],
+    credits: 1000
+  },
   weapons: [
     { name: 'Blaster', damage: 12, range: {pb: 3, short: 25, medium: 50, long: 250 }, charge: 100 },
     { name: 'Lightsaber', difficulty: D6Difficulty.VeryHard, damage: 15 },
     { name: 'Knife', difficulty: D6Difficulty.VeryEasy, damage: 3, strength: true }
   ],
-  credits: 1000,
   force: {
     sensitive: true,
     points: 2,

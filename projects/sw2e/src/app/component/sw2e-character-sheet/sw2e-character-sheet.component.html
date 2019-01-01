@@ -80,7 +80,13 @@
     </div>
     <div class="col-lg-6">
       <prf-card>
-        <sw2e-equipment [equipment]="data.equipment" [credits]="data.credits"></sw2e-equipment>
+        <div (click)="openEquipmentDialog()" class="clickable">
+          <h5>Equipment</h5>
+          <ul class="list-inline">
+            <li class="list-inline-item" *ngFor="let equipment of data.equipment">{{ equipment.name }} <span *ngIf="equipment.quantity && equipment.quantity > 0">({{ equipment.quantity }})</span></li>
+            <li class="list-inline-item">{{ data.credits | currency }}</li>
+          </ul>
+        </div>
         <sw2e-weapons [weapons]="data.weapons"></sw2e-weapons>
       </prf-card>
       <prf-card>

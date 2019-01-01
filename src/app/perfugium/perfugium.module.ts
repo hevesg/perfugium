@@ -6,6 +6,8 @@ import { FooterComponent } from './component/footer/footer.component';
 import {RouterModule} from '@angular/router';
 import {BsModule} from '../bs/bs.module';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import {MatDialogModule} from '@angular/material';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,17 @@ import {TimeAgoPipe} from 'time-ago-pipe';
   imports: [
     CommonModule,
     RouterModule,
-    BsModule
+    BsModule,
+    MatDialogModule,
+    NoopAnimationsModule
   ],
   exports: [
     CharacterListComponent,
     NavbarComponent,
     FooterComponent,
-    BsModule
+    BsModule,
+    MatDialogModule,
+    NoopAnimationsModule
   ]
 })
 export class PerfugiumModule { }

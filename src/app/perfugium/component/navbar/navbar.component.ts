@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Character} from '../../interface/character';
 
 @Component({
   selector: 'prf-navbar',
@@ -6,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  @Input()
+  public character: Character;
+
+  @Input()
+  public label: string;
 
   constructor() { }
 

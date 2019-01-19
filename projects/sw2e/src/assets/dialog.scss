@@ -8,8 +8,8 @@
 
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
   pointer-events: none;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
 }
@@ -23,10 +23,10 @@
 }
 
 .cdk-overlay-backdrop {
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   -webkit-tap-highlight-color: transparent;
   opacity: 0;
   transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
@@ -51,4 +51,5 @@
 
 .mat-dialog-container {
   padding: 0 !important;
+  max-height: 80vh !important;
 }

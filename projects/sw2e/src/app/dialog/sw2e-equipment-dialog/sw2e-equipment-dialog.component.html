@@ -1,25 +1,25 @@
-<prf-modal label="Equipment" (close)="close()">
+<prf-modal label="Equipment" (close)="close()" (save)="save()">
   <ul class="list-unstyled">
     <li class="d-sm-flex">
       <div class="flex-grow-1 p-2 align-self-center">
-        <input type="texxt" class="form-control" />
+        <input type="text" class="form-control" />
       </div>
       <div class="p-2 align-self-center"></div>
       <div class="btn-group p-2 align-self-center">
         <button type="button" class="btn btn-secondary">-</button>
         <button type="button" class="btn btn-secondary">+</button>
       </div>
-      <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary">add</button></div>
+      <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary" (click)="addEquipment()">add</button></div>
     </li>
-    <li class="d-sm-flex" *ngFor="let equipment of data.equipment">
+    <li class="d-sm-flex" *ngFor="let equipment of dialogData.equipment; let index = index">
       <div class="flex-grow-1 p-2 align-self-center">{{ equipment.name }}</div>
       <div class="p-2 align-self-center">{{ equipment.quantity }}</div>
       <div class="btn-group p-2 align-self-center">
-        <button type="button" class="btn btn-secondary">-</button>
-        <button type="button" class="btn btn-secondary">+</button>
+        <button type="button" class="btn btn-secondary" [disabled]="!equipment.quantity || equipment.quantity < 2" (click)="removeItem(index)">-</button>
+        <button type="button" class="btn btn-secondary" (click)="addItem(index)">+</button>
       </div>
-      <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary">remove</button></div>
+      <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary" (click)="removeEquipment(index)">remove</button></div>
     </li>
   </ul>
-  <p>{{ data.credits }}</p>
+  <p>{{ dialogData.credits }}</p>
 </prf-modal>

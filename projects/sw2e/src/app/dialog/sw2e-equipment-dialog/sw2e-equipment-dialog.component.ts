@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Sw2eInventory} from '../../interface/sw2e-inventory';
 import {UpdateDialog} from '../../../../../../src/app/perfugium/interface/update-dialog';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {Equipment} from '../../../../../../src/app/perfugium/interface/equipment';
 
 @Component({
@@ -21,7 +21,6 @@ export class Sw2eEquipmentDialogComponent implements OnInit, UpdateDialog<Sw2eIn
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
     const equipments = this.data.equipment.map((x) => this.addEquipment(x));
 
     this.formGroup = this.formBuilder.group({
@@ -34,7 +33,8 @@ export class Sw2eEquipmentDialogComponent implements OnInit, UpdateDialog<Sw2eIn
   }
 
   public save() {
-    this.dialogRef.close();
+    this.data = this.formGroup.getRawValue();
+    this.dialogRef.close(this.data);
   }
 
   public addEquipment(x: Equipment = null): FormGroup {
@@ -45,15 +45,8 @@ export class Sw2eEquipmentDialogComponent implements OnInit, UpdateDialog<Sw2eIn
   }
 
   public removeEquipment(index: number): void {
-    // this.formGroup.controls.equipments.controls.get('equipments').controls.
-    this.data.equipment.splice(index, 1);
-  }
-
-  private createEquipment(x: Equipment): FormGroup {
-    return this.formBuilder.group({
-      name : [ x.name, Validators.required ],
-      quantity : x.quantity
-    });
+    const equipments: FormArray = this.formGroup.get('equipments') as FormArray;
+    equipments.controls.splice(index, 1);
   }
 
 }

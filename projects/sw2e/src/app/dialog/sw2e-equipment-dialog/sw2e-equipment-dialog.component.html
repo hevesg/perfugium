@@ -1,25 +1,12 @@
-<prf-modal label="Equipment" (close)="close()" (save)="save()">
-  <ul class="list-unstyled">
-    <li class="d-sm-flex">
+<prf-modal label="Equipment" (close)="close()" (save)="save()" [formGroup]="formGroup" [submittable]="formGroup.valid">
+  <ul class="list-unstyled" formArrayName="equipments">
+    <li class="d-sm-flex" *ngFor="let equipment of formGroup.get('equipments').controls; let index = index" [formGroupName]="index">
       <div class="flex-grow-1 p-2 align-self-center">
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" placeholder="Item name" formControlName="name" />
       </div>
-      <div class="p-2 align-self-center"></div>
-      <div class="btn-group p-2 align-self-center">
-        <button type="button" class="btn btn-secondary">-</button>
-        <button type="button" class="btn btn-secondary">+</button>
-      </div>
-      <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary" (click)="addEquipment()">add</button></div>
-    </li>
-    <li class="d-sm-flex" *ngFor="let equipment of dialogData.equipment; let index = index">
-      <div class="flex-grow-1 p-2 align-self-center">{{ equipment.name }}</div>
-      <div class="p-2 align-self-center">{{ equipment.quantity }}</div>
-      <div class="btn-group p-2 align-self-center">
-        <button type="button" class="btn btn-secondary" [disabled]="!equipment.quantity || equipment.quantity < 2" (click)="removeItem(index)">-</button>
-        <button type="button" class="btn btn-secondary" (click)="addItem(index)">+</button>
-      </div>
+      <prf-number-stepper formControlName="quantity" min="1"></prf-number-stepper>
       <div class="p-2 align-self-center"><button type="button" class="btn btn-secondary" (click)="removeEquipment(index)">remove</button></div>
     </li>
   </ul>
-  <p>{{ dialogData.credits }}</p>
+  <p>{{ data.credits }}</p>
 </prf-modal>

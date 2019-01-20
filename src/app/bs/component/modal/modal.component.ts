@@ -10,6 +10,9 @@ export class ModalComponent {
   @Input()
   public label: string;
 
+  @Input()
+  public submittable = true;
+
   @Output()
   private close = new EventEmitter();
 

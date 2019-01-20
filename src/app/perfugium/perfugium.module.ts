@@ -8,6 +8,7 @@ import {BsModule} from '../bs/bs.module';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {MatDialogModule} from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,11 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     RouterModule,
     BsModule,
     MatDialogModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    ReactiveFormsModule
   ],
   exports: [
+    ReactiveFormsModule,
     CharacterListComponent,
     NavbarComponent,
     FooterComponent,

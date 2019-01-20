@@ -1,0 +1,9 @@
+<div class="d-sm-flex">
+  <div class="p-2 align-self-center flex-grow-1 text-right">
+    {{ value }}
+  </div>
+  <div class="btn-group p-2 align-self-center">
+    <button type="button" class="btn btn-secondary" (click)="decrease()" [disabled]="minDisabled">-</button>
+    <button type="button" class="btn btn-secondary" (click)="increase()" [disabled]="maxDisabled">+</button>
+  </div>
+</div>

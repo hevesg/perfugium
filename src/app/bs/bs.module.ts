@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from './card/card.component';
+import { CardComponent } from './component/card/card.component';
 import { IconDirective } from './directive/icon.directive';
-import { ModalComponent } from './modal/modal.component';
+import { ModalComponent } from './component/modal/modal.component';
+import { NumberStepperComponent } from './component/number-stepper/number-stepper.component';
 
 @NgModule({
   declarations: [
     CardComponent,
     IconDirective,
-    ModalComponent
+    ModalComponent,
+    NumberStepperComponent
   ],
   imports: [
     CommonModule
@@ -16,7 +18,8 @@ import { ModalComponent } from './modal/modal.component';
   exports: [
     CardComponent,
     IconDirective,
-    ModalComponent
+    ModalComponent,
+    NumberStepperComponent
   ]
 })
 export class BsModule { }

@@ -1,22 +1,32 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Sw2eInventory} from '../../interface/sw2e-inventory';
+import {UpdateDialog} from '../../../../../../src/app/perfugium/interface/update-dialog';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Equipment} from '../../../../../../src/app/perfugium/interface/equipment';
 
 @Component({
   selector: 'sw2e-equipment-dialog',
   templateUrl: './sw2e-equipment-dialog.component.html',
   styleUrls: ['./sw2e-equipment-dialog.component.scss']
 })
-export class Sw2eEquipmentDialogComponent {
+export class Sw2eEquipmentDialogComponent implements OnInit, UpdateDialog<Sw2eInventory> {
 
-  public dialogData: Sw2eInventory;
+  public formGroup: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<Sw2eEquipmentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Sw2eInventory
-  ) {
-    console.log('const');
-    this.dialogData = Object.assign({}, this.data);
+    @Inject(MAT_DIALOG_DATA) public data: Sw2eInventory,
+    private formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    console.log(this.data);
+    const equipments = this.data.equipment.map((x) => this.addEquipment(x));
+
+    this.formGroup = this.formBuilder.group({
+      equipments: this.formBuilder.array(equipments)
+    });
   }
 
   public close() {
@@ -24,33 +34,26 @@ export class Sw2eEquipmentDialogComponent {
   }
 
   public save() {
-    console.log(this.dialogData);
     this.dialogRef.close();
   }
 
-  public addEquipment() {
-
+  public addEquipment(x: Equipment = null): FormGroup {
+    return this.formBuilder.group({
+      name : [ x.name, Validators.required ],
+      quantity : x.quantity || 1
+    });
   }
 
   public removeEquipment(index: number): void {
-    this.dialogData.equipment.splice(index, 1);
-    console.log(this.data);
-    console.log(this.dialogData);
+    // this.formGroup.controls.equipments.controls.get('equipments').controls.
+    this.data.equipment.splice(index, 1);
   }
 
-  public addItem(index: number): void {
-    let quantity = this.dialogData.equipment[index].quantity ? this.dialogData.equipment[index].quantity : 1;
-    quantity++;
-    this.dialogData.equipment[index].quantity = quantity;
-  }
-
-  public removeItem(index: number): void {
-    if (this.dialogData.equipment[index].quantity > 1) {
-      this.dialogData.equipment[index].quantity--;
-    }
-    if (this.dialogData.equipment[index].quantity === 1) {
-      delete this.dialogData.equipment[index].quantity;
-    }
+  private createEquipment(x: Equipment): FormGroup {
+    return this.formBuilder.group({
+      name : [ x.name, Validators.required ],
+      quantity : x.quantity
+    });
   }
 
 }

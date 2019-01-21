@@ -34,7 +34,7 @@
         </div>
       </prf-card>
       <prf-card>
-        <h5>Special Abilities <span class="fa fa-angle-left"></span> </h5>
+        <h5>Special Abilities</h5>
         <ul class="list-inline">
           <li class="pr-2 list-inline-item">
             <strong class="pr-2">Force sensitive</strong>
@@ -119,26 +119,40 @@
           </li>
         </ul>
         <hr />
-        <p>
-          <strong class="pr-2">Physical description:</strong>
-          <span>{{ data.general.physicalDescription }}</span>
-        </p>
-        <p>
-          <strong class="pr-2">Personality:</strong>
-          <span>{{ data.general.personality }}</span>
-        </p>
-        <p>
-          <strong class="pr-2">Background:</strong>
-          <span>{{ data.general.background }}</span>
-        </p>
-        <p>
-          <strong class="pr-2">Objectives:</strong>
-          <span>{{ data.general.objectives }}</span>
-        </p>
-        <p>
-          <strong class="pr-2">A quote:</strong>
-          <span>{{ data.general.quote }}</span>
-        </p>
+        <div class="row">
+          <div class="col-xl-6">
+            <p>
+              <strong class="pr-2">Physical description:</strong>
+              <span>{{ data.general.physicalDescription }}</span>
+            </p>
+          </div>
+          <div class="col-xl-6">
+            <p>
+              <strong class="pr-2">Personality:</strong>
+              <span>{{ data.general.personality }}</span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <p>
+              <strong class="pr-2">Background:</strong>
+              <span>{{ data.general.background }}</span>
+            </p>
+          </div>
+          <div class="col-xl-4">
+            <p>
+              <strong class="pr-2">Objectives:</strong>
+              <span>{{ data.general.objectives }}</span>
+            </p>
+          </div>
+          <div class="col-xl-4">
+            <p>
+              <strong class="pr-2">A quote:</strong>
+              <span>{{ data.general.quote }}</span>
+            </p>
+          </div>
+        </div>
       </prf-card>
     </div>
   </div>

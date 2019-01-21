@@ -5,15 +5,19 @@
     </button>
   </p>
   <ul class="list-unstyled" formArrayName="equipment">
-    <li class="d-sm-flex" *ngFor="let equ of formGroup.get('equipment').controls; let index = index" [formGroupName]="index">
+    <li class="d-sm-flex border-bottom" *ngFor="let equ of formGroup.get('equipment').controls; let index = index" [formGroupName]="index">
       <div class="flex-grow-1 p-2 align-self-center">
         <input type="text" class="form-control" placeholder="Item name" formControlName="name" />
       </div>
-      <prf-number-stepper formControlName="quantity" min="1"></prf-number-stepper>
-      <div class="p-2 align-self-center">
-        <button type="button" class="btn btn-secondary" (click)="removeEquipment(index)">
-          <i class="fas fa-trash-alt"></i>
-        </button>
+      <div class="align-self-center">
+        <div class="d-flex justify-content-end">
+          <prf-number-stepper formControlName="quantity" min="1"></prf-number-stepper>
+          <div class="p-2 align-self-center">
+            <button type="button" class="btn btn-secondary" (click)="removeEquipment(index)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </li>
   </ul>

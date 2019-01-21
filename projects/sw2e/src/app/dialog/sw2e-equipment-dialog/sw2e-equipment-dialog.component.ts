@@ -21,32 +21,45 @@ export class Sw2eEquipmentDialogComponent implements OnInit, UpdateDialog<Sw2eIn
   ) { }
 
   ngOnInit(): void {
-    const equipments = this.data.equipment.map((x) => this.addEquipment(x));
-
     this.formGroup = this.formBuilder.group({
-      equipments: this.formBuilder.array(equipments)
+      equipment: this.formBuilder.array(
+        this.data.equipment.map((x) => this._createEquipment(x))
+      ),
+      credits: this.data.credits
     });
   }
 
   public close() {
-    this.dialogRef.close();
-  }
-
-  public save() {
-    this.data = this.formGroup.getRawValue();
     this.dialogRef.close(this.data);
   }
 
-  public addEquipment(x: Equipment = null): FormGroup {
+  public save() {
+    const rawData: Sw2eInventory = this.formGroup.getRawValue();
+    rawData.equipment.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    rawData.equipment = rawData.equipment.map((x) => {
+      return {
+        name: x.name,
+        quantity: x.quantity > 1 ? x.quantity : null
+      };
+    });
+    this.dialogRef.close(rawData);
+  }
+
+  private _createEquipment(x: Equipment = null): FormGroup {
     return this.formBuilder.group({
       name : [ x.name, Validators.required ],
       quantity : x.quantity || 1
     });
   }
 
+  public addEquipment(): void {
+    (this.formGroup.get('equipment') as FormArray).insert(0, this._createEquipment({name: undefined}));
+  }
+
   public removeEquipment(index: number): void {
-    const equipments: FormArray = this.formGroup.get('equipments') as FormArray;
-    equipments.controls.splice(index, 1);
+    const array: FormArray = (this.formGroup.get('equipment') as FormArray);
+    array.at(index).clearValidators();
+    array.controls.splice(index, 1);
   }
 
 }

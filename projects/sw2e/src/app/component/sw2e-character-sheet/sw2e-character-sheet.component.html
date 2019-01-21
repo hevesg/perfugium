@@ -2,31 +2,31 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-sm-6">
       <prf-card>
         <div class="row">
-          <div class="col-sm-6 col-md-12 col-lg-6">
+          <div class="col-lg-6 col-xl-12">
             <div class="row">
-              <div class="col-md-4 col-lg-12">
+              <div class="col-xl-4">
                 <prf-d6-attribute label="Dexterity" [attribute]="data.attributes.dexterity"></prf-d6-attribute>
               </div>
-              <div class="col-md-4 col-lg-12">
+              <div class="col-xl-4">
                 <prf-d6-attribute label="Knowledge" [attribute]="data.attributes.knowledge"></prf-d6-attribute>
               </div>
-              <div class="col-md-4 col-lg-12">
+              <div class="col-xl-4">
                 <prf-d6-attribute label="Mechanical" [attribute]="data.attributes.mechanical"></prf-d6-attribute>
               </div>
             </div>
           </div>
-          <div class="col-sm-6 col-md-12 col-lg-6">
+          <div class="col-lg-6 col-xl-12">
             <div class="row">
-              <div class="col-md-4 col-lg-12">
+              <div class="col-xl-4">
                 <prf-d6-attribute label="Perception" [attribute]="data.attributes.perception"></prf-d6-attribute>
               </div>
-              <div class="col-md-4 col-lg-12">
+              <div class="col-xl-4">
                 <prf-d6-attribute label="Strength" [attribute]="data.attributes.strength"></prf-d6-attribute>
               </div>
-              <div class="col-md-4 col-lg-12">
+              <div class="col-xl-4">
                 <prf-d6-attribute label="Technical" [attribute]="data.attributes.technical"></prf-d6-attribute>
               </div>
             </div>
@@ -78,16 +78,22 @@
         </dl>
       </prf-card>
     </div>
-    <div class="col-lg-6">
+    <div class="col-sm-6">
       <prf-card>
-        <div (click)="openEquipmentDialog()" class="clickable">
-          <h5>Equipment</h5>
-          <ul class="list-inline">
-            <li class="list-inline-item" *ngFor="let equipment of data.inventory.equipment">{{ equipment.name }} <span *ngIf="equipment.quantity && equipment.quantity > 0">({{ equipment.quantity }})</span></li>
-            <li class="list-inline-item">{{ data.inventory.credits | currency }}</li>
-          </ul>
+        <div class="row">
+          <div class="col-xl-6">
+            <div (click)="openEquipmentDialog()" class="clickable">
+              <h5>Equipment</h5>
+              <ul class="list-inline">
+                <li class="list-inline-item" *ngFor="let equipment of data.inventory.equipment">{{ equipment.name }} <span *ngIf="equipment.quantity && equipment.quantity > 0">({{ equipment.quantity }})</span></li>
+                <li class="list-inline-item">{{ data.inventory.credits | currency }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <sw2e-weapons [weapons]="data.weapons"></sw2e-weapons>
+          </div>
         </div>
-        <sw2e-weapons [weapons]="data.weapons"></sw2e-weapons>
       </prf-card>
       <prf-card>
         <ul class="list-inline">

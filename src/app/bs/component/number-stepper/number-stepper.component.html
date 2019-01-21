@@ -3,7 +3,11 @@
     {{ value }}
   </div>
   <div class="btn-group p-2 align-self-center">
-    <button type="button" class="btn btn-secondary" (click)="decrease()" [disabled]="minDisabled">-</button>
-    <button type="button" class="btn btn-secondary" (click)="increase()" [disabled]="maxDisabled">+</button>
+    <button type="button" class="btn btn-secondary" (click)="decrease()" [disabled]="minDisabled">
+      <i class="fas fa-minus"></i>
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="increase()" [disabled]="maxDisabled">
+      <i class="fas fa-plus"></i>
+    </button>
   </div>
 </div>

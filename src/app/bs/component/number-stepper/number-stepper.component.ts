@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
@@ -19,6 +19,9 @@ export class NumberStepperComponent implements ControlValueAccessor {
   @Input() max: number = Number.MAX_SAFE_INTEGER;
 
   @Input() value = 0;
+
+  @Output() increased: EventEmitter<void> = new EventEmitter<void>();
+  @Output() decreased: EventEmitter<void> = new EventEmitter<void>();
 
   propagateChange = (_: any) => {};
 
@@ -42,6 +45,7 @@ export class NumberStepperComponent implements ControlValueAccessor {
     if (this.max > this.value) {
       this.value++;
       this.propagateChange(this.value);
+      this.increased.emit();
     }
   }
 
@@ -49,6 +53,7 @@ export class NumberStepperComponent implements ControlValueAccessor {
     if (this.min < this.value) {
       this.value--;
       this.propagateChange(this.value);
+      this.decreased.emit();
     }
   }
 

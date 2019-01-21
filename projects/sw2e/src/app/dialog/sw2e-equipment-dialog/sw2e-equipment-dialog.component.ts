@@ -30,7 +30,7 @@ export class Sw2eEquipmentDialogComponent implements OnInit, UpdateDialog<Sw2eIn
   }
 
   public close() {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close();
   }
 
   public save() {

@@ -1,6 +1,6 @@
 <prf-modal label="Equipment" (close)="close()" (save)="save()" [formGroup]="formGroup" [submittable]="formGroup.valid">
   <p class="text-right">
-    <button type="button" class="btn btn-secondary" (click)="addEquipment()">
+    <button type="button" class="btn btn-secondary" (click)="addEquipment()" [disabled]="formGroup.invalid">
       <i class="fas fa-plus-square"></i> Add new item to inventory
     </button>
   </p>

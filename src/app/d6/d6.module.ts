@@ -4,9 +4,10 @@ import {PerfugiumModule} from '../perfugium/perfugium.module';
 import { D6AttributeComponent } from './component/d6-attribute/d6-attribute.component';
 import { PipPipe } from './pipe/pip.pipe';
 import { D6WeaponRangePipe } from './pipe/d6-weapon-range.pipe';
+import { D6AttributeDialogComponent } from './dialog/d6-attribute-dialog/d6-attribute-dialog.component';
 
 @NgModule({
-  declarations: [D6AttributeComponent, PipPipe, D6WeaponRangePipe],
+  declarations: [D6AttributeComponent, PipPipe, D6WeaponRangePipe, D6AttributeDialogComponent],
   imports: [
     CommonModule,
     PerfugiumModule
@@ -15,7 +16,14 @@ import { D6WeaponRangePipe } from './pipe/d6-weapon-range.pipe';
     PerfugiumModule,
     D6AttributeComponent,
     PipPipe,
-    D6WeaponRangePipe
+    D6WeaponRangePipe,
+    D6AttributeDialogComponent
+  ],
+  providers: [
+    D6AttributeDialogComponent
+  ],
+  entryComponents: [
+    D6AttributeDialogComponent
   ]
 })
 export class D6Module { }

@@ -5,9 +5,10 @@ import { D6AttributeComponent } from './component/d6-attribute/d6-attribute.comp
 import { PipPipe } from './pipe/pip.pipe';
 import { D6WeaponRangePipe } from './pipe/d6-weapon-range.pipe';
 import { D6AttributeDialogComponent } from './dialog/d6-attribute-dialog/d6-attribute-dialog.component';
+import { PipStepperComponent } from './component/pip-stepper/pip-stepper.component';
 
 @NgModule({
-  declarations: [D6AttributeComponent, PipPipe, D6WeaponRangePipe, D6AttributeDialogComponent],
+  declarations: [D6AttributeComponent, PipPipe, D6WeaponRangePipe, D6AttributeDialogComponent, PipStepperComponent],
   imports: [
     CommonModule,
     PerfugiumModule

@@ -1,3 +1,16 @@
 <prf-modal label="{{ data.label }} attribute" (close)="close()" (save)="save()" [formGroup]="formGroup" [submittable]="formGroup.valid">
+  <div class="d-flex">
+    <span class="align-self-center p-2">{{ data.label }}</span>
+    <span class="flex-grow-1"></span>
+    <span class="d-flex justify-content-end">
+      <prf-pip-stepper formControlName="attr"></prf-pip-stepper>
+      <span class="p-2">
+        <button type="button" class="btn btn-secondary" [disabled]="formGroup.invalid">
+          <i class="fas fa-plus-square"></i> Add new skill
+        </button>
+      </span>
+    </span>
+  </div>
+  <hr />
 
 </prf-modal>

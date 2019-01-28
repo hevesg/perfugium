@@ -41,12 +41,12 @@
 
 .clickable {
   cursor: pointer;
-  transition: background-color 500ms;
+  transition: background-color 200ms;
   border: dashed 2px transparent;
-  padding: 5px 5px 0;
-  margin: -7px;
+  padding: $paragraph-margin-bottom 5px 0;
+  margin: -$paragraph-margin-bottom -7px;
   &:hover {
-    background-color: $white;
+    background-color: $gray-100;
     border-color: $gray-400;
     position: relative;
     z-index: 100;

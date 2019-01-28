@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './component/card/card.component';
 import { ModalComponent } from './component/modal/modal.component';
-import { NumberStepperComponent } from './component/number-stepper/number-stepper.component';
+import { NumericStepperComponent } from './component/numeric-stepper/numeric-stepper.component';
 
 @NgModule({
   declarations: [
     CardComponent,
     ModalComponent,
-    NumberStepperComponent
+    NumericStepperComponent
   ],
   imports: [
     CommonModule
@@ -16,7 +16,7 @@ import { NumberStepperComponent } from './component/number-stepper/number-steppe
   exports: [
     CardComponent,
     ModalComponent,
-    NumberStepperComponent
+    NumericStepperComponent
   ]
 })
 export class BsModule { }

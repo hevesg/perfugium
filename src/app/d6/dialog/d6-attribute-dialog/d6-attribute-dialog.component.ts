@@ -21,7 +21,9 @@ export class D6AttributeDialogComponent implements OnInit, UpdateDialog<D6Attrib
   ) { }
 
   ngOnInit() {
-    this.formGroup = this.formBuilder.group({});
+    this.formGroup = this.formBuilder.group({
+      'attr' : this.data.attribute.value
+    });
   }
 
   close(): void {
@@ -29,7 +31,8 @@ export class D6AttributeDialogComponent implements OnInit, UpdateDialog<D6Attrib
   }
 
   save(): void {
-    this.dialogRef.close();
+    console.log(this.formGroup.getRawValue());
+    // this.dialogRef.close();
   }
 
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NumberStepperComponent } from './number-stepper.component';
+import { NumericStepperComponent } from './numeric-stepper.component';
 
-describe('NumberStepperComponent', () => {
-  let component: NumberStepperComponent;
-  let fixture: ComponentFixture<NumberStepperComponent>;
+describe('NumericStepperComponent', () => {
+  let component: NumericStepperComponent;
+  let fixture: ComponentFixture<NumericStepperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NumberStepperComponent ]
+      declarations: [ NumericStepperComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NumberStepperComponent);
+    fixture = TestBed.createComponent(NumericStepperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

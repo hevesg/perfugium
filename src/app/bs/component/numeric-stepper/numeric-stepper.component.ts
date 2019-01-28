@@ -3,17 +3,17 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'prf-number-stepper',
-  templateUrl: './number-stepper.component.html',
-  styleUrls: ['./number-stepper.component.scss'],
+  templateUrl: './numeric-stepper.component.html',
+  styleUrls: ['./numeric-stepper.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NumberStepperComponent),
+      useExisting: forwardRef(() => NumericStepperComponent),
       multi: true
     }
   ]
 })
-export class NumberStepperComponent implements ControlValueAccessor {
+export class NumericStepperComponent implements ControlValueAccessor {
 
   @Input() min: number = Number.MIN_SAFE_INTEGER;
   @Input() max: number = Number.MAX_SAFE_INTEGER;

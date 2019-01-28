@@ -3,6 +3,7 @@ import {UpdateDialog} from '../../../perfugium/interface/update-dialog';
 import {D6Attribute} from '../../interface/d6-attribute';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {D6AttributeDialogData} from '../../interface/d6-attribute-dialog-data';
 
 @Component({
   selector: 'prf-d6-attribute-dialog',
@@ -15,7 +16,7 @@ export class D6AttributeDialogComponent implements OnInit, UpdateDialog<D6Attrib
 
   constructor(
     public dialogRef: MatDialogRef<D6AttributeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: D6Attribute,
+    @Inject(MAT_DIALOG_DATA) public data: D6AttributeDialogData,
     private formBuilder: FormBuilder
   ) { }
 

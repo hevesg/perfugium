@@ -13,7 +13,7 @@
         <div class="d-flex justify-content-end">
           <prf-number-stepper formControlName="quantity" min="1"></prf-number-stepper>
           <div class="p-2 align-self-center">
-            <button type="button" class="btn btn-secondary" (click)="removeEquipment(index)">
+            <button type="button" class="btn btn-secondary" [disabled]="formGroup.get('equipment').get(index.toString()).invalid" (click)="removeEquipment(index)">
               <i class="fas fa-trash-alt"></i>
             </button>
           </div>

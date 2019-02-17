@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PipPipe implements PipeTransform {
 
-  transform(value: any, args?: any): string {
+  transform(value: number): string {
     let ret: string = Math.floor(value / 3) + 'D';
     const mod: number = value % 3;
     if (mod > 0) {

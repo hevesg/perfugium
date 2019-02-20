@@ -19,6 +19,7 @@ export class NumericStepperComponent implements ControlValueAccessor {
   @Input() max: number = Number.MAX_SAFE_INTEGER;
 
   @Input() value = 0;
+  @Input() disabled = false;
 
   @Output() increased: EventEmitter<void> = new EventEmitter<void>();
   @Output() decreased: EventEmitter<void> = new EventEmitter<void>();
@@ -35,6 +36,7 @@ export class NumericStepperComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   writeValue(val: any): void {

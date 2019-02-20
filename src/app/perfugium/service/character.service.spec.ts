@@ -1,12 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CharacterServiceService } from './character.service';
+import { CharacterService } from './character.service';
+import {Injectable} from '@angular/core';
 
-describe('CharacterServiceService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+describe('CharacterService', () => {
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  class TestService extends CharacterService {
+    constructor() {
+      super('test');
+    }
+  }
+
+  beforeEach(() => TestBed.configureTestingModule({ }));
 
   it('should be created', () => {
-    const service: CharacterServiceService = TestBed.get(CharacterServiceService);
+    const service: TestService = TestBed.get(TestService);
     expect(service).toBeTruthy();
   });
 });

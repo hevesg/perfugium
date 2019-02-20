@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CharacterListComponent } from './character-list.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 describe('CharacterListComponent', () => {
   let component: CharacterListComponent;
@@ -8,7 +10,10 @@ describe('CharacterListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CharacterListComponent ]
+      declarations: [ CharacterListComponent, TimeAgoPipe ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));

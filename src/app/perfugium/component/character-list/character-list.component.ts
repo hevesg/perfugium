@@ -9,7 +9,7 @@ import {Character} from '../../interface/character';
 export class CharacterListComponent implements OnInit {
 
   @Input()
-  public characters: Character[];
+  public characters: Character[] = [];
 
   constructor() { }
 

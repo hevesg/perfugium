@@ -20,7 +20,7 @@ describe('PipStepperComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be the same as parent Numeric Stepper', () => {
     expect(component).toBeTruthy();
   });
 });

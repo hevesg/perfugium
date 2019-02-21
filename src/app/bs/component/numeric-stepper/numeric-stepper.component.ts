@@ -1,4 +1,4 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
@@ -13,7 +13,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
     }
   ]
 })
-export class NumericStepperComponent implements ControlValueAccessor {
+export class NumericStepperComponent implements ControlValueAccessor, OnChanges {
 
   @Input() min: number = Number.MIN_SAFE_INTEGER;
   @Input() max: number = Number.MAX_SAFE_INTEGER;
@@ -27,6 +27,17 @@ export class NumericStepperComponent implements ControlValueAccessor {
   propagateChange = (_: any) => {};
 
   constructor() { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.min && changes.min.currentValue > this.value) {
+      this.propagateChange(this.min);
+      this.writeValue(this.min);
+    }
+    if (changes.max && changes.max.currentValue < this.value) {
+      this.propagateChange(this.max);
+      this.writeValue(this.max);
+    }
+  }
 
   registerOnChange(fn: any): void {
     this.propagateChange = fn;

@@ -46,4 +46,6 @@ describe('NumericStepperComponent', () => {
     component.decrease();
     expect(component.value).toEqual(0);
   });
+
+  // TODO: test min-max change
 });

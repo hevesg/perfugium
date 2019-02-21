@@ -6,7 +6,7 @@ import {Equipment} from '../../../../../../src/app/perfugium/interface/equipment
   templateUrl: './sw2e-equipment.component.html',
   styleUrls: ['./sw2e-equipment.component.scss']
 })
-export class Sw2eEquipmentComponent implements OnInit {
+export class Sw2eEquipmentComponent {
 
   @Input()
   public equipment: Equipment[];
@@ -15,8 +15,5 @@ export class Sw2eEquipmentComponent implements OnInit {
   public credits = 0;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

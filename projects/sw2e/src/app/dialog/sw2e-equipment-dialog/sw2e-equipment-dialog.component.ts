@@ -4,6 +4,7 @@ import {Sw2eInventory} from '../../interface/sw2e-inventory';
 import {UpdateDialog} from '../../../../../../src/app/perfugium/interface/update-dialog';
 import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {Equipment} from '../../../../../../src/app/perfugium/interface/equipment';
+import {Utils} from '../../../../../../src/app/perfugium/utils/utils';
 
 @Component({
   selector: 'sw2e-equipment-dialog',
@@ -35,7 +36,7 @@ export class Sw2eEquipmentDialogComponent implements OnInit, UpdateDialog<Sw2eIn
 
   public save() {
     const rawData: Sw2eInventory = this.formGroup.getRawValue();
-    rawData.equipment.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    rawData.equipment = Utils.sortByName(rawData.equipment);
     rawData.equipment = rawData.equipment.map((x) => {
       return {
         name: x.name,

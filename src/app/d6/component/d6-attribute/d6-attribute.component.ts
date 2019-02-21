@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {D6Attribute} from '../../interface/d6-attribute';
 import {MatDialog} from '@angular/material';
 import {D6AttributeDialogComponent} from '../../dialog/d6-attribute-dialog/d6-attribute-dialog.component';
+import {D6CharacterService} from '../../service/d6-character.service';
 
 @Component({
   selector: 'prf-d6-attribute',
@@ -16,6 +17,9 @@ export class D6AttributeComponent implements OnInit {
   @Input()
   public attribute: D6Attribute;
 
+  @Output()
+  public save: EventEmitter<D6Attribute> = new EventEmitter<D6Attribute>();
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -26,7 +30,7 @@ export class D6AttributeComponent implements OnInit {
 
     dialog.afterClosed().subscribe((x) => {
       if (x) {
-        this.attribute = x;
+        this.save.emit(x);
       }
     });
   }

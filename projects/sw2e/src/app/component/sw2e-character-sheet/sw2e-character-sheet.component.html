@@ -8,26 +8,26 @@
           <div class="col-lg-6 col-xl-12">
             <div class="row">
               <div class="col-xl-4">
-                <prf-d6-attribute label="Dexterity" [attribute]="data.attributes.dexterity"></prf-d6-attribute>
+                <prf-d6-attribute label="Dexterity" [attribute]="data.attributes.dexterity" (save)="saveAttribute('dexterity', $event)"></prf-d6-attribute>
               </div>
               <div class="col-xl-4">
-                <prf-d6-attribute label="Knowledge" [attribute]="data.attributes.knowledge"></prf-d6-attribute>
+                <prf-d6-attribute label="Knowledge" [attribute]="data.attributes.knowledge" (save)="saveAttribute('knowledge', $event)"></prf-d6-attribute>
               </div>
               <div class="col-xl-4">
-                <prf-d6-attribute label="Mechanical" [attribute]="data.attributes.mechanical"></prf-d6-attribute>
+                <prf-d6-attribute label="Mechanical" [attribute]="data.attributes.mechanical" (save)="saveAttribute('mechanical', $event)"></prf-d6-attribute>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-xl-12">
             <div class="row">
               <div class="col-xl-4">
-                <prf-d6-attribute label="Perception" [attribute]="data.attributes.perception"></prf-d6-attribute>
+                <prf-d6-attribute label="Perception" [attribute]="data.attributes.perception" (save)="saveAttribute('perception', $event)"></prf-d6-attribute>
               </div>
               <div class="col-xl-4">
-                <prf-d6-attribute label="Strength" [attribute]="data.attributes.strength"></prf-d6-attribute>
+                <prf-d6-attribute label="Strength" [attribute]="data.attributes.strength" (save)="saveAttribute('strength', $event)"></prf-d6-attribute>
               </div>
               <div class="col-xl-4">
-                <prf-d6-attribute label="Technical" [attribute]="data.attributes.technical"></prf-d6-attribute>
+                <prf-d6-attribute label="Technical" [attribute]="data.attributes.technical" (save)="saveAttribute('technical', $event)"></prf-d6-attribute>
               </div>
             </div>
           </div>

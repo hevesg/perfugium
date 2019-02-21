@@ -25,7 +25,9 @@ export class D6AttributeComponent implements OnInit {
     const dialog = this.dialog.open(D6AttributeDialogComponent, { data: { label: label, attribute: this.attribute } });
 
     dialog.afterClosed().subscribe((x) => {
-      if (x) {}
+      if (x) {
+        this.attribute = x;
+      }
     });
   }
 }

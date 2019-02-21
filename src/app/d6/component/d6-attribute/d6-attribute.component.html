@@ -1,7 +1,7 @@
 <div class="clickable" (click)="openAttributeDialog(label)">
   <h5 class="d-flex">
     <span class="flex-grow-1 ">{{ label }}</span>
-    <span>{{ attribute.value | pip }}</span>
+    <span>{{ attribute.attr | pip }}</span>
   </h5>
   <ul class="list-unstyled" *ngIf="attribute.skills.length">
     <li *ngFor="let skill of attribute.skills">

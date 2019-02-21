@@ -25,7 +25,7 @@ export const adiGallia: Sw2eCharacter = {
   },
   attributes: {
     dexterity: {
-      value: 9,
+      attr: 9,
       skills: [
         { name: 'Brawling Parry', value: 13 },
         { name: 'Dodge', value: 21 },
@@ -35,7 +35,7 @@ export const adiGallia: Sw2eCharacter = {
       ]
     },
     knowledge: {
-      value: 10,
+      attr: 10,
       skills: [
         { name: 'Bureaucracy', value: 12 },
         { name: 'Cultures', value: 21 },
@@ -45,7 +45,7 @@ export const adiGallia: Sw2eCharacter = {
       ]
     },
     mechanical: {
-      value: 14,
+      attr: 14,
       skills: [
         { name: 'Sensors', value: 21 },
         { name: 'Shields', value: 21 },
@@ -55,7 +55,7 @@ export const adiGallia: Sw2eCharacter = {
       ]
     },
     perception: {
-      value: 10,
+      attr: 10,
       skills: [
         { name: 'Bargain', value: 22 },
         { name: 'Con', value: 17 },
@@ -65,14 +65,14 @@ export const adiGallia: Sw2eCharacter = {
       ]
     },
     strength: {
-      value: 7,
+      attr: 7,
       skills: [
         { name: 'Brawling', value: 13 },
         { name: 'Climbing/Jumping', value: 9 },
       ]
     },
     technical: {
-      value: 8,
+      attr: 8,
       skills: [
         { name: 'Lightsaber Repair', value: 13 }
       ]

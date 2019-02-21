@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {D6AttributeDialogData} from '../../interface/d6-attribute-dialog-data';
 import {D6Skill} from '../../interface/d6-skill';
+import {Sw2eInventory} from '../../../../../projects/sw2e/src/app/interface/sw2e-inventory';
 
 @Component({
   selector: 'prf-d6-attribute-dialog',
@@ -24,7 +25,7 @@ export class D6AttributeDialogComponent implements OnInit, UpdateDialog<D6Attrib
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
-      attr: this.data.attribute.value,
+      attr: this.data.attribute.attr,
       skills: this.formBuilder.array(
         this.data.attribute.skills.map((x) => this._createSkill(x))
       )
@@ -36,14 +37,15 @@ export class D6AttributeDialogComponent implements OnInit, UpdateDialog<D6Attrib
   }
 
   save(): void {
-    console.log(this.formGroup.getRawValue());
-    // this.dialogRef.close();
+    const rawData: D6Attribute = this.formGroup.getRawValue();
+    rawData.skills.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    this.dialogRef.close(rawData);
   }
 
   private _createSkill(x: D6Skill = null): FormGroup {
     return this.formBuilder.group({
       name: [x.name, Validators.required],
-      value: x.value ? x.value : this.data.attribute.value
+      value: x.value ? x.value : this.data.attribute.attr
     });
   }
 }

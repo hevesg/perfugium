@@ -1,0 +1,19 @@
+@import "variables";
+
+.form-control.ng-touched.ng-invalid {
+  @extend .form-control.is-invalid;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: background-color 500ms, border-color 250ms;
+  border: dashed 2px transparent;
+  padding: $paragraph-margin-bottom 5px 0;
+  margin: -$paragraph-margin-bottom -7px;
+  &:hover {
+    background-color: $gray-100;
+    border-color: $gray-400;
+    position: relative;
+    z-index: 100;
+  }
+}

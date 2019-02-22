@@ -18,7 +18,7 @@
 // @import "~bootstrap/scss/custom-forms";
 @import "~bootstrap/scss/nav";
 @import "~bootstrap/scss/navbar";
-@import "card";
+@import "~bootstrap/scss/card";
 // @import "~bootstrap/scss/breadcrumb";
 // @import "~bootstrap/scss/pagination";
 // @import "~bootstrap/scss/badge";
@@ -38,17 +38,4 @@
 @import "~bootstrap/scss/print";
 
 @import "dialog";
-
-.clickable {
-  cursor: pointer;
-  transition: background-color 200ms;
-  border: dashed 2px transparent;
-  padding: $paragraph-margin-bottom 5px 0;
-  margin: -$paragraph-margin-bottom -7px;
-  &:hover {
-    background-color: $gray-100;
-    border-color: $gray-400;
-    position: relative;
-    z-index: 100;
-  }
-}
+@import "extention";

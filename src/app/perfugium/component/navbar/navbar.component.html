@@ -1,0 +1,9 @@
+<nav class="navbar navbar-expand navbar-dark bg-primary mb-4">
+  <span *ngIf="character">
+    <a routerLink="/character" class="navbar-brand">
+      <span class="fa fa-angle-left"></span>
+    </a>
+    <span class="navbar-brand">{{ character.name }}</span>
+  </span>
+  <span class="navbar-brand" *ngIf="label">{{ label }}</span>
+</nav>

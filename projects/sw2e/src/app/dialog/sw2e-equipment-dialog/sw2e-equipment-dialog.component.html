@@ -1,0 +1,27 @@
+<prf-modal label="Equipment" (close)="close()" (save)="save()" [formGroup]="formGroup" [submittable]="formGroup.valid">
+  <p class="text-right">
+    <button type="button" class="btn btn-secondary" (click)="addEquipment()" [disabled]="formGroup.invalid">
+      <i class="fas fa-plus-square"></i> Add new item to inventory
+    </button>
+  </p>
+  <ul class="list-unstyled" formArrayName="equipment">
+    <li class="d-sm-flex border-bottom" *ngFor="let equ of formGroup.get('equipment').controls; let index = index" [formGroupName]="index">
+      <div class="flex-grow-1 p-2 align-self-center">
+        <input type="text" class="form-control" placeholder="Item name" formControlName="name" />
+      </div>
+      <div class="align-self-center">
+        <div class="d-flex justify-content-end">
+          <prf-number-stepper formControlName="quantity" min="1"></prf-number-stepper>
+          <div class="p-2 align-self-center">
+            <button type="button" class="btn btn-secondary" [disabled]="formGroup.get('equipment').get(index.toString()).invalid" (click)="removeEquipment(index)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <p>
+    <input type="text" class="form-control" placeholder="Item name" formControlName="credits" />
+  </p>
+</prf-modal>

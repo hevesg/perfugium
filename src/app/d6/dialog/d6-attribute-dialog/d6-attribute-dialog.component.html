@@ -1,0 +1,33 @@
+<prf-modal label="{{ data.label }} attribute" (close)="close()" (save)="save()" [formGroup]="formGroup" [submittable]="formGroup.valid">
+  <div class="d-flex">
+    <span class="align-self-center p-2">{{ data.label }}</span>
+    <span class="flex-grow-1"></span>
+    <span class="d-flex justify-content-end">
+      <prf-pip-stepper formControlName="attr"></prf-pip-stepper>
+      <span class="p-2">
+        <button type="button" class="btn btn-secondary" [disabled]="formGroup.invalid" (click)="addSkill()">
+          <i class="fas fa-plus-square"></i> Add new skill
+        </button>
+      </span>
+    </span>
+  </div>
+  <hr />
+  <ul class="list-unstyled" formArrayName="skills">
+    <li class="d-sm-flex border-bottom" *ngFor="let skill of formGroup.get('skills').controls; let index = index" [formGroupName]="index">
+      <div class="flex-grow-1 p-2 align-self-center">
+        <input type="text" class="form-control" placeholder="Skill name" formControlName="name" />
+      </div>
+      <div class="align-self-center">
+        <div class="d-flex justify-content-end">
+          <prf-pip-stepper formControlName="value" [min]="formGroup.get('attr').value"></prf-pip-stepper>
+          <div class="p-2 align-self-center">
+            <button type="button" class="btn btn-secondary" [disabled]="formGroup.get('skills').get(index.toString()).invalid" (click)="removeSkill(index)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+</prf-modal>

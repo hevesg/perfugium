@@ -1,0 +1,15 @@
+<ul class="list-group" *ngIf="characters.length">
+  <a class="list-group-item list-group-item-action flex-column align-items-start">
+    Create new character
+  </a>
+  <a routerLink="/character/{{ character.id }}" *ngFor="let character of characters" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ character.name }}</h5>
+      <small>{{ character.modified | timeAgo}}</small>
+    </div>
+    <p class="mb-1">{{ character.description }}</p>
+  </a>
+</ul>
+<div  *ngIf="characters.length === 0">
+  There seems to be no characters for this game, click here to create one
+</div>

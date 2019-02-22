@@ -1,0 +1,23 @@
+<div class="clickable" (click)="openAttributeDialog(label)">
+  <h5 class="d-flex">
+    <span class="flex-grow-1 ">{{ label }}</span>
+    <span>{{ attribute.attr | pip }}</span>
+  </h5>
+  <ul class="list-unstyled" *ngIf="attribute.skills.length">
+    <li *ngFor="let skill of attribute.skills">
+      <div class="d-flex">
+        <span>{{ skill.name }}</span>
+        <span class="flex-grow-1 border-bottom"></span>
+        <span>{{ skill.value | pip }}</span>
+      </div>
+      <ul *ngIf="skill.specialisations">
+        <li class="d-flex small" *ngFor="let specialisation of skill.specialisations">
+          <span>{{ specialisation.name }}</span>
+          <span class="flex-grow-1 border-bottom"></span>
+          <span>{{ specialisation.value | pip }}</span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</div>

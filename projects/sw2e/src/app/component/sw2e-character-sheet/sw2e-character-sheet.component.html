@@ -1,0 +1,161 @@
+<prf-navbar [character]="data"></prf-navbar>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <prf-card>
+        <div class="row">
+          <div class="col-lg-6 col-xl-12">
+            <div class="row">
+              <div class="col-xl-4">
+                <prf-d6-attribute label="Dexterity" [attribute]="data.attributes.dexterity" (save)="saveAttribute('dexterity', $event)"></prf-d6-attribute>
+              </div>
+              <div class="col-xl-4">
+                <prf-d6-attribute label="Knowledge" [attribute]="data.attributes.knowledge" (save)="saveAttribute('knowledge', $event)"></prf-d6-attribute>
+              </div>
+              <div class="col-xl-4">
+                <prf-d6-attribute label="Mechanical" [attribute]="data.attributes.mechanical" (save)="saveAttribute('mechanical', $event)"></prf-d6-attribute>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-12">
+            <div class="row">
+              <div class="col-xl-4">
+                <prf-d6-attribute label="Perception" [attribute]="data.attributes.perception" (save)="saveAttribute('perception', $event)"></prf-d6-attribute>
+              </div>
+              <div class="col-xl-4">
+                <prf-d6-attribute label="Strength" [attribute]="data.attributes.strength" (save)="saveAttribute('strength', $event)"></prf-d6-attribute>
+              </div>
+              <div class="col-xl-4">
+                <prf-d6-attribute label="Technical" [attribute]="data.attributes.technical" (save)="saveAttribute('technical', $event)"></prf-d6-attribute>
+              </div>
+            </div>
+          </div>
+        </div>
+      </prf-card>
+      <prf-card>
+        <h5>Special Abilities</h5>
+        <ul class="list-inline">
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Force sensitive</strong>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Force points:</strong>
+            <span class="pr-2">{{ data.force.points }}</span>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Dark side points:</strong>
+            <span class="pr-2">{{ data.force.darkSide }}</span>
+          </li>
+        </ul>
+        <dl *ngIf="data.force.abilities.length">
+          <ng-container *ngFor="let ability of data.force.abilities">
+            <dt class="d-flex border-bottom">
+              <span class="flex-grow-1">{{ ability.name }}</span>
+              <span *ngIf="ability.value">{{ ability.value | pip}}</span>
+            </dt>
+            <p *ngIf="ability.description" class="small">{{ ability.description }}</p>
+            <dd *ngIf="ability.list" class="d-flex small">
+              <ul class="list-inline">
+                <li class="list-inline-item" *ngFor="let item of ability.list">{{ item }}</li>
+              </ul>
+            </dd>
+          </ng-container>
+        </dl>
+        <dl *ngIf="data.abilities.length">
+          <ng-container *ngFor="let ability of data.abilities">
+            <dt class="d-flex border-bottom">
+              <span class="flex-grow-1">{{ ability.name }}</span>
+              <span *ngIf="ability.value">{{ ability.value | pip}}</span>
+            </dt>
+            <p *ngIf="ability.description" class="small">{{ ability.description }}</p>
+            <dd *ngIf="ability.list" class="d-flex small">
+              <ul class="list-inline">
+                <li class="list-inline-item" *ngFor="let item of ability.list">{{ item }}</li>
+              </ul>
+            </dd>
+          </ng-container>
+        </dl>
+      </prf-card>
+    </div>
+    <div class="col-sm-6">
+      <prf-card>
+        <div class="row">
+          <div class="col-xl-6">
+            <div (click)="openEquipmentDialog()" class="clickable">
+              <h5>Equipment</h5>
+              <ul class="list-inline">
+                <li class="list-inline-item" *ngFor="let equipment of data.inventory.equipment">{{ equipment.name }} <span *ngIf="equipment.quantity && equipment.quantity > 0">({{ equipment.quantity }})</span></li>
+                <li class="list-inline-item">{{ data.inventory.credits | currency }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <sw2e-weapons [weapons]="data.weapons"></sw2e-weapons>
+          </div>
+        </div>
+      </prf-card>
+      <prf-card>
+        <ul class="list-inline">
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Gender / Species:</strong>
+            <span class="pr-2">{{ data.general.gender }} {{ data.general.species }}</span>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Home world:</strong>
+            <span class="pr-2">{{ data.general.homeWorld }}</span>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Age:</strong>
+            <span class="pr-2">{{ data.general.age }}</span>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Height:</strong>
+            <span class="pr-2">{{ data.general.height }}</span>
+          </li>
+          <li class="pr-2 list-inline-item">
+            <strong class="pr-2">Weight:</strong>
+            <span class="pr-2">{{ data.general.weight }}</span>
+          </li>
+        </ul>
+        <hr />
+        <div class="row">
+          <div class="col-xl-6">
+            <p>
+              <strong class="pr-2">Physical description:</strong>
+              <span>{{ data.general.physicalDescription }}</span>
+            </p>
+          </div>
+          <div class="col-xl-6">
+            <p>
+              <strong class="pr-2">Personality:</strong>
+              <span>{{ data.general.personality }}</span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <p>
+              <strong class="pr-2">Background:</strong>
+              <span>{{ data.general.background }}</span>
+            </p>
+          </div>
+          <div class="col-xl-4">
+            <p>
+              <strong class="pr-2">Objectives:</strong>
+              <span>{{ data.general.objectives }}</span>
+            </p>
+          </div>
+          <div class="col-xl-4">
+            <p>
+              <strong class="pr-2">A quote:</strong>
+              <span>{{ data.general.quote }}</span>
+            </p>
+          </div>
+        </div>
+      </prf-card>
+    </div>
+  </div>
+</div>
+
+<prf-footer></prf-footer>

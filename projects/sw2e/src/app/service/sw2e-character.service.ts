@@ -33,27 +33,4 @@ export class Sw2eCharacterService extends D6CharacterService {
     };
   }
 
-  public setDexterity(val: number) {
-    this.setAttribute(this._data.attributes.dexterity, val);
-  }
-
-  public setKnowledge(val: number) {
-    this.setAttribute(this._data.attributes.knowledge, val);
-  }
-
-  public setMechanical(val: number) {
-    this.setAttribute(this._data.attributes.mechanical, val);
-  }
-
-  public setPerception(val: number) {
-    this.setAttribute(this._data.attributes.perception, val);
-  }
-
-  public setStrength(val: number) {
-    this.setAttribute(this._data.attributes.strength, val);
-  }
-
-  public setTechnical(val: number) {
-    this.setAttribute(this._data.attributes.technical, val);
-  }
 }

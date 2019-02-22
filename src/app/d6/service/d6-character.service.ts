@@ -8,11 +8,11 @@ export abstract class D6CharacterService extends CharacterService {
   }
 
   protected createAttribute(val: number): D6Attribute {
-    return { value: val, skills: [] };
+    return { attr: val, skills: [] };
   }
 
   protected setAttribute(attr: D6Attribute, val: number): void {
-    const diff: number = val - attr.value;
+    const diff: number = val - attr.attr;
     attr.skills.forEach((x) => {
       if (diff < 0) {
         x.value += diff;
@@ -21,6 +21,6 @@ export abstract class D6CharacterService extends CharacterService {
         x.value = val;
       }
     });
-    attr.value = val;
+    attr.attr = val;
   }
 }

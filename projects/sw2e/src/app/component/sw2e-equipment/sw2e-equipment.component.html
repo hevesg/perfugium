@@ -1,5 +1,0 @@
-<h5>Equipment</h5>
-<ul class="list-inline">
-  <li class="list-inline-item" *ngFor="let equ of equipment">{{ equ.name }} <span *ngIf="equ.quantity && equ.quantity > 0">({{ equ.quantity }})</span></li>
-  <li class="list-inline-item">{{ credits | currency }}</li>
-</ul>

@@ -3,6 +3,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-6">
+
+      <!--Attributes-->
+
       <prf-card>
         <div class="row">
           <div class="col-lg-6 col-xl-12">
@@ -33,6 +36,9 @@
           </div>
         </div>
       </prf-card>
+
+      <!--Special Abilities-->
+
       <prf-card>
         <h5>Special Abilities</h5>
         <ul class="list-inline">
@@ -79,6 +85,9 @@
       </prf-card>
     </div>
     <div class="col-sm-6">
+
+      <!--Equipment-->
+
       <prf-card>
         <div class="row">
           <div class="col-xl-6">
@@ -91,10 +100,28 @@
             </div>
           </div>
           <div class="col-xl-6">
-            <sw2e-weapons [weapons]="data.weapons"></sw2e-weapons>
+            <div class="clickable">
+              <h5>Weapons</h5>
+              <dl>
+                <ng-container *ngFor="let weapon of data.weapons">
+                  <dt class="d-flex border-bottom">
+                    <span class="flex-grow-1">{{ weapon.name }}</span>
+                    <span><span *ngIf="weapon.strength">STR+</span>{{ weapon.damage | pip}}</span>
+                  </dt>
+                  <dd class="d-flex small">
+                    <span class="pr-4" *ngIf="weapon.range"><strong>Range:</strong> {{ weapon.range | d6WeaponRange}}</span>
+                    <span class="pr-4" *ngIf="weapon.difficulty"><strong>Difficulty:</strong> {{ weapon.difficulty }}</span>
+                    <span class="pr-4" *ngIf="weapon.charge"><strong>Charges:</strong> {{ weapon.charge }}</span>
+                  </dd>
+                </ng-container>
+              </dl>
+            </div>
           </div>
         </div>
       </prf-card>
+
+      <!--General information-->
+
       <prf-card>
         <ul class="list-inline">
           <li class="pr-2 list-inline-item">

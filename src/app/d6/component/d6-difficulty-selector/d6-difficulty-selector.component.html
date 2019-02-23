@@ -1,0 +1,3 @@
+<mat-radio-group class="btn-group btn-group-toggle" (change)="onChange($event)" [disabled]="disabled" [value]="value">
+  <mat-radio-button class="btn btn-secondary" [value]="difficulty" *ngFor="let difficulty of difficulties">{{ difficulty }}</mat-radio-button>
+</mat-radio-group>

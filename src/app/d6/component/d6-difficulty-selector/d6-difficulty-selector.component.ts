@@ -46,7 +46,6 @@ export class D6DifficultySelectorComponent implements ControlValueAccessor, OnIn
   }
 
   writeValue(val: D6Difficulty): void {
-    console.log(val);
     this.value = val;
   }
 

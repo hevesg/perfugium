@@ -1,0 +1,54 @@
+<prf-modal label="Weapons" (close)="close()" (save)="save()" [formGroup]="formGroup" [submittable]="formGroup.valid">
+  <p class="text-right">
+    <button type="button" class="btn btn-secondary" (click)="addWeapon()" [disabled]="formGroup.invalid">
+      <i class="fas fa-plus-square"></i> Add new weapon
+    </button>
+  </p>
+  <ul class="list-unstyled" formArrayName="weapons">
+    <li class="border-bottom" *ngFor="let weapon of formGroup.get('weapons').controls; let index = index" [formGroupName]="index">
+      <div class="d-sm-flex">
+        <div class="flex-grow-1 p-2 align-self-center">
+          <input type="text" class="form-control" placeholder="Item name" formControlName="name" />
+        </div>
+        <div class="align-self-center">
+          <div class="d-flex justify-content-end">
+            <div class="p-2 align-self-center">Damage:</div>
+            <prf-pip-stepper formControlName="damage" [min]="1"></prf-pip-stepper>
+            <div class="p-2 align-self-center">
+              <button type="button" class="btn btn-secondary" [disabled]="formGroup.get('weapons').get(index.toString()).invalid" (click)="removeWeapon(index)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-sm-flex pt-2 pb-2 flex-grow-1">
+        <div class="pr-2 align-self-center border-right">
+          <mat-radio-group formControlName="ranged">
+            <mat-radio-button [value]="true">Ranged</mat-radio-button>
+            <mat-radio-button [value]="false">Melee</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="pl-2 flex-grow-1">
+          <div class="d-sm-flex">
+            <div class="pr-2 flex-grow-1" *ngIf="formGroup.get('weapons').get(index.toString()).get('ranged').value">
+              <prf-d6-range class="align-self-center"></prf-d6-range>
+            </div>
+            <div class="pr-2 d-sm-flex flex-grow-1" *ngIf="!formGroup.get('weapons').get(index.toString()).get('ranged').value">
+              <div class="pr-2 align-self-center">Difficulty:</div>
+              <div class="pr-2 pl-2 align-self-center">
+                <prf-d6-difficulty-selector formControlName="difficulty"></prf-d6-difficulty-selector>
+              </div>
+            </div>
+            <div class="pl-2 d-flex">
+              <div class="pr-2 align-self-center">Max charge:</div>
+              <div class="pl-2 align-self-center">
+                <prf-number-stepper formControlName="charge" [min]="0"></prf-number-stepper>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</prf-modal>

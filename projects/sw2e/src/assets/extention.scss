@@ -17,3 +17,28 @@
     z-index: 100;
   }
 }
+
+.mat-radio-button {
+  @extend .p-2;
+  &.mat-radio-checked .mat-radio-inner-circle {
+    background-color: $black;
+  }
+  input {
+    display: none;
+  }
+  &.btn {
+    .mat-radio-label {
+      margin: 0;
+
+      .mat-radio-container {
+        display: none;
+      }
+      .mat-radio-label-content {
+        padding-left: 0;
+      }
+    }
+    &.mat-radio-checked {
+      @extend .active;
+    }
+  }
+}

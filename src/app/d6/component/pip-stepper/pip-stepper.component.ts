@@ -18,6 +18,9 @@ export class PipStepperComponent extends NumericStepperComponent implements Cont
 
   @Input() min = 3;
 
+  @Input() ctrl = 3;
+  @Input() shift = 1;
+
   constructor() {
     super();
   }

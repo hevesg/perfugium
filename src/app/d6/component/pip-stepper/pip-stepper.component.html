@@ -3,10 +3,10 @@
     {{ value | pip}}
   </div>
   <div class="btn-group p-2 align-self-center">
-    <button type="button" class="btn btn-secondary" (click)="decrease()" [disabled]="minDisabled">
+    <button type="button" class="btn btn-secondary" (click)="decrease($event)" [disabled]="minDisabled">
       <i class="fas fa-minus"></i>
     </button>
-    <button type="button" class="btn btn-secondary" (click)="increase()" [disabled]="maxDisabled">
+    <button type="button" class="btn btn-secondary" (click)="increase($event)" [disabled]="maxDisabled">
       <i class="fas fa-plus"></i>
     </button>
   </div>

@@ -100,7 +100,7 @@
             </div>
           </div>
           <div class="col-xl-6">
-            <div class="clickable">
+            <div (click)="openWeaponsDialog()" class="clickable">
               <h5>Weapons</h5>
               <dl>
                 <ng-container *ngFor="let weapon of data.weapons">

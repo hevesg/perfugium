@@ -5,6 +5,7 @@ import {Sw2eCharacter} from '../../interface/sw2e-character';
 import {MatDialog} from '@angular/material';
 import {Sw2eEquipmentDialogComponent} from '../../dialog/sw2e-equipment-dialog/sw2e-equipment-dialog.component';
 import {D6Attribute} from '../../../../../../src/app/d6/interface/d6-attribute';
+import {D6WeaponsDialogComponent} from '../../../../../../src/app/d6/dialog/d6-weapons-dialog/d6-weapons-dialog.component';
 
 @Component({
   selector: 'sw2e-character-sheet',
@@ -34,6 +35,17 @@ export class Sw2eCharacterSheetComponent implements OnInit {
     dialog.afterClosed().subscribe((x) => {
       if (x) {
         this.data.inventory = x;
+        this.character.save();
+      }
+    });
+  }
+
+  public openWeaponsDialog() {
+    const dialog = this.dialog.open(D6WeaponsDialogComponent, { data: this.data.weapons});
+
+    dialog.afterClosed().subscribe((x) => {
+      if (x) {
+        this.data.weapons = x;
         this.character.save();
       }
     });

@@ -21,6 +21,9 @@ export class NumericStepperComponent implements ControlValueAccessor, OnChanges 
   @Input() value = 0;
   @Input() disabled = false;
 
+  @Input() ctrl = 10;
+  @Input() shift = 100;
+
   @Output() increased: EventEmitter<void> = new EventEmitter<void>();
   @Output() decreased: EventEmitter<void> = new EventEmitter<void>();
 
@@ -54,20 +57,24 @@ export class NumericStepperComponent implements ControlValueAccessor, OnChanges 
     this.value = val;
   }
 
-  public increase(): void {
-    if (this.max > this.value) {
-      this.value++;
-      this.propagateChange(this.value);
-      this.increased.emit();
+  public increase(e: MouseEvent): void {
+    this.value += this._getValueChange(e);
+    if (this.value > this.max) {
+      this.value = this.max;
     }
+    this.propagateChange(this.value);
+    this.writeValue(this.value);
+    this.increased.emit();
   }
 
-  public decrease(): void {
-    if (this.min < this.value) {
-      this.value--;
-      this.propagateChange(this.value);
-      this.decreased.emit();
+  public decrease(e): void {
+    this.value -= this._getValueChange(e);
+    if (this.min > this.value) {
+      this.value = this.min;
     }
+    this.propagateChange(this.value);
+    this.writeValue(this.value);
+    this.decreased.emit();
   }
 
   public get maxDisabled(): boolean {
@@ -76,6 +83,17 @@ export class NumericStepperComponent implements ControlValueAccessor, OnChanges 
 
   public get minDisabled(): boolean {
     return this.min >= this.value;
+  }
+
+  private _getValueChange(e: MouseEvent): number {
+    let val = 1;
+    if (e.ctrlKey || e.metaKey) {
+      val *= this.ctrl;
+    }
+    if (e.shiftKey) {
+      val *= this.shift;
+    }
+    return val;
   }
 
 }

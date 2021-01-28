@@ -2,6 +2,6 @@
  * Public API Surface of d6
  */
 
-export * from './lib/d6.service';
-export * from './lib/d6.component';
-export * from './lib/d6.module';
+export * from './lib/interface/d6-character';
+export * from './lib/interface/d6-attribute';
+export * from './lib/interface/d6-skill';

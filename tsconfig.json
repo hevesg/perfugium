@@ -6,6 +6,10 @@
       "d6": [
         "dist/d6/d6",
         "dist/d6"
+      ],
+      "perfugium": [
+        "dist/perfugium/perfugium",
+        "dist/perfugium"
       ]
     },
     "outDir": "./dist/out-tsc",

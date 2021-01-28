@@ -145,6 +145,46 @@
           }
         }
       }
+    },
+    "perfugium": {
+      "projectType": "library",
+      "root": "projects/perfugium",
+      "sourceRoot": "projects/perfugium/src",
+      "prefix": "prf",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/perfugium/tsconfig.lib.json",
+            "project": "projects/perfugium/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/perfugium/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/perfugium/src/test.ts",
+            "tsConfig": "projects/perfugium/tsconfig.spec.json",
+            "karmaConfig": "projects/perfugium/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/perfugium/tsconfig.lib.json",
+              "projects/perfugium/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "sw2e"

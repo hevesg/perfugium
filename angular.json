@@ -105,6 +105,46 @@
           }
         }
       }
+    },
+    "d6": {
+      "projectType": "library",
+      "root": "projects/d6",
+      "sourceRoot": "projects/d6/src",
+      "prefix": "d6",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/d6/tsconfig.lib.json",
+            "project": "projects/d6/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/d6/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/d6/src/test.ts",
+            "tsConfig": "projects/d6/tsconfig.spec.json",
+            "karmaConfig": "projects/d6/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/d6/tsconfig.lib.json",
+              "projects/d6/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "sw2e"

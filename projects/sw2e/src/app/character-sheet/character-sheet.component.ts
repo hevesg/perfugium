@@ -12,4 +12,7 @@ export class CharacterSheetComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClickName(): void {
+    console.log('hello');
+  }
 }

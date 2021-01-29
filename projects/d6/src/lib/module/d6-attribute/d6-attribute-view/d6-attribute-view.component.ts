@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'd6-d6-attribute-view',
+  selector: 'd6-attribute-view',
   templateUrl: './d6-attribute-view.component.html',
   styleUrls: ['./d6-attribute-view.component.css']
 })

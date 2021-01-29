@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ADI_GALLIA} from '../interface/mock/adi-gallia';
 import {CharacterSheetComponent} from '../../../../perfugium/src/lib/module/character/character-sheet/character-sheet.component';
+import {Sw2eCharacter} from '../interface/sw2e-character';
 
 @Component({
   selector: 'app-sw2e-character-sheet',
@@ -12,9 +13,10 @@ export class Sw2eCharacterSheetComponent extends CharacterSheetComponent impleme
 
   public formGroup: FormGroup = this.getFormGroup();
 
-  public get name(): string {
-    return this.formGroup.get('name')?.value;
+  public get character(): Sw2eCharacter {
+    return this.formGroup.getRawValue() as Sw2eCharacter;
   }
+
   constructor() {
     super();
   }

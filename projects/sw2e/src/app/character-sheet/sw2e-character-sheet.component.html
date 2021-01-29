@@ -1,4 +1,4 @@
-<prf-navbar [brand]="name" (clickBrand)="onClickName()"></prf-navbar>
+<prf-navbar [brand]="character.name" (clickBrand)="onClickName()"></prf-navbar>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-9">
@@ -20,7 +20,12 @@
     <div class="col-md-6 mb-4">
       <div class="card">
         <div class="card-body">
-          <p class="card-text">Attributes</p>
+          <d6-attribute-view [attribute]="character.attributes.dexterity" name="Dexterity"></d6-attribute-view>
+          <d6-attribute-view [attribute]="character.attributes.perception" name="Perception"></d6-attribute-view>
+          <d6-attribute-view [attribute]="character.attributes.knowledge" name="Knowledge"></d6-attribute-view>
+          <d6-attribute-view [attribute]="character.attributes.strength" name="Strength"></d6-attribute-view>
+          <d6-attribute-view [attribute]="character.attributes.mechanical" name="Mechanical"></d6-attribute-view>
+          <d6-attribute-view [attribute]="character.attributes.technical" name="Technical"></d6-attribute-view>
         </div>
       </div>
     </div>

@@ -7,8 +7,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class NavbarComponent {
 
-  @Input() public brand = '';
-  @Input() public backUrl = 'hh';
+  @Input() public brand!: string;
+  @Input() public backUrl!: string;
 
   @Output() clickBrand: EventEmitter<void> = new EventEmitter<void>();
 

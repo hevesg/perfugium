@@ -5,6 +5,9 @@ import {D6SkillViewComponent} from './d6-skill-view/d6-skill-view.component';
 
 @NgModule({
   declarations: [D6SkillViewComponent],
+  exports: [
+    D6SkillViewComponent
+  ],
   imports: [
     CommonModule
   ]

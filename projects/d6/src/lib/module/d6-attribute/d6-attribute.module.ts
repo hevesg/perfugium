@@ -5,6 +5,9 @@ import {D6AttributeViewComponent} from './d6-attribute-view/d6-attribute-view.co
 
 @NgModule({
   declarations: [D6AttributeViewComponent],
+  exports: [
+    D6AttributeViewComponent
+  ],
   imports: [
     CommonModule
   ]

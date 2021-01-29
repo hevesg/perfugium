@@ -4,6 +4,8 @@ import {Sw2eCharacterSheetComponent} from './sw2e-character-sheet.component';
 import {NavbarModule} from '../../../../perfugium/src/lib/module/navbar/navbar.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {D6AttributeModule} from '../../../../d6/src/lib/module/d6-attribute/d6-attribute.module';
+import {ForceViewComponent} from '../force/force-view/force-view.component';
+import {D6PipModule} from '../../../../d6/src/lib/module/d6-pip/d6-pip.module';
 
 describe('CharacterSheetComponent', () => {
   let component: Sw2eCharacterSheetComponent;
@@ -11,11 +13,12 @@ describe('CharacterSheetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Sw2eCharacterSheetComponent ],
+      declarations: [ Sw2eCharacterSheetComponent, ForceViewComponent ],
       imports: [
         NavbarModule,
         RouterTestingModule,
-        D6AttributeModule
+        D6AttributeModule,
+        D6PipModule
       ]
     })
     .compileComponents();

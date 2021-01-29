@@ -3,8 +3,16 @@
   <span>{{ attribute.value | d6Pip }}</span>
 </h5>
 <ul class="list-group list-group-flush mb-4">
-  <li *ngFor="let skill of attribute.skills" class="list-group-item d-flex justify-content-between">
-    <span>{{ skill.name }}</span>
-    <span>{{ skill.value | d6Pip }}</span>
+  <li *ngFor="let skill of attribute.skills" class="list-group-item">
+    <div class="d-flex justify-content-between">
+      <span>{{ skill.name }}</span>
+      <span>{{ skill.value | d6Pip }}</span>
+    </div>
+    <ul *ngIf="!!skill.specs && !!skill.specs.length" class="small">
+      <li *ngFor="let spec of skill.specs" class="d-flex justify-content-between">
+        <span>{{ spec.name }}</span>
+        <span>{{ spec.value | d6Pip }}</span>
+      </li>
+    </ul>
   </li>
 </ul>

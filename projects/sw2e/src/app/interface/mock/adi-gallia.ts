@@ -85,18 +85,18 @@ export const ADI_GALLIA: Sw2eCharacter = {
       { name: 'Utility Belt' },
       { name: 'Thermal detonator', quantity: 2 }
     ],
+    weapons: [
+      { name: 'Blaster', damage: 12, range: {pb: 3, short: 25, medium: 50, long: 250 }, charge: 100 },
+      { name: 'Lightsaber', difficulty: D6Difficulty.VeryHard, damage: 15 },
+      { name: 'Knife', difficulty: D6Difficulty.VeryEasy, damage: 3, strength: true }
+    ],
     credits: 1000
   },*/
-  /*weapons: [
-    { name: 'Blaster', damage: 12, range: {pb: 3, short: 25, medium: 50, long: 250 }, charge: 100 },
-    { name: 'Lightsaber', difficulty: D6Difficulty.VeryHard, damage: 15 },
-    { name: 'Knife', difficulty: D6Difficulty.VeryEasy, damage: 3, strength: true }
-  ],*/
   force: {
     sensitive: true,
     points: 2,
     darkSide: 0,
-    /*abilities: [
+    abilities: [
       { name: 'Control', value: 25,
         list: ['Absorb/Dissipate Energy',
           'Accelerate Healing',
@@ -131,7 +131,7 @@ export const ADI_GALLIA: Sw2eCharacter = {
         list: ['Affect Mind',
           'Projected Fighting'
         ]}
-    ]*/
+    ]
   },
   /*abilities: [
     { name: 'Gills', description: 'Can breath underwater' }

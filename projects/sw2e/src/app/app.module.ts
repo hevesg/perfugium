@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {Sw2eCharacterSheetComponent} from './character-sheet/sw2e-character-sheet.component';
 import {NavbarModule} from '../../../perfugium/src/lib/module/navbar/navbar.module';
 import {D6AttributeModule} from '../../../d6/src/lib/module/d6-attribute/d6-attribute.module';
+import {ForceModule} from './force/force.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {D6AttributeModule} from '../../../d6/src/lib/module/d6-attribute/d6-attr
     BrowserModule,
     AppRoutingModule,
     NavbarModule,
-    D6AttributeModule
+    D6AttributeModule,
+    ForceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,75 +1,48 @@
 <prf-navbar [brand]="character.name" (clickBrand)="onClickName()"></prf-navbar>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-9">
-      <div class="card mb-4">
-        <div class="card-body">
-          <p class="card-text">General information</p>
-        </div>
-      </div>
+<div class="container-md">
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <p class="card-text">General information</p>
     </div>
-    <div class="col-md-3 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-text">Picture</p>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row tile-row">
+        <div class="col-sm-6 col-md-4">
+          <d6-attribute-view [attribute]="character.attributes.dexterity" name="Dexterity"></d6-attribute-view>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <d6-attribute-view [attribute]="character.attributes.perception" name="Perception"></d6-attribute-view>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <d6-attribute-view [attribute]="character.attributes.knowledge" name="Knowledge"></d6-attribute-view>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <d6-attribute-view [attribute]="character.attributes.strength" name="Strength"></d6-attribute-view>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <d6-attribute-view [attribute]="character.attributes.mechanical" name="Mechanical"></d6-attribute-view>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <d6-attribute-view [attribute]="character.attributes.technical" name="Technical"></d6-attribute-view>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-lg-8 col-xl-6 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-6">
-              <d6-attribute-view [attribute]="character.attributes.dexterity" name="Dexterity"></d6-attribute-view>
-            </div>
-            <div class="col-sm-6">
-              <d6-attribute-view [attribute]="character.attributes.perception" name="Perception"></d6-attribute-view>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <d6-attribute-view [attribute]="character.attributes.knowledge" name="Knowledge"></d6-attribute-view>
-            </div>
-            <div class="col-sm-6">
-              <d6-attribute-view [attribute]="character.attributes.strength" name="Strength"></d6-attribute-view>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <d6-attribute-view [attribute]="character.attributes.mechanical" name="Mechanical"></d6-attribute-view>
-            </div>
-            <div class="col-sm-6">
-              <d6-attribute-view [attribute]="character.attributes.technical" name="Technical"></d6-attribute-view>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-xl-6 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-text">Equipment</p>
-        </div>
-      </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <p class="card-text">Equipment</p>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-9 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h4>Force abilities</h4>
-          <app-force-view [force]="character.force"></app-force-view>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <p class="card-text">Wound status</p>
-        </div>
-      </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h4>Force abilities</h4>
+      <app-force-view [force]="character.force"></app-force-view>
     </div>
   </div>
+
 </div>

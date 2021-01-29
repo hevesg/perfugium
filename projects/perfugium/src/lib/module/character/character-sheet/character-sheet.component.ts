@@ -2,7 +2,9 @@ import {FormControl, FormGroup} from '@angular/forms';
 
 export abstract class CharacterSheetComponent {
 
-  constructor() {
+  public abstract formGroup: FormGroup;
+
+  protected constructor() {
   }
 
   protected getFormGroup(): FormGroup {

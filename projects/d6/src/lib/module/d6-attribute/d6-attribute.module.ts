@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {D6AttributeViewComponent} from './d6-attribute-view/d6-attribute-view.component';
+import {D6PipModule} from '../d6-pip/d6-pip.module';
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import {D6AttributeViewComponent} from './d6-attribute-view/d6-attribute-view.co
     D6AttributeViewComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    D6PipModule
   ]
 })
 export class D6AttributeModule { }

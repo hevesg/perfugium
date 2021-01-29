@@ -4,4 +4,4 @@
 
 export * from './lib/interface/d6-character';
 export * from './lib/module/d6-attribute/interface/d6-attribute';
-export * from './lib/module/d6-skill/interface/d6-skill';
+export * from './lib/module/d6-attribute/interface/d6-skill';

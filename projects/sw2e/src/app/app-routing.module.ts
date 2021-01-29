@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {CharacterSheetComponent} from "./character-sheet/character-sheet.component";
+import {Sw2eCharacterSheetComponent} from './character-sheet/sw2e-character-sheet.component';
 
 const routes: Routes = [
-  { path: 'character', component: CharacterSheetComponent },
+  { path: 'character', component: Sw2eCharacterSheetComponent },
   { path: '', redirectTo: '/character', pathMatch: 'full' }
 ];
 

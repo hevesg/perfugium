@@ -15,6 +15,7 @@ describe('NavbarComponent', () => {
   let hostComponent: HostComponent;
   let component: NavbarComponent;
   let fixture: ComponentFixture<HostComponent>;
+  let navbarBrand: HTMLAnchorElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -28,6 +29,7 @@ describe('NavbarComponent', () => {
     hostComponent = fixture.componentInstance;
     component = hostComponent.navbar;
     fixture.detectChanges();
+    navbarBrand = fixture.debugElement.query(By.css('.navbar-brand')).nativeElement;
   });
 
   it('should create', () => {
@@ -36,7 +38,12 @@ describe('NavbarComponent', () => {
 
   it('should call onClickBrand when clicking on brand', () => {
     const spy: any = spyOn(component, 'onClickBrand');
-    const navbarBrand: HTMLAnchorElement = fixture.debugElement.query(By.css('.navbar-brand')).nativeElement;
+    navbarBrand.click();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should emit event when clicking on brand', () => {
+    const spy: any = spyOn(component.clickBrand, 'emit');
     navbarBrand.click();
     expect(spy).toHaveBeenCalledTimes(1);
   });

@@ -1,27 +1,51 @@
-<prf-navbar [brand]="'hello'" (clickBrand)="onClickName()"></prf-navbar>
+<prf-navbar [brand]="name" (clickBrand)="onClickName()"></prf-navbar>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-9">
-      <p>General information</p>
+      <div class="card mb-4">
+        <div class="card-body">
+          <p class="card-text">General information</p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-3">
-      <p>Picture</p>
+    <div class="col-md-3 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">Picture</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
-      <p>Attributes</p>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">Attributes</p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <p>Equipment</p>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">Equipment</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-9">
-      <p>Special Abilities</p>
+    <div class="col-md-9 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">Special Abilities</p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-3">
-      <p>Wound status</p>
+    <div class="col-md-3 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <p class="card-text">Wound status</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
 <dl class="row">
-  <dt class="col-sm-3">Force sensitive</dt>
-  <dd class="col-sm-1">{{ force.sensitive }}</dd>
-  <dt class="col-sm-3">Force points</dt>
-  <dd class="col-sm-1">{{ force.points }}</dd>
-  <dt class="col-sm-3">Dark side</dt>
-  <dd class="col-sm-1">{{ force.darkSide }}</dd>
+  <dt class="col-sm-4">Force sensitive</dt>
+  <dd class="col-sm-2">{{ force.sensitive }}</dd>
+  <dt class="col-sm-4">Force points</dt>
+  <dd class="col-sm-2">{{ force.points }}</dd>
+  <dt class="col-sm-4">Dark side</dt>
+  <dd class="col-sm-2">{{ force.darkSide }}</dd>
 </dl>
 <div *ngFor="let ability of force.abilities">
   <h5 class="d-flex justify-content-between border-bottom pb-2">
@@ -12,6 +12,6 @@
     <span *ngIf="!!ability.value">{{ ability.value | d6Pip }}</span>
   </h5>
   <ul *ngIf="!!ability.list && !!ability.list.length" class="list-inline">
-    <li *ngFor="let element of ability.list" class="list-inline-item">{{ element }}</li>
+    <li *ngFor="let element of ability.list" class="list-inline-item badge bg-light text-dark">{{ element }}</li>
   </ul>
 </div>

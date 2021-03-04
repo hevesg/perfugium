@@ -41,7 +41,25 @@
   <div class="card">
     <div class="card-body">
       <h4>Force abilities</h4>
-      <app-force-view [force]="character.force"></app-force-view>
+      <dl class="row">
+        <dt class="col-sm-3">Force sensitive</dt>
+        <dd class="col-sm-1">{{ character.force.sensitive }}</dd>
+        <dt class="col-sm-3">Force points</dt>
+        <dd class="col-sm-1">{{ character.force.points }}</dd>
+        <dt class="col-sm-3">Dark side</dt>
+        <dd class="col-sm-1">{{ character.force.darkSide }}</dd>
+      </dl>
+      <div class="row tile-row">
+        <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let ability of character.force.abilities">
+          <h5 class="d-flex justify-content-between border-bottom pb-2">
+            <span>{{ ability.name }}</span>
+            <span *ngIf="!!ability.value">{{ ability.value | d6Pip }}</span>
+          </h5>
+          <ul *ngIf="!!ability.list && !!ability.list.length" class="list-inline">
+            <li *ngFor="let element of ability.list" class="list-inline-item badge bg-light text-dark">{{ element }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 

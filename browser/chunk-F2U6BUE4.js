@@ -1,0 +1,1 @@
+import{b as a}from"./chunk-L35SAXUK.js";import{ka as n,ta as o,ua as s,va as i,wa as r}from"./chunk-PVS56FIZ.js";var m=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["prf-sw2e"]],decls:3,vars:0,template:function(e,l){e&1&&(o(0,"p"),r(1,"sw2e works!"),s(),i(2,"router-outlet"))},dependencies:[a],encapsulation:2})};export{m as Sw2e};

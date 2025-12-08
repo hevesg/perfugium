@@ -1,0 +1,116 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "packageManager": "npm",
+    "analytics": false
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "star-wars-2e": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/star-wars-2e",
+      "sourceRoot": "projects/star-wars-2e/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/star-wars-2e/src/main.ts",
+            "tsConfig": "projects/star-wars-2e/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/star-wars-2e/public"
+              }
+            ],
+            "styles": [
+              "projects/star-wars-2e/src/styles.scss"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "star-wars-2e:build:production"
+            },
+            "development": {
+              "buildTarget": "star-wars-2e:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
+    },
+    "dice6": {
+      "projectType": "library",
+      "root": "projects/dice6",
+      "sourceRoot": "projects/dice6/src",
+      "prefix": "d6",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dice6/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/dice6/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    },
+    "core": {
+      "projectType": "library",
+      "root": "projects/core",
+      "sourceRoot": "projects/core/src",
+      "prefix": "prf",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/core/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/core/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    }
+  }
+}

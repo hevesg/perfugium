@@ -1,0 +1,11 @@
+@if (characters().length) {
+  <div class="list-group">
+    @for (character of characters(); track character.id) {
+      <button type="button" class="list-group-item list-group-item-action" (click)="selectCharacter.emit(character)">
+        <h3 data-qa="character-name">{{ character.name }}</h3>
+        <p data-qa="character-description">{{ character.description }}</p>
+        <p data-qa="character-modified" class="mb-0">{{ character.modified | ago }}</p>
+      </button>
+    }
+  </div>
+}

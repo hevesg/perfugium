@@ -1,0 +1,8 @@
+<prf-navbar class="mb-3">Star Wars 2<sup>nd</sup> Edition</prf-navbar>
+<div class="container-fluid">
+  @let characters = characters$ | async;
+  @if (characters?.length) {
+    <prf-character-list [characters]="characters!" (selectCharacter)="router.navigate(['characters', $event.id])"
+                        data-qa="character-list"></prf-character-list>
+  }
+</div>

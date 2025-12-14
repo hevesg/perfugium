@@ -30,9 +30,7 @@
                 "input": "projects/star-wars-2e/public"
               }
             ],
-            "styles": [
-              "projects/star-wars-2e/src/styles.scss"
-            ]
+            "styles": ["projects/star-wars-2e/src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -69,46 +67,6 @@
             }
           },
           "defaultConfiguration": "development"
-        }
-      }
-    },
-    "dice6": {
-      "projectType": "library",
-      "root": "projects/dice6",
-      "sourceRoot": "projects/dice6/src",
-      "prefix": "d6",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:ng-packagr",
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/dice6/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/dice6/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        }
-      }
-    },
-    "core": {
-      "projectType": "library",
-      "root": "projects/core",
-      "sourceRoot": "projects/core/src",
-      "prefix": "prf",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:ng-packagr",
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/core/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/core/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
         }
       }
     }

@@ -1,0 +1,9 @@
+@let character = character$ | async;
+@if (character) {
+  <prf-navbar class="mb-3">{{ character.name }}</prf-navbar>
+  <div class="container-fluid">
+    <p>This application is still work in progress so
+      <a routerLink="/characters">go back to the character list</a>
+    </p>
+  </div>
+}

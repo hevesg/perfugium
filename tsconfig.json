@@ -5,7 +5,12 @@
   "compilerOptions": {
     "paths": {
       "core": ["./dist/core"],
-      "dice6": ["./dist/dice6"]
+      "dice6": [
+        "./dist/dice6"
+      ],
+      "perfugium": [
+        "./dist/perfugium"
+      ]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -46,6 +51,12 @@
     },
     {
       "path": "./projects/core/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/perfugium/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/perfugium/tsconfig.spec.json"
     }
   ]
 }

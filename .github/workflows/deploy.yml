@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build:star-wars-2e -- --base-href /perfugium/
+        run: npm run build:star-wars-2e --base-href /perfugium/ && cp dist/star-wars-2e/browser/index.html dist/star-wars-2e/browser/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

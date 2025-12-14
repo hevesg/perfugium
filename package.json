@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "test:star-wars-2e": "jest --testPathPatterns=projects/star-wars-2e",
-    "build:star-wars-2e": "ng build star-wars-2e",
+    "build:star-wars-2e": "ng build star-wars-2e && cp dist/star-wars-2e/browser/index.html dist/star-wars-2e/browser/404.html",
     "start:star-wars-2e": "ng serve star-wars-2e",
     "format": "prettier --write \"**/*.{ts,js,json,md,html,css,scss}\"",
     "format:check": "prettier --check \"**/*.{ts,js,json,md,html,css,scss}\"",

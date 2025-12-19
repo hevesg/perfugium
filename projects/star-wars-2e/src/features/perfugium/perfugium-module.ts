@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CharacterListComponent } from './components/character-list/character-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CharacterService } from './services/character.service';
-import { AgoPipe } from './pipes/ago-pipe';
+import { AgoPipe } from './pipes/ago/ago-pipe';
 
 @NgModule({
   declarations: [CharacterListComponent, NavbarComponent, AgoPipe],

@@ -1,9 +1,73 @@
 @let character = character$ | async;
 @if (character) {
-  <prf-navbar class="mb-3">{{ character.name }}</prf-navbar>
-  <div class="container-fluid">
-    <p>This application is still work in progress so
+  <prf-navbar>{{ character.name }}</prf-navbar>
+  <aside class="container-fluid">
+    <p class="alert alert-info">This application is still work in progress so
       <a routerLink="/characters">go back to the character list</a>
     </p>
-  </div>
+  </aside>
+  <main class="container-fluid">
+    <section aria-labelledby="general-data-title" (tap)="onTapGeneral()">
+      <h2 id="general-data-title" class="visually-hidden">General data</h2>
+      <dl class="list-inline">
+        @if (character.general.gender.length) {
+          <dt>Gender</dt>
+          <dd>{{ character.general.gender }}</dd>
+        }
+        <dt>Species</dt>
+        <dd>{{ character.general.species }}</dd>
+        @if (character.general.homeWorld.length) {
+          <dt>Home world</dt>
+          <dd>{{ character.general.homeWorld }}</dd>
+        }
+        @if (character.general.age) {
+          <dt>Age</dt>
+          <dd>{{ character.general.age }} years</dd>
+        }
+        @if (character.general.height) {
+          <dt>Height</dt>
+          <dd>{{ character.general.height }}cm</dd>
+        }
+        @if (character.general.weight) {
+          <dt>Weight</dt>
+          <dd>{{ character.general.weight }}kg</dd>
+        }
+        @if (character.general.physicalDescription.length) {
+          <dt>Physical description</dt>
+          <dd>{{ character.general.physicalDescription }}</dd>
+        }
+        @if (character.general.personality.length) {
+          <dt>Personality</dt>
+          <dd>{{ character.general.personality }}</dd>
+        }
+        @if (character.general.background.length) {
+          <dt>Background</dt>
+          <dd>{{ character.general.background }}</dd>
+        }
+        @if (character.general.objectives.length) {
+          <dt>Objectives</dt>
+          <dd>{{ character.general.objectives }}</dd>
+        }
+        @if (character.general.quote.length) {
+          <dt>Quote</dt>
+          <dd>{{ character.general.quote }}</dd>
+        }
+      </dl>
+    </section>
+    <section aria-labelledby="attributes-title">
+      <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
+      <app-d6-attribute name="Dexterity" [attribute]="character.attributes.dexterity"
+                        role="region" aria-label="Dexterity"></app-d6-attribute>
+      <app-d6-attribute name="Knowledge" [attribute]="character.attributes.knowledge"
+                        role="region" aria-label="Knowledge"></app-d6-attribute>
+      <app-d6-attribute name="Mechanical" [attribute]="character.attributes['mechanical']"
+                        role="region" aria-label="Mechanical"></app-d6-attribute>
+      <app-d6-attribute name="Perception" [attribute]="character.attributes['perception']"
+                        role="region" aria-label="Perception"></app-d6-attribute>
+      <app-d6-attribute name="Strength" [attribute]="character.attributes['strength']"
+                        role="region" aria-label="Strength"></app-d6-attribute>
+      <app-d6-attribute name="Technical" [attribute]="character.attributes['technical']"
+                        role="region" aria-label="Technical"></app-d6-attribute>
+    </section>
+  </main>
 }

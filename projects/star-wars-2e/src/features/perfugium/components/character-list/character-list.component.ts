@@ -5,6 +5,11 @@ import { Character } from '../../model/character';
   selector: 'prf-character-list',
   standalone: false,
   templateUrl: './character-list.component.html',
+  styles: `
+    :host {
+      display: block;
+    }
+  `,
 })
 export class CharacterListComponent {
   readonly characters: InputSignal<Character[]> = input.required();

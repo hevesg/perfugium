@@ -10,9 +10,9 @@ const DEFAULT_CHARACTER: Character = {
 };
 
 export class CharacterBuilder {
-  private readonly character: Character;
+  protected character: Character;
 
-  private constructor(id: string = '78e731027d8fd50ed642340b7c9a63b3') {
+  protected constructor(id: string = '12345') {
     this.character = { ...DEFAULT_CHARACTER, ...{ id } };
   }
 

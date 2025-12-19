@@ -2,9 +2,9 @@
   "name": "perfugium",
   "version": "0.0.0",
   "scripts": {
+    "start:star-wars-2e": "ng serve star-wars-2e",
     "test:star-wars-2e": "jest --testPathPatterns=projects/star-wars-2e",
     "build:star-wars-2e": "ng build star-wars-2e",
-    "start:star-wars-2e": "ng serve star-wars-2e",
     "format": "prettier --write \"**/*.{ts,js,json,md,html,css,scss}\"",
     "format:check": "prettier --check \"**/*.{ts,js,json,md,html,css,scss}\"",
     "lint": "eslint \"**/*.ts\" --fix",

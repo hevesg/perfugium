@@ -1,0 +1,14 @@
+<h3 class="d-flex justify-content-between">
+  <span>{{ name() }}</span>
+  <span>{{ attribute().value | d6Pip }}</span>
+</h3>
+@if (attribute().skills.length) {
+  <ul class="list-unstyled">
+    @for (skill of attribute().skills; track skill.name) {
+      <li class="d-flex justify-content-between">
+        <span>{{ skill.name }}</span>
+        <span>{{ skill.value | d6Pip }}</span>
+      </li>
+    }
+  </ul>
+}

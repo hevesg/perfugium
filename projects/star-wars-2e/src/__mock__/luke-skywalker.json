@@ -1,0 +1,151 @@
+{
+  "id": "a1b2c3d4e5f6789012345678901234ab",
+  "game": "sw2e",
+  "name": "Luke Skywalker",
+  "description": "Luke Skywalker was a renowned Force-sensitive Human male who helped defeat the Galactic Empire in the Galactic Civil War and helped found the New Republic, as well as the New Jedi Order.",
+  "created": 1734700000000,
+  "modified": 1734700000000,
+  "general": {
+    "gender": "Male",
+    "species": "Human",
+    "homeWorld": "Tatooine",
+    "age": 22,
+    "height": 172,
+    "weight": 73,
+    "physicalDescription": "Blond hair, blue eyes, light skin",
+    "personality": "",
+    "background": "Born 2 days after Empire Day, 19 BBY, on Polis Massa. As of The Empire Strikes Back.",
+    "objectives": "",
+    "quote": ""
+  },
+  "characterPoints": 30,
+  "attributes": {
+    "dexterity": {
+      "value": 9,
+      "skills": [
+        { "name": "Blaster", "value": 20 },
+        { "name": "Brawling Parry", "value": 15 },
+        { "name": "Dodge", "value": 22 },
+        { "name": "Lightsaber", "value": 23 },
+        { "name": "Melee Combat", "value": 23 },
+        { "name": "Melee Parry", "value": 18 }
+      ]
+    },
+    "knowledge": {
+      "value": 6,
+      "skills": [
+        { "name": "Alien Species", "value": 12 },
+        { "name": "Bureaucracy", "value": 16 },
+        { "name": "Streetwise", "value": 12 },
+        { "name": "Survival", "value": 18 },
+        { "name": "Value", "value": 12 }
+      ]
+    },
+    "mechanical": {
+      "value": 12,
+      "skills": [
+        { "name": "Astrogation", "value": 15 },
+        { "name": "Beast Riding", "value": 14 },
+        { "name": "Repulsorlift Operation", "value": 24 },
+        { "name": "Sensors", "value": 13 },
+        { "name": "Space Transports", "value": 15 },
+        {
+          "name": "Starfighter Piloting",
+          "value": 18,
+          "specs": [{ "name": "X-Wing", "value": 24 }]
+        },
+        { "name": "Starship Gunnery", "value": 22 },
+        { "name": "Starship Shields", "value": 21 }
+      ]
+    },
+    "perception": {
+      "value": 7,
+      "skills": [
+        { "name": "Bargain", "value": 9 },
+        { "name": "Command", "value": 15 },
+        { "name": "Hide", "value": 14 },
+        { "name": "Search", "value": 15 },
+        { "name": "Sneak", "value": 14 }
+      ]
+    },
+    "strength": {
+      "value": 9,
+      "skills": [
+        { "name": "Brawling", "value": 19 },
+        { "name": "Climbing/Jumping", "value": 18 },
+        { "name": "Lifting", "value": 12 },
+        { "name": "Stamina", "value": 18 }
+      ]
+    },
+    "technical": {
+      "value": 9,
+      "skills": [
+        { "name": "Computer Programming/Repair", "value": 15 },
+        { "name": "Droid Programming/Repair", "value": 18 },
+        { "name": "First Aid", "value": 14 },
+        { "name": "Lightsaber Repair", "value": 17 },
+        { "name": "Repulsorlift Repair", "value": 21 },
+        { "name": "Starfighter Repair", "value": 17 }
+      ]
+    }
+  },
+  "inventory": {
+    "equipment": [
+      { "name": "Comlink" },
+      { "name": "Utility Belt" },
+      { "name": "Astromech (R2-D2)" },
+      { "name": "Starfighter (Red-5, X-Wing)" }
+    ],
+    "weapons": [
+      { "name": "Lightsaber", "difficulty": 4, "damage": 15 },
+      { "name": "Blaster Pistol", "damage": 12 }
+    ],
+    "credits": 0
+  },
+  "force": {
+    "sensitive": true,
+    "points": 12,
+    "darkSide": 0,
+    "abilities": [
+      {
+        "name": "Control",
+        "value": 18,
+        "list": [
+          "Accelerate Healing",
+          "Concentration",
+          "Control Pain",
+          "Detoxify Poison",
+          "Emptiness",
+          "Enhance Attribute",
+          "Hibernation Trance",
+          "Reduce Injury",
+          "Remain Conscious",
+          "Resist Stun"
+        ]
+      },
+      {
+        "name": "Sense",
+        "value": 15,
+        "list": [
+          "Danger Sense",
+          "Instinctive Astrogation",
+          "Life Detection",
+          "Life Sense",
+          "Receptive Telepathy",
+          "Sense Force"
+        ]
+      },
+      {
+        "name": "Alter",
+        "value": 15,
+        "list": ["Telekinesis"]
+      },
+      {
+        "name": "Control and Sense",
+        "list": ["Farseeing", "Lightsaber Combat", "Projective Telepathy"]
+      }
+    ]
+  },
+  "abilities": [],
+  "speed": 10
+}

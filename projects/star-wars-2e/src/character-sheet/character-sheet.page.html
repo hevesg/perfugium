@@ -7,7 +7,20 @@
     </p>
   </aside>
   <main class="container-fluid">
-    <section aria-labelledby="general-data-title" (tap)="onTapGeneral()">
+    <section aria-labelledby="attributes-title">
+      <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
+      @for (attribute of ['dexterity', 'knowledge', 'mechanical', 'perception', 'strength', 'technical']; track attribute) {
+        <app-d6-attribute [attributeName]="attribute | titlecase"
+                          [attribute]="character.attributes[attribute]"
+                          tabindex="0"
+                          role="button"
+                          (click)="openAttribute(attribute)"
+                          (keyup.enter)="openAttribute(attribute)"
+                          [attr.aria-label]="attribute | titlecase">
+        </app-d6-attribute>
+      }
+    </section>
+    <section aria-labelledby="general-data-title">
       <h2 id="general-data-title" class="visually-hidden">General data</h2>
       <dl class="list-inline">
         @if (character.general.gender.length) {
@@ -53,21 +66,6 @@
           <dd>{{ character.general.quote }}</dd>
         }
       </dl>
-    </section>
-    <section aria-labelledby="attributes-title">
-      <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
-      <app-d6-attribute name="Dexterity" [attribute]="character.attributes.dexterity"
-                        role="region" aria-label="Dexterity"></app-d6-attribute>
-      <app-d6-attribute name="Knowledge" [attribute]="character.attributes.knowledge"
-                        role="region" aria-label="Knowledge"></app-d6-attribute>
-      <app-d6-attribute name="Mechanical" [attribute]="character.attributes['mechanical']"
-                        role="region" aria-label="Mechanical"></app-d6-attribute>
-      <app-d6-attribute name="Perception" [attribute]="character.attributes['perception']"
-                        role="region" aria-label="Perception"></app-d6-attribute>
-      <app-d6-attribute name="Strength" [attribute]="character.attributes['strength']"
-                        role="region" aria-label="Strength"></app-d6-attribute>
-      <app-d6-attribute name="Technical" [attribute]="character.attributes['technical']"
-                        role="region" aria-label="Technical"></app-d6-attribute>
     </section>
   </main>
 }

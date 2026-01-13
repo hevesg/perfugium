@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular
 import { D6Attribute } from '../../model/d6-character';
 
 @Component({
-  selector: 'app-d6-attribute[name]',
+  selector: 'app-d6-attribute[attributeName]',
   standalone: false,
   templateUrl: './d6-attribute.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,6 +13,6 @@ import { D6Attribute } from '../../model/d6-character';
   `,
 })
 export class D6AttributeComponent {
-  readonly name: InputSignal<string> = input.required();
+  readonly attributeName: InputSignal<string> = input.required();
   readonly attribute: InputSignal<D6Attribute> = input.required();
 }

@@ -25,7 +25,7 @@ import { Component, HostListener, input, output } from '@angular/core';
     }
   `,
 })
-export class ConfirmModalComponent {
+export class PrfConfirmModalComponent {
   readonly modalTitle = input<string>();
   readonly confirm = output<boolean>();
 

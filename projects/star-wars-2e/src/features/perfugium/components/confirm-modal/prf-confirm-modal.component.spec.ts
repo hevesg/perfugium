@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ConfirmModalComponent } from './confirm-modal.component';
+import { PrfConfirmModalComponent } from './prf-confirm-modal.component';
 
-
-describe('ModalBaseComponent', () => {
-  let component: ConfirmModalComponent;
-  let fixture: ComponentFixture<ConfirmModalComponent>;
+describe('Confirm Modal Component', () => {
+  let component: PrfConfirmModalComponent;
+  let fixture: ComponentFixture<PrfConfirmModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ConfirmModalComponent],
+      declarations: [PrfConfirmModalComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ConfirmModalComponent);
+    fixture = TestBed.createComponent(PrfConfirmModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

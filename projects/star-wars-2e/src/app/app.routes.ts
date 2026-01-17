@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { characterResolver } from '../features/perfugium/misc/character-sheet.resolver';
 
 export const routes: Routes = [
   {
@@ -15,5 +16,6 @@ export const routes: Routes = [
     path: 'characters/:id',
     loadComponent: () =>
       import('../character-sheet/character-sheet.page').then((m) => m.CharacterSheetPage),
+    resolve: { character: characterResolver },
   },
 ];

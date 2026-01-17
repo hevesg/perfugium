@@ -1,19 +1,19 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { D6Module } from '../features/d6/d6-module';
-import { Subscription, filter, combineLatest } from 'rxjs';
-import { CharacterService } from '../features/perfugium/services/character.service';
+import { Subscription, filter, map } from 'rxjs';
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { Sw2eCharacter } from '../model/sw2e-character';
 import { Dialog } from '@angular/cdk/dialog';
 import { D6AttributeModalComponent } from '../features/d6/components/d6-attribute-modal/d6-attribute-modal.component';
 import { D6Attribute } from '../features/d6/model/d6-character';
-import { FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { characterForm } from '../utils/character-form';
 
 @Component({
   selector: 'sw2e-character-sheet',
   standalone: true,
-  imports: [RouterLink, D6Module, AsyncPipe, TitleCasePipe],
+  imports: [RouterLink, D6Module, AsyncPipe, TitleCasePipe, ReactiveFormsModule],
   templateUrl: 'character-sheet.page.html',
   styles: `
     :host {
@@ -24,23 +24,24 @@ import { FormBuilder } from '@angular/forms';
 export class CharacterSheetPage implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private readonly service: CharacterService<Sw2eCharacter> = inject(CharacterService);
   private readonly dialog = inject(Dialog);
   private subscription: Subscription = new Subscription();
 
-  readonly character$ = this.service.load(this.route.snapshot.paramMap.get('id')!);
+  readonly character = this.route.snapshot.data['character'] as Sw2eCharacter;
+  readonly character$ = this.route.data.pipe(map((data) => data['character'] as Sw2eCharacter));
+
+  readonly characterForm = characterForm();
 
   ngOnInit(): void {
-    this.subscription.add(combineLatest([
-      this.route.fragment.pipe(filter((fragment): fragment is string => !!fragment)),
-      this.character$,
-    ]).subscribe(([fragment, character]) => {
-      if (fragment.startsWith('attribute-')) {
-        const attributeKey = fragment.replace('attribute-', '');
-        const attribute = character.attributes[attributeKey as keyof typeof character.attributes];
-        this.openAttributeDialog(attributeKey, attribute);
-      }
-    }));
+    this.subscription.add(
+      this.route.fragment.pipe(filter((fragment): fragment is string => !!fragment)).subscribe((fragment) => {
+        if (fragment.startsWith('attribute-')) {
+          const attributeKey = fragment.replace('attribute-', '');
+          const attribute = this.character.attributes[attributeKey as keyof typeof this.character.attributes];
+          this.openAttributeDialog(attributeKey, attribute);
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {

@@ -1,0 +1,31 @@
+// Custom Grid Utilities
+// Generates responsive grid classes using CSS Grid
+// Usage: class="grid grid-sm-2 grid-lg-3" (1 col default, 2 cols at sm, 3 cols at lg)
+
+@mixin make-grid-columns($columns: 12, $breakpoints: $grid-breakpoints) {
+  .grid {
+    display: grid;
+    gap: $grid-gutter-width / 2;
+  }
+
+  // Default (no breakpoint) - grid-1 through grid-{columns}
+  @for $i from 1 through $columns {
+    .grid-#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+  }
+
+  // Responsive variants - grid-{breakpoint}-{columns}
+  @each $breakpoint, $value in $breakpoints {
+    @include media-breakpoint-up($breakpoint) {
+      @for $i from 1 through $columns {
+        .grid-#{$breakpoint}-#{$i} {
+          grid-template-columns: repeat(#{$i}, 1fr);
+        }
+      }
+    }
+  }
+}
+
+// Generate grid classes with max 12 columns (matching Bootstrap's grid)
+@include make-grid-columns();

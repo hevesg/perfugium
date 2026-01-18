@@ -1,25 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'styles/bootstrap';
+@import 'styles/utilities';
 @import '@angular/cdk/overlay-prebuilt.css';
 
 prf-navbar + * {
   margin-top: 4rem;
-}
-
-.attributes {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-
-  @include media-breakpoint-up(sm) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include media-breakpoint-up(lg) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @include media-breakpoint-up(xxl) {
-    grid-template-columns: repeat(6, 1fr);
-  }
 }

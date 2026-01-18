@@ -30,7 +30,12 @@
                 "input": "projects/star-wars-2e/public"
               }
             ],
-            "styles": ["projects/star-wars-2e/src/styles.scss"]
+            "styles": ["projects/star-wars-2e/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import", "global-builtin"]
+              }
+            }
           },
           "configurations": {
             "production": {

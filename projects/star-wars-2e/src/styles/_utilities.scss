@@ -2,10 +2,12 @@
 // Generates responsive grid classes using CSS Grid
 // Usage: class="grid grid-sm-2 grid-lg-3" (1 col default, 2 cols at sm, 3 cols at lg)
 
+@use "sass:math";
+
 @mixin make-grid-columns($columns: 12, $breakpoints: $grid-breakpoints) {
   .grid {
     display: grid;
-    gap: $grid-gutter-width / 2;
+    gap: math.div($grid-gutter-width, 2);
   }
 
   // Default (no breakpoint) - grid-1 through grid-{columns}

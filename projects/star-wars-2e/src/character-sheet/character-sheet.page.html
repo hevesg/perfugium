@@ -1,71 +1,67 @@
-@let character = character$ | async;
-@if (character) {
-  <prf-navbar>{{ character.name }}</prf-navbar>
+<form [formGroup]="characterForm">
+  <prf-navbar>{{ characterForm.controls.name.value }}</prf-navbar>
   <aside class="container-fluid">
     <p class="alert alert-info">This application is still work in progress so
       <a routerLink="/characters">go back to the character list</a>
     </p>
   </aside>
   <main class="container-fluid">
-    <section aria-labelledby="attributes-title">
+    <section aria-labelledby="attributes-title" formGroupName="attributes">
       <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
-      @for (attribute of ['dexterity', 'knowledge', 'mechanical', 'perception', 'strength', 'technical']; track attribute) {
-        <app-d6-attribute [attributeName]="attribute | titlecase"
-                          [attribute]="character.attributes[attribute]"
-                          tabindex="0"
-                          role="button"
-                          (click)="openAttribute(attribute)"
-                          (keyup.enter)="openAttribute(attribute)"
-                          [attr.aria-label]="attribute | titlecase">
-        </app-d6-attribute>
+      @for (attribute of attributeKeys; track attribute) {
+      <app-d6-attribute
+        [attributeName]="attribute | titlecase"
+        [formControlName]="attribute"
+        [attr.aria-label]="attribute | titlecase">
+      </app-d6-attribute>
       }
     </section>
-    <section aria-labelledby="general-data-title">
+    <section aria-labelledby="general-data-title" formGroupName="general">
       <h2 id="general-data-title" class="visually-hidden">General data</h2>
       <dl class="list-inline">
-        @if (character.general.gender.length) {
-          <dt>Gender</dt>
-          <dd>{{ character.general.gender }}</dd>
+        @if (characterForm.controls.general.controls.gender.value?.length) {
+        <dt>Gender</dt>
+        <dd>{{ characterForm.controls.general.controls.gender.value }}</dd>
         }
         <dt>Species</dt>
-        <dd>{{ character.general.species }}</dd>
-        @if (character.general.homeWorld.length) {
-          <dt>Home world</dt>
-          <dd>{{ character.general.homeWorld }}</dd>
+        <dd>{{ characterForm.controls.general.controls.species.value }}</dd>
+        @if (characterForm.controls.general.controls.homeWorld.value?.length) {
+        <dt>Home world</dt>
+        <dd>{{ characterForm.controls.general.controls.homeWorld.value }}</dd>
         }
-        @if (character.general.age) {
-          <dt>Age</dt>
-          <dd>{{ character.general.age }} years</dd>
+        @if (characterForm.controls.general.controls.age.value) {
+        <dt>Age</dt>
+        <dd>{{ characterForm.controls.general.controls.age.value }} years</dd>
         }
-        @if (character.general.height) {
-          <dt>Height</dt>
-          <dd>{{ character.general.height }}cm</dd>
+        @if (characterForm.controls.general.controls.height.value) {
+        <dt>Height</dt>
+        <dd>{{ characterForm.controls.general.controls.height.value }}cm</dd>
         }
-        @if (character.general.weight) {
-          <dt>Weight</dt>
-          <dd>{{ character.general.weight }}kg</dd>
+        @if (characterForm.controls.general.controls.weight.value) {
+        <dt>Weight</dt>
+        <dd>{{ characterForm.controls.general.controls.weight.value }}kg</dd>
         }
-        @if (character.general.physicalDescription.length) {
-          <dt>Physical description</dt>
-          <dd>{{ character.general.physicalDescription }}</dd>
+        @if (characterForm.controls.general.controls.physicalDescription.value?.length) {
+        <dt>Physical description</dt>
+        <dd>{{ characterForm.controls.general.controls.physicalDescription.value }}</dd>
         }
-        @if (character.general.personality.length) {
-          <dt>Personality</dt>
-          <dd>{{ character.general.personality }}</dd>
+        @if (characterForm.controls.general.controls.personality.value?.length) {
+        <dt>Personality</dt>
+        <dd>{{ characterForm.controls.general.controls.personality.value }}</dd>
         }
-        @if (character.general.background.length) {
-          <dt>Background</dt>
-          <dd>{{ character.general.background }}</dd>
+        @if (characterForm.controls.general.controls.background.value?.length) {
+        <dt>Background</dt>
+        <dd>{{ characterForm.controls.general.controls.background.value }}</dd>
         }
-        @if (character.general.objectives.length) {
-          <dt>Objectives</dt>
-          <dd>{{ character.general.objectives }}</dd>
+        @if (characterForm.controls.general.controls.objectives.value?.length) {
+        <dt>Objectives</dt>
+        <dd>{{ characterForm.controls.general.controls.objectives.value }}</dd>
         }
-        @if (character.general.quote.length) {
-          <dt>Quote</dt>
-          <dd>{{ character.general.quote }}</dd>
+        @if (characterForm.controls.general.controls.quote.value?.length) {
+        <dt>Quote</dt>
+        <dd>{{ characterForm.controls.general.controls.quote.value }}</dd>
         }
       </dl>
     </section>
   </main>
-}
+</form>

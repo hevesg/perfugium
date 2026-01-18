@@ -1,4 +1,4 @@
-import { Component, HostListener, input, output } from '@angular/core';
+import { Component, HostListener, input, OnInit, output } from '@angular/core';
 
 @Component({
   selector: 'prf-confirm-modal',
@@ -25,14 +25,26 @@ import { Component, HostListener, input, output } from '@angular/core';
     }
   `,
 })
-export class PrfConfirmModalComponent {
+export class PrfConfirmModalComponent implements OnInit {
+  private readonly KEYBOARD_ACTIVATION_DELAY_MS = 25;
+  private keyboardActive = false;
+
   readonly modalTitle = input<string>();
   readonly confirm = output<boolean>();
 
+  ngOnInit(): void {
+    // Delay keyboard activation to prevent the Enter/Escape keyup event
+    // that opened the modal from immediately triggering confirm/cancel.
+    setTimeout(() => {
+      this.keyboardActive = true;
+    }, this.KEYBOARD_ACTIVATION_DELAY_MS);
+  }
 
   @HostListener('document:keyup.escape')
   protected onEscape(event?: MouseEvent) {
-    if (event?.detail === 0) {
+    // event.detail === 0 means keyboard-triggered click (Enter/Space on focused button).
+    // We skip those to avoid duplicate handling with the HostListener.
+    if (event?.detail === 0 || !this.keyboardActive) {
       return;
     }
     this.confirm.emit(false);
@@ -40,7 +52,9 @@ export class PrfConfirmModalComponent {
 
   @HostListener('document:keyup.enter')
   protected onEnter(event?: MouseEvent) {
-    if (event?.detail === 0) {
+    // event.detail === 0 means keyboard-triggered click (Enter/Space on focused button).
+    // We skip those to avoid duplicate handling with the HostListener.
+    if (event?.detail === 0 || !this.keyboardActive) {
       return;
     }
     this.confirm.emit(true);

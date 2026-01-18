@@ -32,6 +32,7 @@ import { D6AttributeModalComponent } from '../d6-attribute-modal/d6-attribute-mo
     },
   ],
   host: {
+    class: 'card',
     '(click)': 'openModal()',
     '(keyup.enter)': 'openModal()',
     '(keydown.space)': 'openModal(); $event.preventDefault()',

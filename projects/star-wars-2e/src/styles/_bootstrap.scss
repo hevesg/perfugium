@@ -1,0 +1,53 @@
+// Project Bootstrap Configuration
+// This file imports Bootstrap with custom variable overrides
+// Unused modules are commented out but can be re-enabled as needed
+
+@import "bootstrap/scss/mixins/banner";
+@include bsBanner("");
+
+// Configuration (required)
+@import "bootstrap/scss/functions";
+@import "variables"; // Local project variables (customized)
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// Layout & components
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type"; // list-inline, list-unstyled
+// @import "bootstrap/scss/images";
+@import "bootstrap/scss/containers"; // container-fluid
+@import "bootstrap/scss/grid"; // row, col-*
+// @import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms"; // form-control, col-form-label
+@import "bootstrap/scss/buttons"; // btn, btn-*
+// @import "bootstrap/scss/transitions";
+// @import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group"; // btn-group
+// @import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar"; // navbar, navbar-dark, navbar-brand
+@import "bootstrap/scss/card"; // card, card-body
+// @import "bootstrap/scss/accordion";
+// @import "bootstrap/scss/breadcrumb";
+// @import "bootstrap/scss/pagination";
+// @import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert"; // alert, alert-info
+// @import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group"; // list-group, list-group-item
+// @import "bootstrap/scss/close";
+// @import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal"; // modal-content, modal-header, etc.
+// @import "bootstrap/scss/tooltip";
+// @import "bootstrap/scss/popover";
+// @import "bootstrap/scss/carousel";
+// @import "bootstrap/scss/spinners";
+// @import "bootstrap/scss/offcanvas";
+// @import "bootstrap/scss/placeholders";
+
+// Helpers
+@import "bootstrap/scss/helpers"; // visually-hidden
+
+// Utilities
+@import "bootstrap/scss/utilities/api"; // d-flex, justify-content-*, mb-*, etc.

@@ -15,7 +15,7 @@ export interface D6AttributeModal {
   template: `
     <prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form">
       <div class="row mb-2">
-        <label class="col-6 col-form-label">{{ data.title }}</label>
+        <label class="col-6 col-form-label">Attribute Value</label>
         <div class="col-6">
           <app-d6-pip-input formControlName="value"></app-d6-pip-input>
         </div>

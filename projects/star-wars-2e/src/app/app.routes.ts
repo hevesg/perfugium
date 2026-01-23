@@ -10,12 +10,12 @@ export const routes: Routes = [
   {
     path: 'characters',
     loadComponent: () =>
-      import('../character-list/character-list.page').then((m) => m.CharacterListPage),
+      import('../pages/character-list/character-list.page').then((m) => m.CharacterListPage),
   },
   {
     path: 'characters/:id',
     loadComponent: () =>
-      import('../character-sheet/character-sheet.page').then((m) => m.CharacterSheetPage),
+      import('../pages/character-sheet/character-sheet.page').then((m) => m.CharacterSheetPage),
     resolve: { character: characterResolver },
   },
 ];

@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { D6Module } from '../features/d6/d6-module';
-import { CharacterService } from '../features/perfugium/services/character.service';
-import { Character } from '../features/perfugium/model/character';
+import { D6Module } from '../../features/d6/d6-module';
+import { CharacterService } from '../../features/perfugium/services/character.service';
+import { Character } from '../../features/perfugium/model/character';
 import { defer, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import adiGallia from '../__mock__/adi-gallia.json';
+import adiGallia from '../../__mock__/adi-gallia.json';
 
 @Component({
   selector: 'sw2e-character-list',

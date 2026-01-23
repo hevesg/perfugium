@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { CharacterListPage } from './character-list.page';
-import { CharacterService } from '../features/perfugium/services/character.service';
-import { CharacterBuilder } from '../features/perfugium/model/character.mock';
-import { D6Module } from '../features/d6/d6-module';
-import { MOCK_CHARACTER_SERVICE } from '../../../../setup-jest';
+import { CharacterService } from '../../features/perfugium/services/character.service';
+import { CharacterBuilder } from '../../features/perfugium/model/character.mock';
+import { D6Module } from '../../features/d6/d6-module';
+import { MOCK_CHARACTER_SERVICE } from '../../../../../setup-jest';
 
 describe('CharacterListPage', () => {
   let component: CharacterListPage;

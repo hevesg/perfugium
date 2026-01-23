@@ -37,26 +37,5 @@
     {
       "path": "./projects/star-wars-2e/tsconfig.app.json"
     },
-    {
-      "path": "./projects/star-wars-2e/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/dice6/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/dice6/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/core/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/core/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/perfugium/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/perfugium/tsconfig.spec.json"
-    }
   ]
 }

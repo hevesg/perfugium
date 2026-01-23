@@ -1,15 +1,15 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { D6Module } from '../features/d6/d6-module';
 import { TitleCasePipe } from '@angular/common';
-import { Sw2eCharacter } from '../model/sw2e-character';
 import { ReactiveFormsModule } from '@angular/forms';
-import { characterForm } from '../utils/character-form';
 import { ComponentType } from '@angular/cdk/portal';
-import { D6AttributeModalComponent } from '../features/d6/components/d6-attribute-modal/d6-attribute-modal.component';
-import { CharacterService } from '../features/perfugium/services/character.service';
 import { debounceTime } from 'rxjs';
+import { D6AttributeModalComponent } from '../../features/d6/components/d6-attribute-modal/d6-attribute-modal.component';
+import { CharacterService } from '../../features/perfugium/services/character.service';
+import { Sw2eCharacter } from '../../model/sw2e-character';
+import { characterForm } from '../../utils/character-form';
+import { D6Module } from '../../features/d6/d6-module';
 
 const MODAL_COMPONENTS: Record<string, ComponentType<unknown>> = {
   attribute: D6AttributeModalComponent,

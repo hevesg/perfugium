@@ -9,9 +9,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
-import { take } from 'rxjs';
 import { D6Attribute } from '../../model/d6-character';
-import { D6AttributeModalComponent } from '../d6-attribute-modal/d6-attribute-modal.component';
 
 @Component({
   selector: 'app-d6-attribute[attributeName]',
@@ -33,15 +31,11 @@ import { D6AttributeModalComponent } from '../d6-attribute-modal/d6-attribute-mo
   ],
   host: {
     class: 'card',
-    '(click)': 'openModal()',
-    '(keyup.enter)': 'openModal()',
-    '(keydown.space)': 'openModal(); $event.preventDefault()',
-    tabindex: '0',
-    role: 'button',
+    role: 'region',
   },
 })
 export class D6AttributeComponent implements ControlValueAccessor {
-  private readonly dialog = inject(Dialog);
+  private readonly  = inject(Dialog);
 
   readonly attributeName: InputSignal<string> = input.required();
 
@@ -60,30 +54,5 @@ export class D6AttributeComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  openModal(): void {
-    this.dialog
-      .open<D6Attribute>(D6AttributeModalComponent, {
-        data: {
-          title: this.attributeName(),
-          attribute: this.attribute(),
-        },
-        width: '500px',
-        maxWidth: '90vw',
-        disableClose: true,
-      })
-      .closed.pipe(take(1))
-      .subscribe((result) => {
-        if (result) {
-          this.updateValue(result);
-        }
-      });
-  }
-
-  private updateValue(value: D6Attribute): void {
-    this.attribute.set(value);
-    this.onChange(value);
-    this.onTouched();
   }
 }

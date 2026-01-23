@@ -5,11 +5,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CharacterService } from './services/character.service';
 import { AgoPipe } from './pipes/ago/ago-pipe';
 import { PrfConfirmModalComponent } from './components/confirm-modal/prf-confirm-modal.component';
+import { FormModalDirective } from './directives/form-modal.directive';
 
 @NgModule({
-  declarations: [CharacterListComponent, NavbarComponent, AgoPipe, PrfConfirmModalComponent],
+  declarations: [CharacterListComponent, NavbarComponent, AgoPipe, PrfConfirmModalComponent, FormModalDirective],
   imports: [CommonModule],
-  exports: [CharacterListComponent, NavbarComponent, AgoPipe, PrfConfirmModalComponent],
+  exports: [CharacterListComponent, NavbarComponent, AgoPipe, PrfConfirmModalComponent, FormModalDirective],
   providers: [CharacterService],
 })
-export class PerfugiumModule {}
+export class PerfugiumModule { }

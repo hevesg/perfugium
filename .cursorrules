@@ -1,0 +1,181 @@
+# Unit Testing Guidelines
+
+This project uses **Jest** with **Angular TestBed** for unit testing.
+
+## File Naming & Location
+
+- Test files are co-located with the source files
+- Use `.spec.ts` suffix (e.g., `modal.service.spec.ts`)
+
+## Test Structure
+
+### Imports
+
+```typescript
+import { TestBed } from '@angular/core/testing';
+import { Subject } from 'rxjs';
+// Import the unit under test
+// Import dependencies that need mocking
+```
+
+### Describe Blocks
+
+- Use nested `describe` blocks to group related tests
+- Name the outer `describe` after the class being tested
+- Name inner `describe` blocks after methods or features
+
+```typescript
+describe('ModalService', () => {
+  describe('open', () => {
+    it('does something specific', () => {});
+  });
+});
+```
+
+### Setup
+
+- Use `beforeEach` for test setup
+- Create mock objects with `jest.fn()` for methods
+- Configure `TestBed` with mocked providers
+
+```typescript
+let service: MyService;
+let mockDependency: { someMethod: jest.Mock };
+
+beforeEach(() => {
+  mockDependency = { someMethod: jest.fn() };
+
+  TestBed.configureTestingModule({
+    providers: [{ provide: Dependency, useValue: mockDependency }],
+  });
+  service = TestBed.inject(MyService);
+});
+```
+
+## Mocking Patterns
+
+### Services with Observables
+
+Use `Subject` for mocking observables that need to emit values:
+
+```typescript
+let mockDialogRef: { closed: Subject<unknown> };
+
+beforeEach(() => {
+  mockDialogRef = { closed: new Subject() };
+  mockDialog = { open: jest.fn().mockReturnValue(mockDialogRef) };
+});
+
+it('emits result', (done) => {
+  service.open(Component, {}).subscribe((result) => {
+    expect(result).toEqual(expectedResult);
+    done();
+  });
+  mockDialogRef.closed.next(expectedResult);
+});
+```
+
+### Angular CDK Dialog
+
+```typescript
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+
+let mockDialogRef: { close: jest.Mock };
+
+beforeEach(() => {
+  mockDialogRef = { close: jest.fn() };
+
+  TestBed.configureTestingModule({
+    providers: [
+      { provide: DIALOG_DATA, useValue: mockData },
+      { provide: DialogRef, useValue: mockDialogRef },
+    ],
+  });
+});
+```
+
+### Router
+
+```typescript
+import { Router } from '@angular/router';
+
+let mockRouter: { navigate: jest.Mock };
+
+beforeEach(() => {
+  mockRouter = { navigate: jest.fn() };
+
+  TestBed.configureTestingModule({
+    providers: [{ provide: Router, useValue: mockRouter }],
+  });
+});
+```
+
+## Assertion Patterns
+
+### Verify method calls
+
+```typescript
+expect(mockDialog.open).toHaveBeenCalledWith(Component, expect.any(Object));
+expect(mockDialog.open).toHaveBeenCalledWith(
+  Component,
+  expect.objectContaining({ data: testData })
+);
+```
+
+### Async tests with done callback
+
+```typescript
+it('emits value', (done) => {
+  observable$.subscribe((value) => {
+    expect(value).toBe(expected);
+    done();
+  });
+  // trigger the emission
+});
+```
+
+## Component Testing
+
+### With fake timers (for animations/delays)
+
+```typescript
+beforeEach(() => {
+  jest.useFakeTimers();
+});
+
+afterEach(() => {
+  jest.useRealTimers();
+});
+
+it('renders after delay', () => {
+  jest.advanceTimersByTime(25);
+  fixture.detectChanges();
+  // assertions
+});
+```
+
+### Query DOM elements
+
+```typescript
+import { By } from '@angular/platform-browser';
+
+const element = fixture.debugElement.query(By.css('.my-class'));
+const elements = fixture.debugElement.queryAll(By.css('input'));
+expect(element.nativeElement.textContent).toBe('expected');
+```
+
+## Test Naming
+
+- Start with a verb describing the behavior
+- Be specific about what is being tested
+- Examples:
+  - `calls Dialog.open with the component`
+  - `passes data to dialog config`
+  - `emits result when dialog closes`
+  - `initializes form with attribute value`
+
+## Do NOT
+
+- Do not test that the service "should be created" - this is redundant
+- Do not test implementation details, test behavior
+- Do not use `any` type in tests when possible

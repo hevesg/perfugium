@@ -6,7 +6,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface D6AttributeModal {
   title: string;
-  attribute: D6Attribute;
+  value: D6Attribute;
 }
 
 @Component({
@@ -21,7 +21,7 @@ export interface D6AttributeModal {
         </div>
       </div>
       <div formArrayName="skills">
-        @for (skill of data.attribute.skills; track $index) {
+        @for (skill of data.value.skills; track $index) {
           <div class="row mb-2" [formGroupName]="$index">
             <div class="col-6">
               <input class="form-control" type="text" formControlName="name" />
@@ -42,14 +42,13 @@ export interface D6AttributeModal {
   `,
 })
 export class D6AttributeModalComponent {
-  private router = inject(Router);
   dialogRef = inject<DialogRef<D6Attribute | null>>(DialogRef);
   data = inject<D6AttributeModal>(DIALOG_DATA);
 
   form: FormGroup = new FormGroup({
-    value: new FormControl(this.data.attribute.value, [Validators.required, Validators.min(0)]),
+    value: new FormControl(this.data.value.value, [Validators.required, Validators.min(0)]),
     skills: new FormArray(
-      this.data.attribute.skills.map(
+      this.data.value.skills.map(
         (skill) =>
           new FormGroup({
             name: new FormControl(skill.name),
@@ -60,7 +59,6 @@ export class D6AttributeModalComponent {
   });
 
   protected onConfirm($event: boolean) {
-    this.router.navigate([], { fragment: undefined });
     this.dialogRef.close($event ? this.form.value : null);
   }
 }

@@ -9,10 +9,8 @@
     <section aria-labelledby="attributes-title" formGroupName="attributes" class="grid grid-sm-2 grid-lg-3 grid-xxl-6">
       <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
       @for (attribute of attributeKeys; track attribute) {
-      <app-d6-attribute
-        [attributeName]="attribute | titlecase"
-        [formControlName]="attribute"
-        [attr.aria-label]="attribute | titlecase">
+      <app-d6-attribute [formModal]="modalOf('attribute')" [formModalData]="{ title: attribute | titlecase }"
+        [attributeName]="attribute | titlecase" [formControlName]="attribute" [attr.aria-label]="attribute | titlecase">
       </app-d6-attribute>
       }
     </section>

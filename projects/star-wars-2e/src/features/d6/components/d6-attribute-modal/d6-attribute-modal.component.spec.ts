@@ -23,7 +23,7 @@ describe('D6AttributeModalComponent', () => {
 
   const mockDialogData: D6AttributeModal = {
     title: 'Dexterity',
-    attribute: mockAttribute,
+    value: mockAttribute,
   };
 
   beforeEach(async () => {
@@ -99,12 +99,6 @@ describe('D6AttributeModalComponent', () => {
 
       expect(mockDialogRef.close).toHaveBeenCalledWith(null);
     });
-
-    it('navigates to clear the URL fragment', () => {
-      component['onConfirm'](true);
-
-      expect(mockRouter.navigate).toHaveBeenCalledWith([], { fragment: undefined });
-    });
   });
 
   describe('template rendering', () => {
@@ -153,7 +147,7 @@ describe('D6AttributeModalComponent', () => {
     beforeEach(async () => {
       const emptySkillsData: D6AttributeModal = {
         title: 'Strength',
-        attribute: { value: 9, skills: [] },
+        value: { value: 9, skills: [] },
       };
 
       TestBed.resetTestingModule();

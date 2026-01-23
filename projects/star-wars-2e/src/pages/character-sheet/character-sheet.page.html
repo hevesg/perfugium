@@ -14,52 +14,9 @@
       </app-d6-attribute>
       }
     </section>
-    <section aria-labelledby="general-data-title" formGroupName="general">
+    <section aria-labelledby="general-data-title">
       <h2 id="general-data-title" class="visually-hidden">General data</h2>
-      <dl class="list-inline">
-        @if (characterForm.controls.general.controls.gender.value?.length) {
-        <dt>Gender</dt>
-        <dd>{{ characterForm.controls.general.controls.gender.value }}</dd>
-        }
-        <dt>Species</dt>
-        <dd>{{ characterForm.controls.general.controls.species.value }}</dd>
-        @if (characterForm.controls.general.controls.homeWorld.value?.length) {
-        <dt>Home world</dt>
-        <dd>{{ characterForm.controls.general.controls.homeWorld.value }}</dd>
-        }
-        @if (characterForm.controls.general.controls.age.value) {
-        <dt>Age</dt>
-        <dd>{{ characterForm.controls.general.controls.age.value }} years</dd>
-        }
-        @if (characterForm.controls.general.controls.height.value) {
-        <dt>Height</dt>
-        <dd>{{ characterForm.controls.general.controls.height.value }}cm</dd>
-        }
-        @if (characterForm.controls.general.controls.weight.value) {
-        <dt>Weight</dt>
-        <dd>{{ characterForm.controls.general.controls.weight.value }}kg</dd>
-        }
-        @if (characterForm.controls.general.controls.physicalDescription.value?.length) {
-        <dt>Physical description</dt>
-        <dd>{{ characterForm.controls.general.controls.physicalDescription.value }}</dd>
-        }
-        @if (characterForm.controls.general.controls.personality.value?.length) {
-        <dt>Personality</dt>
-        <dd>{{ characterForm.controls.general.controls.personality.value }}</dd>
-        }
-        @if (characterForm.controls.general.controls.background.value?.length) {
-        <dt>Background</dt>
-        <dd>{{ characterForm.controls.general.controls.background.value }}</dd>
-        }
-        @if (characterForm.controls.general.controls.objectives.value?.length) {
-        <dt>Objectives</dt>
-        <dd>{{ characterForm.controls.general.controls.objectives.value }}</dd>
-        }
-        @if (characterForm.controls.general.controls.quote.value?.length) {
-        <dt>Quote</dt>
-        <dd>{{ characterForm.controls.general.controls.quote.value }}</dd>
-        }
-      </dl>
+      <sw2e-general-data formControlName="general" />
     </section>
   </main>
 </form>

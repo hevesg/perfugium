@@ -10,6 +10,7 @@ import { CharacterService } from '../../features/perfugium/services/character.se
 import { Sw2eCharacter } from '../../model/sw2e-character';
 import { characterForm } from '../../utils/character-form';
 import { D6Module } from '../../features/d6/d6-module';
+import { GeneralDataComponent } from '../../components/general-data/general-data.component';
 
 const MODAL_COMPONENTS: Record<string, ComponentType<unknown>> = {
   attribute: D6AttributeModalComponent,
@@ -17,7 +18,7 @@ const MODAL_COMPONENTS: Record<string, ComponentType<unknown>> = {
 @Component({
   selector: 'sw2e-character-sheet',
   standalone: true,
-  imports: [RouterLink, D6Module, TitleCasePipe, ReactiveFormsModule],
+  imports: [RouterLink, D6Module, TitleCasePipe, ReactiveFormsModule, GeneralDataComponent],
   templateUrl: 'character-sheet.page.html',
   styles: `
     :host {

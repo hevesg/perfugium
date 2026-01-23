@@ -1,7 +1,6 @@
 import { Directive, inject, input, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { NgControl } from '@angular/forms';
-import { filter, map, switchMap, take, tap } from 'rxjs';
+import { take } from 'rxjs';
 import { ComponentType } from '@angular/cdk/portal';
 import { ModalService } from '../services/modal.service';
 
@@ -11,7 +10,8 @@ import { ModalService } from '../services/modal.service';
   host: {
     '(click)': 'open()',
     '(keyup.enter)': 'open()',
-    '(keyup.space)': 'open()',
+    '(keyup.space)': 'open(); $event.preventDefault();',
+    '(keydown.space)': '$event.preventDefault();',
     tabindex: '0',
   },
 })

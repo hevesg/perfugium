@@ -142,7 +142,7 @@ describe('FormModalDirective', () => {
     it('opens modal on keyup.space', () => {
       const input = fixture.debugElement.query(By.css('input'));
 
-      input.triggerEventHandler('keyup.space', null);
+      input.triggerEventHandler('keyup.space', { preventDefault: jest.fn() });
 
       expect(mockModalService.open).toHaveBeenCalled();
     });

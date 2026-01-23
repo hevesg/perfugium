@@ -1,5 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { D6Attribute } from '../features/d6/model/d6-character';
+import { GeneralData } from '../components/general-data/general-data.component';
 
 export const characterForm = () => {
   return new FormGroup({
@@ -12,18 +13,18 @@ export const characterForm = () => {
     modified: new FormControl(0),
 
     // General information
-    general: new FormGroup({
-      gender: new FormControl(''),
-      species: new FormControl(''),
-      homeWorld: new FormControl(''),
-      age: new FormControl(0),
-      height: new FormControl(0),
-      weight: new FormControl(0),
-      physicalDescription: new FormControl(''),
-      personality: new FormControl(''),
-      background: new FormControl(''),
-      objectives: new FormControl(''),
-      quote: new FormControl(''),
+    general: new FormControl<GeneralData>({
+      gender: '',
+      species: '',
+      homeWorld: '',
+      age: 0,
+      height: 0,
+      weight: 0,
+      physicalDescription: '',
+      personality: '',
+      background: '',
+      objectives: '',
+      quote: '',
     }),
 
     // Character points

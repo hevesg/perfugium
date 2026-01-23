@@ -1,0 +1,46 @@
+<div class="card-body">
+  <dl class="list-inline mb-0">
+    @if (data().gender?.length) {
+    <dt>Gender</dt>
+    <dd>{{ data().gender }}</dd>
+    }
+    <dt>Species</dt>
+    <dd>{{ data().species }}</dd>
+    @if (data().homeWorld?.length) {
+    <dt>Home world</dt>
+    <dd>{{ data().homeWorld }}</dd>
+    }
+    @if (data().age) {
+    <dt>Age</dt>
+    <dd>{{ data().age }} years</dd>
+    }
+    @if (data().height) {
+    <dt>Height</dt>
+    <dd>{{ data().height }}cm</dd>
+    }
+    @if (data().weight) {
+    <dt>Weight</dt>
+    <dd>{{ data().weight }}kg</dd>
+    }
+    @if (data().physicalDescription?.length) {
+    <dt>Physical description</dt>
+    <dd>{{ data().physicalDescription }}</dd>
+    }
+    @if (data().personality?.length) {
+    <dt>Personality</dt>
+    <dd>{{ data().personality }}</dd>
+    }
+    @if (data().background?.length) {
+    <dt>Background</dt>
+    <dd>{{ data().background }}</dd>
+    }
+    @if (data().objectives?.length) {
+    <dt>Objectives</dt>
+    <dd>{{ data().objectives }}</dd>
+    }
+    @if (data().quote?.length) {
+    <dt>Quote</dt>
+    <dd>{{ data().quote }}</dd>
+    }
+  </dl>
+</div>

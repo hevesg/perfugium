@@ -51,9 +51,10 @@ describe('CharacterListPage', () => {
       const characterList = fixture.debugElement.query(By.css('[data-qa="character-list"]'));
       expect(characterList).not.toBeNull();
     });
-  });
-  it(`is not displayed when characters don't exist`, async () => {
-    const characterList = fixture.debugElement.query(By.css('[data-qa="character-list"]'));
-    expect(characterList).toBeNull();
+
+    it(`is not displayed when characters don't exist`, async () => {
+      const characterList = fixture.debugElement.query(By.css('[data-qa="character-list"]'));
+      expect(characterList).toBeNull();
+    });
   });
 });

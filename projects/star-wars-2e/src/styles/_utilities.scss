@@ -31,3 +31,10 @@
 
 // Generate grid classes with max 12 columns (matching Bootstrap's grid)
 @include make-grid-columns();
+
+// List inline separator
+// Adds a separator character between items in a definition list
+dl.list-inline.separator dd + dt::before {
+  content: '•';
+  margin-inline: 0.5rem;
+}

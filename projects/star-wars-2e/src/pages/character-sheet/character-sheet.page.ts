@@ -11,9 +11,11 @@ import { Sw2eCharacter } from '../../model/sw2e-character';
 import { characterForm } from '../../utils/character-form';
 import { D6Module } from '../../features/d6/d6-module';
 import { GeneralDataComponent } from '../../components/general-data/general-data.component';
+import { GeneralDataModalComponent } from '../../components/general-data-modal/general-data-modal.component';
 
 const MODAL_COMPONENTS: Record<string, ComponentType<unknown>> = {
   attribute: D6AttributeModalComponent,
+  general: GeneralDataModalComponent,
 };
 @Component({
   selector: 'sw2e-character-sheet',

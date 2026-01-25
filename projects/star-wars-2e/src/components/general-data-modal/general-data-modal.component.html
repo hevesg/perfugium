@@ -1,0 +1,68 @@
+<prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form">
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="gender">Gender</label>
+    <div class="col-8">
+      <input id="gender" class="form-control" type="text" formControlName="gender" />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="species">Species</label>
+    <div class="col-8">
+      <input id="species" class="form-control" type="text" formControlName="species" />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="homeWorld">Home world</label>
+    <div class="col-8">
+      <input id="homeWorld" class="form-control" type="text" formControlName="homeWorld" />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="age">Age</label>
+    <div class="col-8">
+      <input id="age" class="form-control" type="number" formControlName="age" />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="height">Height (cm)</label>
+    <div class="col-8">
+      <input id="height" class="form-control" type="number" formControlName="height" />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="weight">Weight (kg)</label>
+    <div class="col-8">
+      <input id="weight" class="form-control" type="number" formControlName="weight" />
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="physicalDescription">Physical description</label>
+    <div class="col-8">
+      <textarea id="physicalDescription" class="form-control" formControlName="physicalDescription" rows="2"></textarea>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="personality">Personality</label>
+    <div class="col-8">
+      <textarea id="personality" class="form-control" formControlName="personality" rows="2"></textarea>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="background">Background</label>
+    <div class="col-8">
+      <textarea id="background" class="form-control" formControlName="background" rows="2"></textarea>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="objectives">Objectives</label>
+    <div class="col-8">
+      <textarea id="objectives" class="form-control" formControlName="objectives" rows="2"></textarea>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <label class="col-4 col-form-label" for="quote">Quote</label>
+    <div class="col-8">
+      <textarea id="quote" class="form-control" formControlName="quote" rows="2"></textarea>
+    </div>
+  </div>
+</prf-confirm-modal>

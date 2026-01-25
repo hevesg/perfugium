@@ -6,7 +6,8 @@
     </p>
   </aside>
   <main class="container-fluid">
-    <section aria-labelledby="attributes-title" formGroupName="attributes" class="grid grid-sm-2 grid-lg-3 grid-xxl-6 mb-3">
+    <section aria-labelledby="attributes-title" formGroupName="attributes"
+      class="grid grid-sm-2 grid-lg-3 grid-xxl-6 mb-3">
       <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
       @for (attribute of attributeKeys; track attribute) {
       <app-d6-attribute [formModal]="modalOf('attribute')" [formModalData]="{ title: attribute | titlecase }"
@@ -16,7 +17,8 @@
     </section>
     <section aria-labelledby="general-data-title">
       <h2 id="general-data-title" class="visually-hidden">General data</h2>
-      <sw2e-general-data formControlName="general" />
+      <sw2e-general-data formControlName="general" [formModal]="modalOf('general')"
+        [formModalData]="{ title: 'General Information' }" />
     </section>
   </main>
 </form>

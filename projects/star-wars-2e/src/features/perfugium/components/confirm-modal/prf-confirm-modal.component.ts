@@ -23,6 +23,17 @@ import { Component, HostListener, input, OnInit, output } from '@angular/core';
     :host {
       display: block;
     }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+    }
+
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+    }
   `,
 })
 export class PrfConfirmModalComponent implements OnInit {

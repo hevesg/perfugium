@@ -15,10 +15,14 @@
       </app-d6-attribute>
       }
     </section>
-    <section aria-labelledby="general-data-title">
+    <section aria-labelledby="general-data-title" class="mb-3">
       <h2 id="general-data-title" class="visually-hidden">General data</h2>
       <sw2e-general-data formControlName="general" [formModal]="modalOf('general')"
         [formModalData]="{ title: 'General Information' }" />
+    </section>
+    <section aria-labelledby="weapons-title" class="mb-3" formGroupName="inventory">
+      <h2 id="weapons-title" class="visually-hidden">Weapons</h2>
+      <app-d6-weapons formControlName="weapons" />
     </section>
   </main>
 </form>

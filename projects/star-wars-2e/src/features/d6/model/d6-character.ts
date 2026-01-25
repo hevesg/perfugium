@@ -11,6 +11,15 @@ export type D6Attribute = {
   skills: D6Skill[];
 };
 
+export type D6Weapon = {
+  name: string;
+  damage: number;
+  range?: { pb?: number; short?: number; medium?: number; long?: number };
+  difficulty?: number;
+  charge?: number;
+  strength?: boolean;
+};
+
 export type D6Character = Character & {
   attributes: { [key: string]: D6Attribute };
 };

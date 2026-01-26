@@ -1,7 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,900&display=swap');
+
+
+:root {
+  --prf-heading-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
 @import 'styles/bootstrap';
 @import 'styles/utilities';
 @import '@angular/cdk/overlay-prebuilt.css';
+
+// Headings (including Bootstrap heading utility classes)
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
 
 prf-navbar + * {
   margin-top: 4rem;

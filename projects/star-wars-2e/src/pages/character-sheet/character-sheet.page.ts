@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentType } from '@angular/cdk/portal';
 import { debounceTime } from 'rxjs';
 import { D6AttributeModalComponent } from '../../features/d6/components/d6-attribute-modal/d6-attribute-modal.component';
+import { D6WeaponsModalComponent } from '../../features/d6/components/d6-weapons-modal/d6-weapons-modal.component';
 import { CharacterService } from '../../features/perfugium/services/character.service';
 import { Sw2eCharacter } from '../../model/sw2e-character';
 import { characterForm } from '../../utils/character-form';
@@ -16,6 +17,7 @@ import { GeneralDataModalComponent } from '../../components/general-data-modal/g
 const MODAL_COMPONENTS: Record<string, ComponentType<unknown>> = {
   attribute: D6AttributeModalComponent,
   general: GeneralDataModalComponent,
+  weapons: D6WeaponsModalComponent,
 };
 @Component({
   selector: 'sw2e-character-sheet',
@@ -36,7 +38,14 @@ export class CharacterSheetPage implements OnInit {
   readonly character = this.route.snapshot.data['character'] as Sw2eCharacter;
 
   readonly characterForm = characterForm();
-  readonly attributeKeys = ['dexterity', 'knowledge', 'mechanical', 'perception', 'strength', 'technical'] as const;
+  readonly attributeKeys = [
+    'dexterity',
+    'knowledge',
+    'mechanical',
+    'perception',
+    'strength',
+    'technical',
+  ] as const;
 
   modalOf(key: string): ComponentType<unknown> {
     if (key in MODAL_COMPONENTS) {
@@ -50,10 +59,7 @@ export class CharacterSheetPage implements OnInit {
     this.characterForm.patchValue(this.character);
 
     this.characterForm.valueChanges
-      .pipe(
-        debounceTime(500),
-        takeUntilDestroyed(this.destroyRef)
-      )
+      .pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.characterService
           .save({ ...this.character, ...this.characterForm.getRawValue() } as Sw2eCharacter)

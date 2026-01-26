@@ -10,6 +10,7 @@ import { D6Weapon } from '../../model/d6-character';
   styles: `
     :host {
       display: block;
+      cursor: pointer;
     }
   `,
   providers: [

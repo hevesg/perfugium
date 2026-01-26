@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { D6PipInputComponent } from './components/d6-pip-input/d6-pip-input.component';
 import { D6WeaponsComponent } from './components/d6-weapons/d6-weapons.component';
 import { D6EquipmentComponent } from './components/d6-equipment/d6-equipment.component';
+import { D6WeaponsModalComponent } from './components/d6-weapons-modal/d6-weapons-modal.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { D6EquipmentComponent } from './components/d6-equipment/d6-equipment.com
     D6PipInputComponent,
     D6WeaponsComponent,
     D6EquipmentComponent,
+    D6WeaponsModalComponent,
   ],
   imports: [CommonModule, PerfugiumModule, ReactiveFormsModule],
   exports: [
@@ -30,6 +32,7 @@ import { D6EquipmentComponent } from './components/d6-equipment/d6-equipment.com
     D6PipInputComponent,
     D6WeaponsComponent,
     D6EquipmentComponent,
+    D6WeaponsModalComponent,
   ],
 })
 export class D6Module {}

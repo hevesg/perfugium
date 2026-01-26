@@ -1,0 +1,96 @@
+<prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form">
+  <div formArrayName="weapons">
+    @for (weapon of weaponsFormArray.controls; track $index) {
+      <div [formGroupName]="$index" class="mb-3">
+        <div class="row mb-2">
+          <label class="col-4 col-form-label" [for]="'name-' + $index">Name</label>
+          <div class="col-8">
+            <input
+              [id]="'name-' + $index"
+              class="form-control"
+              type="text"
+              formControlName="name"
+            />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-4 col-form-label" [for]="'damage-' + $index">Damage</label>
+          <div class="col-8">
+            <app-d6-pip-input [id]="'damage-' + $index" formControlName="damage"></app-d6-pip-input>
+          </div>
+        </div>
+        <div formGroupName="range" class="row mb-2">
+          <label class="col-4 col-form-label">Range</label>
+          <div class="col-8">
+            <div class="row g-2">
+              <div class="col-3">
+                <input class="form-control" type="number" placeholder="PB" formControlName="pb" />
+              </div>
+              <div class="col-3">
+                <input
+                  class="form-control"
+                  type="number"
+                  placeholder="Short"
+                  formControlName="short"
+                />
+              </div>
+              <div class="col-3">
+                <input
+                  class="form-control"
+                  type="number"
+                  placeholder="Medium"
+                  formControlName="medium"
+                />
+              </div>
+              <div class="col-3">
+                <input
+                  class="form-control"
+                  type="number"
+                  placeholder="Long"
+                  formControlName="long"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-4 col-form-label" [for]="'difficulty-' + $index">Difficulty</label>
+          <div class="col-8">
+            <input
+              [id]="'difficulty-' + $index"
+              class="form-control"
+              type="number"
+              min="0"
+              max="5"
+              formControlName="difficulty"
+            />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-4 col-form-label" [for]="'charge-' + $index">Charge</label>
+          <div class="col-8">
+            <input
+              [id]="'charge-' + $index"
+              class="form-control"
+              type="number"
+              formControlName="charge"
+            />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-8 offset-4">
+            <div class="form-check">
+              <input
+                [id]="'strength-' + $index"
+                class="form-check-input"
+                type="checkbox"
+                formControlName="strength"
+              />
+              <label class="form-check-label" [for]="'strength-' + $index">Add Strength</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</prf-confirm-modal>

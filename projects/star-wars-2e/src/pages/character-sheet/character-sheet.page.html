@@ -1,28 +1,48 @@
 <form [formGroup]="characterForm">
   <prf-navbar>{{ characterForm.controls.name.value }}</prf-navbar>
   <aside class="container-fluid">
-    <p class="alert alert-info">This application is still work in progress so
+    <p class="alert alert-info">
+      This application is still work in progress so
       <a routerLink="/characters">go back to the character list</a>
     </p>
   </aside>
   <main class="container-fluid">
-    <section aria-labelledby="attributes-title" formGroupName="attributes"
-      class="grid grid-sm-2 grid-lg-3 grid-xxl-6 mb-3">
+    <section
+      aria-labelledby="attributes-title"
+      formGroupName="attributes"
+      class="grid grid-sm-2 grid-lg-3 grid-xxl-6 mb-3"
+    >
       <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
       @for (attribute of attributeKeys; track attribute) {
-      <app-d6-attribute [formModal]="modalOf('attribute')" [formModalData]="{ title: attribute | titlecase }"
-        [attributeName]="attribute | titlecase" [formControlName]="attribute" [attr.aria-label]="attribute | titlecase">
-      </app-d6-attribute>
+        <app-d6-attribute
+          [formModal]="modalOf('attribute')"
+          [formModalData]="{ title: attribute | titlecase }"
+          [attributeName]="attribute | titlecase"
+          [formControlName]="attribute"
+          [attr.aria-label]="attribute | titlecase"
+        >
+        </app-d6-attribute>
       }
     </section>
     <section aria-labelledby="general-data-title" class="mb-3">
       <h2 id="general-data-title" class="visually-hidden">General data</h2>
-      <sw2e-general-data formControlName="general" [formModal]="modalOf('general')"
-        [formModalData]="{ title: 'General Information' }" />
+      <sw2e-general-data
+        formControlName="general"
+        [formModal]="modalOf('general')"
+        [formModalData]="{ title: 'General Information' }"
+      />
     </section>
-    <section aria-labelledby="inventory-title" class="grid grid-sm-2 mb-3" formGroupName="inventory">
+    <section
+      aria-labelledby="inventory-title"
+      class="grid grid-sm-2 mb-3"
+      formGroupName="inventory"
+    >
       <h2 id="inventory-title" class="visually-hidden">Inventory</h2>
-      <app-d6-weapons formControlName="weapons" />
+      <app-d6-weapons
+        formControlName="weapons"
+        [formModal]="modalOf('weapons')"
+        [formModalData]="{ title: 'Weapons' }"
+      />
       <app-d6-equipment formControlName="equipment" />
     </section>
   </main>

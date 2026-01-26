@@ -1,5 +1,10 @@
+<button class="btn btn-outline-secondary" type="button" (click)="decrement()"
+        aria-label="Decrease"
+        [disabled]="disabled() || value() <= min()"
+        tabindex="-1">-
+</button>
 <input type="text"
-       class="form-control border-0 text-end"
+       class="form-control text-center"
        readonly
        [value]="value() | d6Pip"
        (keydown)="onKeydown($event)"
@@ -8,15 +13,8 @@
        [attr.aria-valuemin]="min()"
        [attr.aria-valuemax]="max() < Number.MAX_SAFE_INTEGER ? max() : null"
        [attr.aria-valuetext]="value() | d6Pip">
-<div class="btn-group ml-2">
-<button class="btn btn-outline-secondary" type="button" (click)="decrement()"
-        aria-label="Decrease"
-        [disabled]="disabled() || value() <= min()"
-        tabindex="-1">-
-</button>
 <button class="btn btn-outline-secondary" type="button" (click)="increment()"
         aria-label="Increase"
         [disabled]="disabled() || value() >= max()"
         tabindex="-1">+
 </button>
-</div>

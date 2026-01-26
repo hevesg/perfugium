@@ -15,19 +15,19 @@ export interface D6AttributeModal {
   template: `
     <prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form">
       <div class="row mb-2">
-        <label class="col-6 col-form-label">Attribute Value</label>
-        <div class="col-6">
-          <app-d6-pip-input formControlName="value"></app-d6-pip-input>
+        <label class="col-7 col-form-label">Attribute Value</label>
+        <div class="col-5">
+          <app-d6-pip-stepper formControlName="value"></app-d6-pip-stepper>
         </div>
       </div>
       <div formArrayName="skills">
         @for (skill of data.value.skills; track $index) {
           <div class="row mb-2" [formGroupName]="$index">
-            <div class="col-6">
+            <div class="col-7">
               <input class="form-control" type="text" formControlName="name" />
             </div>
-            <div class="col-6">
-              <app-d6-pip-input formControlName="value"></app-d6-pip-input>
+            <div class="col-5">
+              <app-d6-pip-stepper formControlName="value"></app-d6-pip-stepper>
             </div>
           </div>
         }

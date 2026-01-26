@@ -3,16 +3,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { D6PipInputComponent } from './d6-pip-input.component';
+import { D6PipStepperComponent } from './d6-pip-stepper.component';
 import { D6Module } from '../../d6-module';
 
 @Component({
   template: `
-    <app-d6-pip-input
+    <app-d6-pip-stepper
       [formControl]="control"
       [min]="min"
       [max]="max"
-    ></app-d6-pip-input>
+    ></app-d6-pip-stepper>
   `,
   standalone: false,
 })
@@ -22,16 +22,16 @@ class TestHostComponent {
   max = 15;
 }
 
-describe('D6 Pip Input Component', () => {
-  let component: D6PipInputComponent;
-  let fixture: ComponentFixture<D6PipInputComponent>;
+describe('D6 Pip Stepper Component', () => {
+  let component: D6PipStepperComponent;
+  let fixture: ComponentFixture<D6PipStepperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [D6Module],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(D6PipInputComponent);
+    fixture = TestBed.createComponent(D6PipStepperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -71,7 +71,8 @@ describe('D6 Pip Input Component', () => {
       expect(component.value()).toBe(4);
     });
 
-    it('does not decrement below 0', () => {
+    it('does not decrement below min', () => {
+      fixture.componentRef.setInput('min', 0);
       component.writeValue(0);
 
       component.decrement();
@@ -173,7 +174,7 @@ describe('D6 Pip Input Component', () => {
   });
 });
 
-describe('D6 Pip Input Component (TestHost)', () => {
+describe('D6 Pip Stepper Component (TestHost)', () => {
   let hostFixture: ComponentFixture<TestHostComponent>;
   let hostComponent: TestHostComponent;
 

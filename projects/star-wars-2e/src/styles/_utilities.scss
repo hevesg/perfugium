@@ -36,5 +36,5 @@
 // Adds a separator character between items in a definition list
 dl.list-inline.separator dd + dt::before {
   content: '•';
-  margin-inline: 0.5rem;
+  margin-inline-end: 0.5rem;
 }

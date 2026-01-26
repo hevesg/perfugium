@@ -2,22 +2,22 @@ import { Component, forwardRef, ChangeDetectionStrategy, signal, input } from '@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-d6-pip-input',
+  selector: 'app-d6-pip-stepper',
   standalone: false,
-  templateUrl: './d6-pip-input.component.html',
+  templateUrl: './d6-pip-stepper.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => D6PipInputComponent),
+      useExisting: forwardRef(() => D6PipStepperComponent),
       multi: true,
     },
   ],
   host: {
-    class: 'd-flex',
+    class: 'input-group',
   },
 })
-export class D6PipInputComponent implements ControlValueAccessor {
+export class D6PipStepperComponent implements ControlValueAccessor {
   readonly value = signal(0);
   readonly disabled = signal(false);
 
@@ -49,7 +49,7 @@ export class D6PipInputComponent implements ControlValueAccessor {
   }
 
   decrement(): void {
-    this.value.update((v) => Math.max(0, v - 1));
+    this.value.update((v) => Math.max(this.min(), v - 1));
     this.emitChange();
   }
 

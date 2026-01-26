@@ -1,27 +1,37 @@
+<h3 class="card-header">Weapons</h3>
 <div class="card-body">
-  <h3>Weapons</h3>
   @if (weapons().length === 0) {
-  <p class="text-body-secondary mb-0">No weapons</p>
+    <p class="text-body-secondary mb-0">No weapons</p>
   } @else {
-  <table class="table table-sm mb-0">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Damage</th>
-        <th>Range</th>
-        <th>Difficulty</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (weapon of weapons(); track weapon.name) {
-      <tr>
-        <td>{{ weapon.name }}</td>
-        <td>{{ weapon.damage | d6Pip }}@if (weapon.strength) {+STR}</td>
-        <td>@if (weapon.range) {{{ weapon.range.short }}/{{ weapon.range.medium }}/{{ weapon.range.long }}}</td>
-        <td>@if (weapon.difficulty !== undefined) {{{ weapon.difficulty | d6Difficulty }}}</td>
-      </tr>
-      }
-    </tbody>
-  </table>
+    <table class="table table-sm mb-0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Damage</th>
+          <th>Range/Diff</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (weapon of weapons(); track weapon.name) {
+          <tr>
+            <td>{{ weapon.name }}</td>
+            <td>
+              {{ weapon.damage | d6Pip }}
+              @if (weapon.strength) {
+                +STR
+              }
+            </td>
+            <td>
+              @if (weapon.range) {
+                {{ weapon.range.short }}/{{ weapon.range.medium }}/{{ weapon.range.long }}
+              }
+              @if (weapon.difficulty !== undefined) {
+                {{ weapon.difficulty | d6Difficulty }}
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
   }
 </div>

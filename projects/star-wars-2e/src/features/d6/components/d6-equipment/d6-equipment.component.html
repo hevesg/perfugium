@@ -1,0 +1,23 @@
+<h3 class="card-header">Equipment</h3>
+<div class="card-body">
+  @if (equipment().length === 0) {
+    <p class="text-body-secondary mb-0">No equipment</p>
+  } @else {
+    <table class="table table-sm mb-0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of equipment(); track item.name) {
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity ?? 1 }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

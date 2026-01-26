@@ -20,6 +20,11 @@ export type D6Weapon = {
   strength?: boolean;
 };
 
+export type D6Equipment = {
+  name: string;
+  quantity?: number;
+};
+
 export type D6Character = Character & {
   attributes: { [key: string]: D6Attribute };
 };

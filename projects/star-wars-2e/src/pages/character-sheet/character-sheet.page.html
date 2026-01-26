@@ -20,9 +20,10 @@
       <sw2e-general-data formControlName="general" [formModal]="modalOf('general')"
         [formModalData]="{ title: 'General Information' }" />
     </section>
-    <section aria-labelledby="weapons-title" class="mb-3" formGroupName="inventory">
+    <section aria-labelledby="weapons-title" class="grid grid-sm-2" formGroupName="inventory">
       <h2 id="weapons-title" class="visually-hidden">Weapons</h2>
       <app-d6-weapons formControlName="weapons" />
+      <app-d6-equipment formControlName="equipment" />
     </section>
   </main>
 </form>

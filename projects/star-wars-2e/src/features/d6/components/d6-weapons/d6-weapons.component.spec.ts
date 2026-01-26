@@ -78,7 +78,8 @@ describe('D6WeaponsComponent', () => {
       fixture.detectChanges();
 
       const row = fixture.debugElement.query(By.css('tbody tr'));
-      expect(row.nativeElement.textContent).toContain('1D+STR');
+      expect(row.nativeElement.textContent).toContain('1D');
+      expect(row.nativeElement.textContent).toContain('+STR');
     });
 
     it('handles null value', () => {

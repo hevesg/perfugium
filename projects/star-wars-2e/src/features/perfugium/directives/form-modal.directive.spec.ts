@@ -31,14 +31,14 @@ class TestHostComponent {
 describe('FormModalDirective', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let hostComponent: TestHostComponent;
-  let mockModalService: { open: jest.Mock };
+  let mockModalService: { open: jest.Mock; get: jest.Mock };
   let modalClosed$: Subject<unknown>;
 
   beforeEach(async () => {
     modalClosed$ = new Subject();
     mockModalService = {
-      get: jest.fn().mockReturnValue(MockModalComponent),
       open: jest.fn().mockReturnValue(modalClosed$.asObservable()),
+      get: jest.fn().mockReturnValue(MockModalComponent)
     };
 
     await TestBed.configureTestingModule({

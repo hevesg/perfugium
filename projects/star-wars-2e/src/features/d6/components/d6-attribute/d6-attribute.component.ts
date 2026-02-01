@@ -18,7 +18,8 @@ import { D6Attribute } from '../../model/d6-character';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: `
     :host {
-      display: block;
+      display: flex;
+      flex-direction: column;
       cursor: pointer;
     }
   `,

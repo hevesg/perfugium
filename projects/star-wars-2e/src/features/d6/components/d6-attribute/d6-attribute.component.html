@@ -4,16 +4,16 @@
 </h3>
 @switch (!!attribute().skills.length) {
   @case (true) {
-  <ul class="list-group list-group-flush mb-0">
-    @for (skill of attribute().skills; track skill.name) {
-    <li class="list-group-item d-flex justify-content-between border-0">
-      <span>{{ skill.name }}</span>
-      <span>{{ skill.value | d6Pip }}</span>
-    </li>
-    }
-  </ul>
+    <ul class="list-group list-group-flush mb-0">
+      @for (skill of attribute().skills; track skill.name) {
+        <li class="list-group-item d-flex justify-content-between border-0">
+          <span>{{ skill.name }}</span>
+          <span>{{ skill.value | d6Pip }}</span>
+        </li>
+      }
+    </ul>
   }
   @case (false) {
-    <div class="card-body">No skills yet</div>
+    <div class="card-body fill-center bg-body-tertiary text-body-secondary">No skills yet</div>
   }
 }

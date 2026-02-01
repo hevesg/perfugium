@@ -38,3 +38,13 @@ dl.list-inline.separator dd + dt::before {
   content: '•';
   margin-inline-end: 0.5rem;
 }
+
+// Fill and center
+// Use as a flex child to fill remaining space and center content (e.g. empty-state areas)
+// Parent must be display: flex; flex-direction: column
+.fill-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

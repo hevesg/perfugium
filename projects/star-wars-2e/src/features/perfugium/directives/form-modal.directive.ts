@@ -16,14 +16,18 @@ import { ModalService } from '../services/modal.service';
   },
 })
 export class FormModalDirective {
-  readonly formModal = input.required<ComponentType<unknown>>();
+  readonly formModal = input.required<string>();
   readonly formModalData = input<Object>({});
 
   private readonly ngControl = inject(NgControl, { optional: false });
   private readonly modalService = inject(ModalService);
 
   open(): void {
-    this.modalService.open(this.formModal(), { ...this.formModalData(), ...{ value: this.ngControl.value } })
+    this.modalService
+      .open(this.modalService.get(this.formModal()), {
+        ...this.formModalData(),
+        ...{ value: this.ngControl.value },
+      })
       .pipe(take(1))
       .subscribe((result) => {
         if (result) {

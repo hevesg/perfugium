@@ -15,7 +15,7 @@
       <h2 id="attributes-title" class="visually-hidden">Attributes</h2>
       @for (attribute of attributeKeys; track attribute) {
         <app-d6-attribute
-          [formModal]="modalOf('attribute')"
+          formModal="attribute"
           [formModalData]="{ title: attribute | titlecase }"
           [attributeName]="attribute | titlecase"
           [formControlName]="attribute"
@@ -28,7 +28,7 @@
       <h2 id="general-data-title" class="visually-hidden">General data</h2>
       <sw2e-general-data
         formControlName="general"
-        [formModal]="modalOf('general')"
+        formModal="general"
         [formModalData]="{ title: 'General Information' }"
       />
     </section>
@@ -40,7 +40,7 @@
       <h2 id="inventory-title" class="visually-hidden">Inventory</h2>
       <app-d6-weapons
         formControlName="weapons"
-        [formModal]="modalOf('weapons')"
+        formModal="weapons"
         [formModalData]="{ title: 'Weapons' }"
       />
       <app-d6-equipment formControlName="equipment" />

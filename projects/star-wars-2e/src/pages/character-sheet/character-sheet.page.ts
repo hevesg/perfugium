@@ -13,12 +13,8 @@ import { characterForm } from '../../utils/character-form';
 import { D6Module } from '../../features/d6/d6-module';
 import { GeneralDataComponent } from '../../components/general-data/general-data.component';
 import { GeneralDataModalComponent } from '../../components/general-data-modal/general-data-modal.component';
+import { ModalService } from '../../features/perfugium/services/modal.service';
 
-const MODAL_COMPONENTS: Record<string, ComponentType<unknown>> = {
-  attribute: D6AttributeModalComponent,
-  general: GeneralDataModalComponent,
-  weapons: D6WeaponsModalComponent,
-};
 @Component({
   selector: 'sw2e-character-sheet',
   standalone: true,
@@ -34,6 +30,7 @@ export class CharacterSheetPage implements OnInit {
   private route = inject(ActivatedRoute);
   private characterService = inject(CharacterService<Sw2eCharacter>);
   private destroyRef = inject(DestroyRef);
+  private modalService = inject(ModalService);
 
   readonly character = this.route.snapshot.data['character'] as Sw2eCharacter;
 
@@ -47,16 +44,12 @@ export class CharacterSheetPage implements OnInit {
     'technical',
   ] as const;
 
-  modalOf(key: string): ComponentType<unknown> {
-    if (key in MODAL_COMPONENTS) {
-      return MODAL_COMPONENTS[key];
-    } else {
-      throw new Error(`Unknown component: ${key}`);
-    }
-  }
-
   ngOnInit(): void {
     this.characterForm.patchValue(this.character);
+    this.modalService
+      .register('attribute', D6AttributeModalComponent)
+      .register('general', GeneralDataModalComponent)
+      .register('weapons', D6WeaponsModalComponent);
 
     this.characterForm.valueChanges
       .pipe(debounceTime(500), takeUntilDestroyed(this.destroyRef))

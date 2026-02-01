@@ -10,19 +10,21 @@ import { PerfugiumModule } from '../perfugium-module';
 @Component({ template: '', standalone: false })
 class MockModalComponent {}
 
+const TEST_MODAL_KEY = 'test-modal';
+
 @Component({
   standalone: false,
   template: `
     <input
       [formControl]="control"
-      [formModal]="modalComponent"
+      [formModal]="modalKey"
       [formModalData]="modalData"
     />
   `,
 })
 class TestHostComponent {
   control = new FormControl('initial value');
-  modalComponent = MockModalComponent;
+  modalKey = TEST_MODAL_KEY;
   modalData = { title: 'Test Modal' };
 }
 
@@ -35,6 +37,7 @@ describe('FormModalDirective', () => {
   beforeEach(async () => {
     modalClosed$ = new Subject();
     mockModalService = {
+      get: jest.fn().mockReturnValue(MockModalComponent),
       open: jest.fn().mockReturnValue(modalClosed$.asObservable()),
     };
 
@@ -50,7 +53,15 @@ describe('FormModalDirective', () => {
   });
 
   describe('open', () => {
-    it('calls modalService.open with the modal component', () => {
+    it('calls modalService.get with the modal key', () => {
+      const input = fixture.debugElement.query(By.css('input'));
+
+      input.triggerEventHandler('click', null);
+
+      expect(mockModalService.get).toHaveBeenCalledWith(TEST_MODAL_KEY);
+    });
+
+    it('calls modalService.open with the component from get', () => {
       const input = fixture.debugElement.query(By.css('input'));
 
       input.triggerEventHandler('click', null);
@@ -157,11 +168,11 @@ describe('FormModalDirective', () => {
   describe('with default formModalData', () => {
     @Component({
       standalone: false,
-      template: `<input [formControl]="control" [formModal]="modalComponent" />`,
+      template: `<input [formControl]="control" [formModal]="modalKey" />`,
     })
     class MinimalHostComponent {
       control = new FormControl('test');
-      modalComponent = MockModalComponent;
+      modalKey = TEST_MODAL_KEY;
     }
 
     beforeEach(async () => {

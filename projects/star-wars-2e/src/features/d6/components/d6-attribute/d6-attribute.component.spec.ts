@@ -71,6 +71,29 @@ describe('D6AttributeComponent', () => {
       const skillsList = fixture.debugElement.query(By.css('ul'));
       expect(skillsList).toBeNull();
     });
+
+    it('displays "No skills yet" when no skills exist', () => {
+      component.writeValue({ value: 10, skills: [] });
+      fixture.detectChanges();
+
+      const emptyMessage = fixture.debugElement.query(By.css('.card-body'));
+      expect(emptyMessage.nativeElement.textContent).toBe('No skills yet');
+    });
+
+    it('renders skills in a list-group', () => {
+      component.writeValue(mockAttribute);
+      fixture.detectChanges();
+
+      const listGroup = fixture.debugElement.query(By.css('ul.list-group'));
+      expect(listGroup).toBeTruthy();
+
+      const skillItems = fixture.debugElement.queryAll(By.css('li.list-group-item'));
+      expect(skillItems.length).toBe(2);
+      expect(skillItems[0].nativeElement.textContent).toContain('Dodge');
+      expect(skillItems[0].nativeElement.textContent).toContain('5D');
+      expect(skillItems[1].nativeElement.textContent).toContain('Brawling');
+      expect(skillItems[1].nativeElement.textContent).toContain('4D+2');
+    });
   });
 
   describe('ControlValueAccessor', () => {

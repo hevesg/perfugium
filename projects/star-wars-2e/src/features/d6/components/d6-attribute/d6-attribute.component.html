@@ -2,15 +2,18 @@
   <span>{{ attributeName() }}</span>
   <span>{{ attribute().value | d6Pip }}</span>
 </h3>
-<div class="card-body">
-  @if (attribute().skills.length) {
-  <ul class="list-unstyled mb-0">
+@switch (!!attribute().skills.length) {
+  @case (true) {
+  <ul class="list-group list-group-flush mb-0">
     @for (skill of attribute().skills; track skill.name) {
-    <li class="d-flex justify-content-between">
+    <li class="list-group-item d-flex justify-content-between border-0">
       <span>{{ skill.name }}</span>
       <span>{{ skill.value | d6Pip }}</span>
     </li>
     }
   </ul>
   }
-</div>
+  @case (false) {
+    <div class="card-body">No skills yet</div>
+  }
+}

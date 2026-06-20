@@ -77,6 +77,26 @@ describe('D6AttributeModalComponent', () => {
       component.form.get('value')?.setValue(-1);
       expect(component.form.get('value')?.valid).toBe(false);
     });
+
+    it('rejects attribute value below 3', () => {
+      component.form.get('value')?.setValue(2);
+      expect(component.form.get('value')?.valid).toBe(false);
+    });
+
+    it('accepts attribute value of 3', () => {
+      component.form.get('value')?.setValue(3);
+      expect(component.form.get('value')?.valid).toBe(true);
+    });
+
+    it('rejects skill value below attribute value', () => {
+      component.skills.at(0).get('value')?.setValue(mockAttribute.value - 1);
+      expect(component.skills.at(0).get('value')?.valid).toBe(false);
+    });
+
+    it('accepts skill value equal to attribute value', () => {
+      component.skills.at(0).get('value')?.setValue(mockAttribute.value);
+      expect(component.skills.at(0).get('value')?.valid).toBe(true);
+    });
   });
 
   describe('onConfirm', () => {
@@ -141,6 +161,41 @@ describe('D6AttributeModalComponent', () => {
       expect(skillNameInputs[0].nativeElement.value).toBe('Dodge');
       expect(skillNameInputs[1].nativeElement.value).toBe('Brawling');
     });
+
+    it('sets aria-valuemin to 3 on the attribute stepper', () => {
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const stepperInputs = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper input'));
+      expect(stepperInputs[0].nativeElement.getAttribute('aria-valuemin')).toBe('3');
+    });
+
+    it('sets aria-valuemin to attribute value on skill steppers', () => {
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const stepperInputs = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper input'));
+      expect(stepperInputs[1].nativeElement.getAttribute('aria-valuemin')).toBe(String(mockAttribute.value));
+      expect(stepperInputs[2].nativeElement.getAttribute('aria-valuemin')).toBe(String(mockAttribute.value));
+    });
+
+    it('disables attribute stepper decrease button at value 3', () => {
+      component.form.get('value')?.setValue(3);
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const decreaseButtons = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper button[aria-label="Decrease"]'));
+      expect(decreaseButtons[0].nativeElement.disabled).toBe(true);
+    });
+
+    it('disables skill stepper decrease button at attribute value', () => {
+      component.skills.at(0).get('value')?.setValue(mockAttribute.value);
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const decreaseButtons = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper button[aria-label="Decrease"]'));
+      expect(decreaseButtons[1].nativeElement.disabled).toBe(true);
+    });
   });
 
   describe('addSkill', () => {
@@ -148,7 +203,7 @@ describe('D6AttributeModalComponent', () => {
       component['addSkill']();
 
       expect(component.skills.length).toBe(3);
-      expect(component.skills.at(0).value).toEqual({ name: '', value: 0 });
+      expect(component.skills.at(0).value).toEqual({ name: '', value: mockAttribute.value });
     });
 
     it('preserves existing skills after the new one', () => {
@@ -163,8 +218,8 @@ describe('D6AttributeModalComponent', () => {
       component['addSkill']();
 
       expect(component.skills.length).toBe(4);
-      expect(component.skills.at(0).value).toEqual({ name: '', value: 0 });
-      expect(component.skills.at(1).value).toEqual({ name: '', value: 0 });
+      expect(component.skills.at(0).value).toEqual({ name: '', value: mockAttribute.value });
+      expect(component.skills.at(1).value).toEqual({ name: '', value: mockAttribute.value });
       expect(component.skills.at(2).value).toEqual({ name: 'Dodge', value: 15 });
     });
 
@@ -185,17 +240,17 @@ describe('D6AttributeModalComponent', () => {
       expect(skillNameInputs[2].nativeElement.value).toBe('Brawling');
     });
 
-    it('new skill has required and min(0) validators on value', () => {
+    it('new skill has required and min(attribute value) validators on value', () => {
       component['addSkill']();
 
       const newSkillValue = component.skills.at(0).get('value');
       newSkillValue?.setValue(null);
       expect(newSkillValue?.valid).toBe(false);
 
-      newSkillValue?.setValue(-1);
+      newSkillValue?.setValue(mockAttribute.value - 1);
       expect(newSkillValue?.valid).toBe(false);
 
-      newSkillValue?.setValue(0);
+      newSkillValue?.setValue(mockAttribute.value);
       expect(newSkillValue?.valid).toBe(true);
     });
   });

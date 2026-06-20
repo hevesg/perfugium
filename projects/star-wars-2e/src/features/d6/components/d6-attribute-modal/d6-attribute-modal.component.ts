@@ -19,7 +19,7 @@ export interface D6AttributeModal {
           <button class="btn btn-outline-secondary" type="button" (click)="addSkill()">Add Skill</button>
         </div>
         <div class="col-6">
-          <app-d6-pip-stepper formControlName="value"></app-d6-pip-stepper>
+          <app-d6-pip-stepper formControlName="value" [min]="3"></app-d6-pip-stepper>
         </div>
       </div>
       <div formArrayName="skills">
@@ -29,7 +29,7 @@ export interface D6AttributeModal {
               <input class="form-control" type="text" formControlName="name" />
             </div>
             <div class="col-6">
-              <app-d6-pip-stepper formControlName="value"></app-d6-pip-stepper>
+              <app-d6-pip-stepper formControlName="value" [min]="data.value.value"></app-d6-pip-stepper>
             </div>
           </div>
         }
@@ -54,7 +54,7 @@ export class D6AttributeModalComponent {
         (skill) =>
           new FormGroup({
             name: new FormControl(skill.name),
-            value: new FormControl(skill.value, [Validators.required, Validators.min(0)]),
+            value: new FormControl(skill.value, [Validators.required, Validators.min(this.data.value.value)]),
           }),
       ),
     ),
@@ -67,7 +67,7 @@ export class D6AttributeModalComponent {
   protected addSkill() {
     this.skills.insert(0, new FormGroup({
       name: new FormControl(''),
-      value: new FormControl(0, [Validators.required, Validators.min(0)]),
+      value: new FormControl(this.data.value.value, [Validators.required, Validators.min(this.data.value.value)]),
     }));
   }
 

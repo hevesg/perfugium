@@ -143,6 +143,63 @@ describe('D6AttributeModalComponent', () => {
     });
   });
 
+  describe('addSkill', () => {
+    it('inserts a new skill at index 0', () => {
+      component['addSkill']();
+
+      expect(component.skills.length).toBe(3);
+      expect(component.skills.at(0).value).toEqual({ name: '', value: 0 });
+    });
+
+    it('preserves existing skills after the new one', () => {
+      component['addSkill']();
+
+      expect(component.skills.at(1).value).toEqual({ name: 'Dodge', value: 15 });
+      expect(component.skills.at(2).value).toEqual({ name: 'Brawling', value: 14 });
+    });
+
+    it('adds multiple skills each at index 0', () => {
+      component['addSkill']();
+      component['addSkill']();
+
+      expect(component.skills.length).toBe(4);
+      expect(component.skills.at(0).value).toEqual({ name: '', value: 0 });
+      expect(component.skills.at(1).value).toEqual({ name: '', value: 0 });
+      expect(component.skills.at(2).value).toEqual({ name: 'Dodge', value: 15 });
+    });
+
+    it('renders the new skill row as first in the template', () => {
+      jest.advanceTimersByTime(25);
+      fixture.detectChanges();
+
+      const addButton = fixture.debugElement.query(By.css('.btn-outline-secondary'));
+      addButton.nativeElement.click();
+      fixture.detectChanges();
+
+      const skillNameInputs = fixture.debugElement.queryAll(
+        By.css('[formArrayName="skills"] input[formControlName="name"]')
+      );
+      expect(skillNameInputs.length).toBe(3);
+      expect(skillNameInputs[0].nativeElement.value).toBe('');
+      expect(skillNameInputs[1].nativeElement.value).toBe('Dodge');
+      expect(skillNameInputs[2].nativeElement.value).toBe('Brawling');
+    });
+
+    it('new skill has required and min(0) validators on value', () => {
+      component['addSkill']();
+
+      const newSkillValue = component.skills.at(0).get('value');
+      newSkillValue?.setValue(null);
+      expect(newSkillValue?.valid).toBe(false);
+
+      newSkillValue?.setValue(-1);
+      expect(newSkillValue?.valid).toBe(false);
+
+      newSkillValue?.setValue(0);
+      expect(newSkillValue?.valid).toBe(true);
+    });
+  });
+
   describe('with empty skills', () => {
     beforeEach(async () => {
       const emptySkillsData: D6AttributeModal = {

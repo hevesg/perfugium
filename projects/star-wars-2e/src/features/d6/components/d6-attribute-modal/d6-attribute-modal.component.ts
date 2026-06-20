@@ -15,18 +15,20 @@ export interface D6AttributeModal {
   template: `
     <prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form">
       <div class="row mb-2">
-        <label class="col-7 col-form-label">Attribute Value</label>
-        <div class="col-5">
+        <div class="col-6">
+          <button class="btn btn-outline-secondary" type="button" (click)="addSkill()">Add Skill</button>
+        </div>
+        <div class="col-6">
           <app-d6-pip-stepper formControlName="value"></app-d6-pip-stepper>
         </div>
       </div>
       <div formArrayName="skills">
-        @for (skill of data.value.skills; track $index) {
+        @for (skill of skills.controls; track skill) {
           <div class="row mb-2" [formGroupName]="$index">
-            <div class="col-7">
+            <div class="col-6">
               <input class="form-control" type="text" formControlName="name" />
             </div>
-            <div class="col-5">
+            <div class="col-6">
               <app-d6-pip-stepper formControlName="value"></app-d6-pip-stepper>
             </div>
           </div>
@@ -46,7 +48,7 @@ export class D6AttributeModalComponent {
   data = inject<D6AttributeModal>(DIALOG_DATA);
 
   form: FormGroup = new FormGroup({
-    value: new FormControl(this.data.value.value, [Validators.required, Validators.min(0)]),
+    value: new FormControl(this.data.value.value, [Validators.required, Validators.min(3)]),
     skills: new FormArray(
       this.data.value.skills.map(
         (skill) =>
@@ -57,6 +59,17 @@ export class D6AttributeModalComponent {
       ),
     ),
   });
+
+  get skills(): FormArray {
+    return this.form.get('skills') as FormArray;
+  }
+
+  protected addSkill() {
+    this.skills.insert(0, new FormGroup({
+      name: new FormControl(''),
+      value: new FormControl(0, [Validators.required, Validators.min(0)]),
+    }));
+  }
 
   protected onConfirm($event: boolean) {
     this.dialogRef.close($event ? this.form.value : null);

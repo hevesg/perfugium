@@ -13,23 +13,26 @@ export interface D6AttributeModal {
   selector: 'app-d6-attribute-modal',
   standalone: false,
   template: `
-    <prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form">
+    <prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form" [confirmDisabled]="form.invalid">
       <div class="row mb-2">
         <div class="col-6">
-          <button class="btn btn-outline-secondary" type="button" (click)="addSkill()">Add Skill</button>
+          <button class="btn btn-outline-secondary" type="button" (click)="addSkill()" [disabled]="form.invalid">Add Skill</button>
         </div>
         <div class="col-6">
-          <app-d6-pip-stepper formControlName="value" [min]="3"></app-d6-pip-stepper>
+          <app-d6-pip-stepper formControlName="value" [min]="3"
+            [class.is-invalid]="form.get('value')?.invalid"></app-d6-pip-stepper>
         </div>
       </div>
       <div formArrayName="skills">
         @for (skill of skills.controls; track skill) {
           <div class="row mb-2" [formGroupName]="$index">
             <div class="col-6">
-              <input class="form-control" type="text" formControlName="name" />
+              <input class="form-control" type="text" formControlName="name"
+                [class.is-invalid]="skill.get('name')?.invalid" />
             </div>
             <div class="col-6">
-              <app-d6-pip-stepper formControlName="value" [min]="data.value.value"></app-d6-pip-stepper>
+              <app-d6-pip-stepper formControlName="value" [min]="data.value.value"
+                [class.is-invalid]="skill.get('value')?.invalid"></app-d6-pip-stepper>
             </div>
           </div>
         }
@@ -53,7 +56,7 @@ export class D6AttributeModalComponent {
       this.data.value.skills.map(
         (skill) =>
           new FormGroup({
-            name: new FormControl(skill.name),
+            name: new FormControl(skill.name, [Validators.required]),
             value: new FormControl(skill.value, [Validators.required, Validators.min(this.data.value.value)]),
           }),
       ),
@@ -66,12 +69,20 @@ export class D6AttributeModalComponent {
 
   protected addSkill() {
     this.skills.insert(0, new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
       value: new FormControl(this.data.value.value, [Validators.required, Validators.min(this.data.value.value)]),
     }));
   }
 
   protected onConfirm($event: boolean) {
-    this.dialogRef.close($event ? this.form.value : null);
+    if (!$event) {
+      this.dialogRef.close(null);
+      return;
+    }
+    const value = this.form.value;
+    value.skills = [...value.skills].sort((a: { name: string }, b: { name: string }) =>
+      a.name.localeCompare(b.name),
+    );
+    this.dialogRef.close(value);
   }
 }

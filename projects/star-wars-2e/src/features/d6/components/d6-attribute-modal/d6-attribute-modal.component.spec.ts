@@ -97,10 +97,20 @@ describe('D6AttributeModalComponent', () => {
       component.skills.at(0).get('value')?.setValue(mockAttribute.value);
       expect(component.skills.at(0).get('value')?.valid).toBe(true);
     });
+
+    it('rejects skill with empty name', () => {
+      component.skills.at(0).get('name')?.setValue('');
+      expect(component.skills.at(0).get('name')?.valid).toBe(false);
+    });
+
+    it('accepts skill with non-empty name', () => {
+      component.skills.at(0).get('name')?.setValue('Dodge');
+      expect(component.skills.at(0).get('name')?.valid).toBe(true);
+    });
   });
 
   describe('onConfirm', () => {
-    it('closes dialog with form value when confirmed', () => {
+    it('closes dialog with skills sorted alphabetically when confirmed', () => {
       component.form.get('value')?.setValue(15);
 
       component['onConfirm'](true);
@@ -108,10 +118,24 @@ describe('D6AttributeModalComponent', () => {
       expect(mockDialogRef.close).toHaveBeenCalledWith({
         value: 15,
         skills: [
-          { name: 'Dodge', value: 15 },
           { name: 'Brawling', value: 14 },
+          { name: 'Dodge', value: 15 },
         ],
       });
+    });
+
+    it('sorts skills with more than two entries alphabetically', () => {
+      component['addSkill']();
+      component.skills.at(0).get('name')?.setValue('Alien Languages');
+
+      component['onConfirm'](true);
+
+      const closed = mockDialogRef.close.mock.calls[0][0];
+      expect(closed.skills.map((s: { name: string }) => s.name)).toEqual([
+        'Alien Languages',
+        'Brawling',
+        'Dodge',
+      ]);
     });
 
     it('closes dialog with null when cancelled', () => {
@@ -196,6 +220,99 @@ describe('D6AttributeModalComponent', () => {
       const decreaseButtons = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper button[aria-label="Decrease"]'));
       expect(decreaseButtons[1].nativeElement.disabled).toBe(true);
     });
+
+    it('enables Add Skill button when form is valid', () => {
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const addButton = fixture.debugElement.query(By.css('.btn-outline-secondary'));
+      expect(addButton.nativeElement.disabled).toBe(false);
+    });
+
+    it('disables Add Skill button when form is invalid', () => {
+      component.skills.at(0).get('name')?.setValue('');
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const addButton = fixture.debugElement.query(By.css('.btn-outline-secondary'));
+      expect(addButton.nativeElement.disabled).toBe(true);
+    });
+
+    it('enables Confirm button when form is valid', () => {
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const confirmButton = fixture.debugElement.query(By.css('.btn-primary'));
+      expect(confirmButton.nativeElement.disabled).toBe(false);
+    });
+
+    it('disables Confirm button when form is invalid', () => {
+      component.skills.at(0).get('name')?.setValue('');
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const confirmButton = fixture.debugElement.query(By.css('.btn-primary'));
+      expect(confirmButton.nativeElement.disabled).toBe(true);
+    });
+
+    it('adds is-invalid class to attribute stepper when value is invalid', () => {
+      component.form.get('value')?.setValue(2);
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const attributeStepper = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper'))[0];
+      expect(attributeStepper.nativeElement.classList).toContain('is-invalid');
+    });
+
+    it('does not add is-invalid class to attribute stepper when value is valid', () => {
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const attributeStepper = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper'))[0];
+      expect(attributeStepper.nativeElement.classList).not.toContain('is-invalid');
+    });
+
+    it('adds is-invalid class to skill name input when name is empty', () => {
+      component.skills.at(0).get('name')?.setValue('');
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const skillNameInputs = fixture.debugElement.queryAll(
+        By.css('[formArrayName="skills"] input[formControlName="name"]'),
+      );
+      expect(skillNameInputs[0].nativeElement.classList).toContain('is-invalid');
+    });
+
+    it('does not add is-invalid class to skill name input when name is non-empty', () => {
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const skillNameInputs = fixture.debugElement.queryAll(
+        By.css('[formArrayName="skills"] input[formControlName="name"]'),
+      );
+      expect(skillNameInputs[0].nativeElement.classList).not.toContain('is-invalid');
+    });
+
+    it('adds is-invalid class to skill value stepper when value is below attribute value', () => {
+      component.skills.at(0).get('value')?.setValue(mockAttribute.value - 1);
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const skillSteppers = fixture.debugElement.queryAll(
+        By.css('[formArrayName="skills"] app-d6-pip-stepper'),
+      );
+      expect(skillSteppers[0].nativeElement.classList).toContain('is-invalid');
+    });
+
+    it('does not add is-invalid class to skill value stepper when value is valid', () => {
+      waitForKeyboardActivation();
+      fixture.detectChanges();
+
+      const skillSteppers = fixture.debugElement.queryAll(
+        By.css('[formArrayName="skills"] app-d6-pip-stepper'),
+      );
+      expect(skillSteppers[0].nativeElement.classList).not.toContain('is-invalid');
+    });
   });
 
   describe('addSkill', () => {
@@ -238,6 +355,21 @@ describe('D6AttributeModalComponent', () => {
       expect(skillNameInputs[0].nativeElement.value).toBe('');
       expect(skillNameInputs[1].nativeElement.value).toBe('Dodge');
       expect(skillNameInputs[2].nativeElement.value).toBe('Brawling');
+    });
+
+    it('new skill name is invalid when empty', () => {
+      component['addSkill']();
+
+      const newSkillName = component.skills.at(0).get('name');
+      expect(newSkillName?.valid).toBe(false);
+    });
+
+    it('new skill name is valid when non-empty', () => {
+      component['addSkill']();
+
+      const newSkillName = component.skills.at(0).get('name');
+      newSkillName?.setValue('Piloting');
+      expect(newSkillName?.valid).toBe(true);
     });
 
     it('new skill has required and min(attribute value) validators on value', () => {

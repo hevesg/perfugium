@@ -15,7 +15,7 @@ import { Component, HostListener, input, OnInit, output } from '@angular/core';
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" (click)="onEscape($event)">Cancel</button>
-        <button class="btn btn-primary" (click)="onEnter($event)">Confirm</button>
+        <button class="btn btn-primary" (click)="onEnter($event)" [disabled]="confirmDisabled()">Confirm</button>
       </div>
     </div>
   `,
@@ -41,6 +41,7 @@ export class PrfConfirmModalComponent implements OnInit {
   private keyboardActive = false;
 
   readonly modalTitle = input<string>();
+  readonly confirmDisabled = input(false);
   readonly confirm = output<boolean>();
 
   ngOnInit(): void {
@@ -65,7 +66,7 @@ export class PrfConfirmModalComponent implements OnInit {
   protected onEnter(event?: MouseEvent) {
     // event.detail === 0 means keyboard-triggered click (Enter/Space on focused button).
     // We skip those to avoid duplicate handling with the HostListener.
-    if (event?.detail === 0 || !this.keyboardActive) {
+    if (event?.detail === 0 || !this.keyboardActive || this.confirmDisabled()) {
       return;
     }
     this.confirm.emit(true);

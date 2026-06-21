@@ -102,6 +102,22 @@ describe('Confirm Modal Component', () => {
 
       expect(confirmSpy).not.toHaveBeenCalled();
     });
+
+    it('is disabled when confirmDisabled is true', () => {
+      fixture.componentRef.setInput('confirmDisabled', true);
+      fixture.detectChanges();
+
+      const confirmButton = fixture.debugElement.query(By.css('.btn-primary'));
+      expect(confirmButton.nativeElement.disabled).toBe(true);
+    });
+
+    it('is enabled when confirmDisabled is false', () => {
+      fixture.componentRef.setInput('confirmDisabled', false);
+      fixture.detectChanges();
+
+      const confirmButton = fixture.debugElement.query(By.css('.btn-primary'));
+      expect(confirmButton.nativeElement.disabled).toBe(false);
+    });
   });
 
   describe('keyboard shortcuts', () => {
@@ -121,6 +137,17 @@ describe('Confirm Modal Component', () => {
       document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
 
       expect(confirmSpy).toHaveBeenCalledWith(true);
+    });
+
+    it('does not emit true on Enter key when confirmDisabled is true', () => {
+      const confirmSpy = jest.spyOn(component.confirm, 'emit');
+      fixture.componentRef.setInput('confirmDisabled', true);
+      fixture.detectChanges();
+
+      waitForKeyboardActivation();
+      document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Enter' }));
+
+      expect(confirmSpy).not.toHaveBeenCalled();
     });
 
     it('does not emit on Escape key before keyboard activation delay', () => {

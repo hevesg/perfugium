@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { D6Attribute } from '../../model/d6-character';
@@ -31,7 +32,7 @@ export interface D6AttributeModal {
                 [class.is-invalid]="skill.get('name')?.invalid" />
             </div>
             <div class="col-6">
-              <app-d6-pip-stepper formControlName="value" [min]="data.value.value"
+              <app-d6-pip-stepper formControlName="value" [min]="attributeValue()"
                 [class.is-invalid]="skill.get('value')?.invalid"></app-d6-pip-stepper>
             </div>
           </div>
@@ -50,6 +51,8 @@ export class D6AttributeModalComponent {
   dialogRef = inject<DialogRef<D6Attribute | null>>(DialogRef);
   data = inject<D6AttributeModal>(DIALOG_DATA);
 
+  readonly attributeValue = signal(this.data.value.value);
+
   form: FormGroup = new FormGroup({
     value: new FormControl(this.data.value.value, [Validators.required, Validators.min(3)]),
     skills: new FormArray(
@@ -63,6 +66,20 @@ export class D6AttributeModalComponent {
     ),
   });
 
+  constructor() {
+    this.form.get('value')!.valueChanges.pipe(takeUntilDestroyed()).subscribe((newMin: number) => {
+      this.attributeValue.set(newMin);
+      this.skills.controls.forEach((skillGroup) => {
+        const valueControl = skillGroup.get('value')!;
+        valueControl.setValidators([Validators.required, Validators.min(newMin)]);
+        if (valueControl.value < newMin) {
+          valueControl.setValue(newMin, { emitEvent: false });
+        }
+        valueControl.updateValueAndValidity({ emitEvent: false });
+      });
+    });
+  }
+
   get skills(): FormArray {
     return this.form.get('skills') as FormArray;
   }
@@ -70,7 +87,7 @@ export class D6AttributeModalComponent {
   protected addSkill() {
     this.skills.insert(0, new FormGroup({
       name: new FormControl('', [Validators.required]),
-      value: new FormControl(this.data.value.value, [Validators.required, Validators.min(this.data.value.value)]),
+      value: new FormControl(this.attributeValue(), [Validators.required, Validators.min(this.attributeValue())]),
     }));
   }
 

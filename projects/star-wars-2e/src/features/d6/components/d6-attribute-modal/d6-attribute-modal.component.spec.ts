@@ -145,6 +145,60 @@ describe('D6AttributeModalComponent', () => {
     });
   });
 
+  describe('attribute value change propagation', () => {
+    it('bumps skill value up to new attribute minimum when attribute increases', () => {
+      const newAttributeValue = mockAttribute.skills[1].value + 1; // above Brawling (14)
+      component.form.get('value')?.setValue(newAttributeValue);
+
+      expect(component.skills.at(1).get('value')?.value).toBe(newAttributeValue);
+    });
+
+    it('does not change skill value when it is already above the new minimum', () => {
+      component.form.get('value')?.setValue(mockAttribute.skills[0].value - 1); // below Dodge (15)
+
+      expect(component.skills.at(0).get('value')?.value).toBe(mockAttribute.skills[0].value);
+    });
+
+    it('updates skill validator so values below new attribute minimum are invalid', () => {
+      const newAttributeValue = 16;
+      component.form.get('value')?.setValue(newAttributeValue);
+
+      component.skills.at(0).get('value')?.setValue(newAttributeValue - 1, { emitEvent: false });
+      expect(component.skills.at(0).get('value')?.valid).toBe(false);
+    });
+
+    it('updates skill validator so values at or above new attribute minimum are valid', () => {
+      const newAttributeValue = 16;
+      component.form.get('value')?.setValue(newAttributeValue);
+
+      component.skills.at(0).get('value')?.setValue(newAttributeValue);
+      expect(component.skills.at(0).get('value')?.valid).toBe(true);
+    });
+
+    it('updates attributeValue signal when attribute value changes', () => {
+      component.form.get('value')?.setValue(20);
+
+      expect(component.attributeValue()).toBe(20);
+    });
+
+    it('updates skill stepper aria-valuemin when attribute value changes', () => {
+      const newAttributeValue = 18;
+      component.form.get('value')?.setValue(newAttributeValue);
+      fixture.detectChanges();
+
+      const stepperInputs = fixture.debugElement.queryAll(By.css('app-d6-pip-stepper input'));
+      expect(stepperInputs[1].nativeElement.getAttribute('aria-valuemin')).toBe(String(newAttributeValue));
+    });
+
+    it('uses current attribute value as default for newly added skill after attribute increased', () => {
+      const newAttributeValue = 20;
+      component.form.get('value')?.setValue(newAttributeValue);
+      component['addSkill']();
+
+      expect(component.skills.at(0).get('value')?.value).toBe(newAttributeValue);
+    });
+  });
+
   describe('template rendering', () => {
     const waitForKeyboardActivation = () => jest.advanceTimersByTime(25);
 

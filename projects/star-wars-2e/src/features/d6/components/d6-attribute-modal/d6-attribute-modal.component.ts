@@ -17,7 +17,7 @@ export interface D6AttributeModal {
     <prf-confirm-modal [modalTitle]="data.title" (confirm)="onConfirm($event)" [formGroup]="form" [confirmDisabled]="form.invalid">
       <div class="row mb-2">
         <div class="col-6">
-          <button class="btn btn-outline-secondary" type="button" (click)="addSkill()" [disabled]="form.invalid">Add Skill</button>
+          <button class="btn w-100 btn-secondary" type="button" (click)="addSkill()" [disabled]="form.invalid">Add Skill</button>
         </div>
         <div class="col-6">
           <app-d6-pip-stepper formControlName="value" [min]="3"
@@ -27,9 +27,15 @@ export interface D6AttributeModal {
       <div formArrayName="skills">
         @for (skill of skills.controls; track skill) {
           <prf-swipe-item class="mb-2" #swipeItem>
-            <prf-swipe-end class="d-flex justify-content-center gap-2 bg-danger-subtle p-1 rounded-end">
-              <button class="btn btn-danger btn-sm" type="button" (click)="deleteSkill($index)">Delete skill</button>
-              <button class="btn btn-secondary btn-sm" type="button" (click)="swipeItem.close()">Cancel</button>
+            <prf-swipe-end class="bg-danger-subtle p-1 rounded">
+              <div class="row g-1">
+                <div class="col">
+                  <button class="btn btn-danger btn-sm w-100" type="button" (click)="deleteSkill($index)">Delete skill</button>
+                </div>
+                <div class="col">
+                  <button class="btn btn-secondary btn-sm w-100" type="button" (click)="swipeItem.close()">Cancel</button>
+                </div>
+              </div>
             </prf-swipe-end>
             <div class="row" [formGroupName]="$index">
               <div class="col-6">

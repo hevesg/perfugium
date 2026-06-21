@@ -11,6 +11,7 @@ import { D6WeaponsComponent } from './components/d6-weapons/d6-weapons.component
 import { D6EquipmentComponent } from './components/d6-equipment/d6-equipment.component';
 import { D6WeaponsModalComponent } from './components/d6-weapons-modal/d6-weapons-modal.component';
 import { D6PipModalComponent } from './components/d6-pip-modal/d6-pip-modal.component';
+import { SwiperModule } from '../swiper/swiper-module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { D6PipModalComponent } from './components/d6-pip-modal/d6-pip-modal.comp
     D6WeaponsModalComponent,
     D6PipModalComponent,
   ],
-  imports: [CommonModule, PerfugiumModule, ReactiveFormsModule],
+  imports: [CommonModule, PerfugiumModule, ReactiveFormsModule, SwiperModule],
   exports: [
     PerfugiumModule,
     D6AttributeComponent,

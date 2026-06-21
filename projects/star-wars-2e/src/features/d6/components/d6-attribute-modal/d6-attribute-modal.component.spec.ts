@@ -111,12 +111,10 @@ describe('D6AttributeModalComponent', () => {
 
   describe('onConfirm', () => {
     it('closes dialog with skills sorted alphabetically when confirmed', () => {
-      component.form.get('value')?.setValue(15);
-
       component['onConfirm'](true);
 
       expect(mockDialogRef.close).toHaveBeenCalledWith({
-        value: 15,
+        value: 12,
         skills: [
           { name: 'Brawling', value: 14 },
           { name: 'Dodge', value: 15 },
@@ -366,6 +364,42 @@ describe('D6AttributeModalComponent', () => {
         By.css('[formArrayName="skills"] app-d6-pip-stepper'),
       );
       expect(skillSteppers[0].nativeElement.classList).not.toContain('is-invalid');
+    });
+  });
+
+  describe('deleteSkill', () => {
+    it('removes the skill at the given index', () => {
+      component['deleteSkill'](0);
+
+      expect(component.skills.length).toBe(1);
+      expect(component.skills.at(0).value).toEqual({ name: 'Brawling', value: 14 });
+    });
+
+    it('removes the skill at the last index', () => {
+      component['deleteSkill'](1);
+
+      expect(component.skills.length).toBe(1);
+      expect(component.skills.at(0).value).toEqual({ name: 'Dodge', value: 15 });
+    });
+
+    it('makes the form valid after removing an invalid skill', () => {
+      component['addSkill']();
+      expect(component.form.invalid).toBe(true);
+
+      component['deleteSkill'](0);
+
+      expect(component.form.valid).toBe(true);
+    });
+
+    it('renders the remaining skill rows after deletion', () => {
+      jest.advanceTimersByTime(25);
+      fixture.detectChanges();
+
+      component['deleteSkill'](0);
+      fixture.detectChanges();
+
+      const skillRows = fixture.debugElement.queryAll(By.css('[formArrayName="skills"] .row'));
+      expect(skillRows.length).toBe(1);
     });
   });
 

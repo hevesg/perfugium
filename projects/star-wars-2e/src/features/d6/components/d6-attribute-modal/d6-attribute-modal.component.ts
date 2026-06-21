@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
@@ -26,16 +26,22 @@ export interface D6AttributeModal {
       </div>
       <div formArrayName="skills">
         @for (skill of skills.controls; track skill) {
-          <div class="row mb-2" [formGroupName]="$index">
-            <div class="col-6">
-              <input class="form-control" type="text" formControlName="name"
-                [class.is-invalid]="skill.get('name')?.invalid" />
+          <prf-swipe-item class="mb-2" #swipeItem>
+            <prf-swipe-end class="d-flex justify-content-center gap-2 bg-danger-subtle p-1 rounded-end">
+              <button class="btn btn-danger btn-sm" type="button" (click)="deleteSkill($index)">Delete skill</button>
+              <button class="btn btn-secondary btn-sm" type="button" (click)="swipeItem.close()">Cancel</button>
+            </prf-swipe-end>
+            <div class="row" [formGroupName]="$index">
+              <div class="col-6">
+                <input class="form-control" type="text" formControlName="name"
+                  [class.is-invalid]="skill.get('name')?.invalid" />
+              </div>
+              <div class="col-6">
+                <app-d6-pip-stepper formControlName="value" [min]="attributeValue()"
+                  [class.is-invalid]="skill.get('value')?.invalid"></app-d6-pip-stepper>
+              </div>
             </div>
-            <div class="col-6">
-              <app-d6-pip-stepper formControlName="value" [min]="attributeValue()"
-                [class.is-invalid]="skill.get('value')?.invalid"></app-d6-pip-stepper>
-            </div>
-          </div>
+          </prf-swipe-item>
         }
       </div>
     </prf-confirm-modal>
@@ -50,6 +56,7 @@ export interface D6AttributeModal {
 export class D6AttributeModalComponent {
   dialogRef = inject<DialogRef<D6Attribute | null>>(DialogRef);
   data = inject<D6AttributeModal>(DIALOG_DATA);
+  private cdr = inject(ChangeDetectorRef);
 
   readonly attributeValue = signal(this.data.value.value);
 
@@ -82,6 +89,11 @@ export class D6AttributeModalComponent {
 
   get skills(): FormArray {
     return this.form.get('skills') as FormArray;
+  }
+
+  protected deleteSkill(index: number) {
+    this.skills.removeAt(index);
+    this.cdr.markForCheck();
   }
 
   protected addSkill() {

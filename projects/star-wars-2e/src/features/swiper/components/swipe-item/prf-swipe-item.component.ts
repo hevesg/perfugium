@@ -1,16 +1,18 @@
 import {
-  AfterViewInit,
   Component,
   ContentChild,
+  ElementRef,
   HostListener,
   computed,
+  inject,
   output,
   signal,
 } from '@angular/core';
 import { PrfSwipeStartComponent } from '../swipe-start/prf-swipe-start.component';
 import { PrfSwipeEndComponent } from '../swipe-end/prf-swipe-end.component';
 
-type SwipeState = 'start' | 'end' | null;
+type SwipeOutputState = 'start' | 'end' | null;
+type PanelState = 'opening-start' | 'open-start' | 'opening-end' | 'open-end' | 'closing' | null;
 
 @Component({
   selector: 'prf-swipe-item',
@@ -39,12 +41,20 @@ type SwipeState = 'start' | 'end' | null;
     .swipe-main {
       position: relative;
       z-index: 1;
-      width: 100%;
     }
   `,
+  host: {
+    '[class.is-open-start]': 'panelState() === "open-start" || panelState() === "opening-start"',
+    '[class.is-open-end]': 'panelState() === "open-end" || panelState() === "opening-end"',
+    '[class.is-opening]': 'panelState() === "opening-start" || panelState() === "opening-end"',
+    '[class.is-closing]': 'panelState() === "closing"',
+    '[class.is-dragging]': 'isPastThreshold()',
+  },
 })
-export class PrfSwipeItemComponent implements AfterViewInit {
+export class PrfSwipeItemComponent {
   private readonly SWIPE_THRESHOLD_PX = 50;
+  protected readonly TRANSITION_DURATION_MS = 300;
+  private readonly elementRef = inject(ElementRef);
 
   @ContentChild(PrfSwipeStartComponent)
   protected readonly startPanel?: PrfSwipeStartComponent;
@@ -52,27 +62,39 @@ export class PrfSwipeItemComponent implements AfterViewInit {
   @ContentChild(PrfSwipeEndComponent)
   protected readonly endPanel?: PrfSwipeEndComponent;
 
-  readonly opened = output<SwipeState>();
+  readonly opened = output<SwipeOutputState>();
 
-  private readonly isOpen = signal<SwipeState>(null);
+  protected readonly panelState = signal<PanelState>(null);
   protected readonly dragOffset = signal(0);
   protected readonly isDragging = signal(false);
+  protected readonly isPastThreshold = computed(
+    () => this.isDragging() && Math.abs(this.dragOffset()) >= this.SWIPE_THRESHOLD_PX,
+  );
+
+  private readonly openSide = computed<SwipeOutputState>(() => {
+    const s = this.panelState();
+    if (s === 'open-start' || s === 'opening-start') return 'start';
+    if (s === 'open-end' || s === 'opening-end') return 'end';
+    return null;
+  });
 
   private startX = 0;
-  private startPanelWidth = 0;
-  private endPanelWidth = 0;
+  private stateTimer?: ReturnType<typeof setTimeout>;
 
-  ngAfterViewInit(): void {
-    this.startPanelWidth = this.startPanel?.elementRef.nativeElement.offsetWidth ?? 0;
-    this.endPanelWidth = this.endPanel?.elementRef.nativeElement.offsetWidth ?? 0;
+  private get hostWidth(): number {
+    return this.elementRef.nativeElement.offsetWidth;
+  }
+
+  private scheduleTransition(next: PanelState): void {
+    clearTimeout(this.stateTimer);
+    this.stateTimer = setTimeout(() => this.panelState.set(next), this.TRANSITION_DURATION_MS);
   }
 
   protected readonly mainTransform = computed(() => {
-    const open = this.isOpen();
+    const side = this.openSide();
     const drag = this.dragOffset();
-
-    if (open === 'start') return `translateX(${this.startPanelWidth + drag}px)`;
-    if (open === 'end') return `translateX(${-this.endPanelWidth + drag}px)`;
+    if (side === 'start') return `translateX(calc(100% + ${drag}px))`;
+    if (side === 'end') return `translateX(calc(-100% + ${drag}px))`;
     return `translateX(${drag}px)`;
   });
 
@@ -81,9 +103,10 @@ export class PrfSwipeItemComponent implements AfterViewInit {
   );
 
   close(): void {
-    this.isOpen.set(null);
+    this.panelState.set('closing');
     this.dragOffset.set(0);
     this.opened.emit(null);
+    this.scheduleTransition(null);
   }
 
   @HostListener('touchstart', ['$event'])
@@ -122,20 +145,18 @@ export class PrfSwipeItemComponent implements AfterViewInit {
   }
 
   private applyDrag(rawOffset: number): void {
-    const open = this.isOpen();
+    const side = this.openSide();
     let clamped = rawOffset;
 
-    if (open === null) {
+    if (side === null) {
       if (rawOffset > 0 && !this.startPanel) clamped = 0;
       if (rawOffset < 0 && !this.endPanel) clamped = 0;
-      clamped = Math.min(clamped, this.startPanel ? this.startPanelWidth : 0);
-      clamped = Math.max(clamped, this.endPanel ? -this.endPanelWidth : 0);
-    } else if (open === 'start') {
+      clamped = Math.min(clamped, this.startPanel ? this.hostWidth : 0);
+      clamped = Math.max(clamped, this.endPanel ? -this.hostWidth : 0);
+    } else if (side === 'start') {
       clamped = Math.min(rawOffset, 0);
-      clamped = Math.max(clamped, -this.startPanelWidth);
-    } else if (open === 'end') {
+    } else if (side === 'end') {
       clamped = Math.max(rawOffset, 0);
-      clamped = Math.min(clamped, this.endPanelWidth);
     }
 
     this.dragOffset.set(clamped);
@@ -143,20 +164,26 @@ export class PrfSwipeItemComponent implements AfterViewInit {
 
   private settle(): void {
     const offset = this.dragOffset();
-    const open = this.isOpen();
-    let next: SwipeState = open;
+    const side = this.openSide();
+    let nextSide: SwipeOutputState = side;
 
-    if (open === null) {
-      if (offset >= this.SWIPE_THRESHOLD_PX && this.startPanel) next = 'start';
-      else if (offset <= -this.SWIPE_THRESHOLD_PX && this.endPanel) next = 'end';
+    if (side === null) {
+      if (offset >= this.SWIPE_THRESHOLD_PX && this.startPanel) nextSide = 'start';
+      else if (offset <= -this.SWIPE_THRESHOLD_PX && this.endPanel) nextSide = 'end';
     }
 
-    this.isOpen.set(next);
     this.dragOffset.set(0);
     this.isDragging.set(false);
 
-    if (next !== open) {
-      this.opened.emit(next);
+    if (nextSide !== side) {
+      this.opened.emit(nextSide);
+      if (nextSide === 'start') {
+        this.panelState.set('opening-start');
+        this.scheduleTransition('open-start');
+      } else if (nextSide === 'end') {
+        this.panelState.set('opening-end');
+        this.scheduleTransition('open-end');
+      }
     }
   }
 }

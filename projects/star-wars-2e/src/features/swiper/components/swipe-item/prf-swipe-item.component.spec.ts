@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { SwiperModule } from '../../swiper-module';
 import { PrfSwipeItemComponent } from './prf-swipe-item.component';
 
-const PANEL_WIDTH = 80;
+const HOST_WIDTH = 80;
 
 function mouseSwipe(host: HTMLElement, startX: number, endX: number): void {
   host.dispatchEvent(new MouseEvent('mousedown', { clientX: startX, bubbles: true }));
@@ -105,9 +105,8 @@ function setupFixture<T>(hostType: new () => T): {
   const mainEl = fixture.debugElement.query(By.css('[data-qa="swipe-main"]'))
     .nativeElement as HTMLElement;
 
-  // JSDOM has no layout engine — set widths manually so gesture logic works
-  (swipeItem as any).startPanelWidth = PANEL_WIDTH;
-  (swipeItem as any).endPanelWidth = PANEL_WIDTH;
+  // JSDOM has no layout engine — mock host offsetWidth so gesture clamping works
+  Object.defineProperty(hostElement, 'offsetWidth', { configurable: true, get: () => HOST_WIDTH });
 
   return { fixture, host: fixture.componentInstance, swipeItem, hostElement, mainEl };
 }
@@ -156,7 +155,7 @@ describe('PrfSwipeItemComponent', () => {
         mouseSwipe(hostElement, 0, 60);
         fixture.detectChanges();
 
-        expect(mainEl.style.transform).toBe(`translateX(${PANEL_WIDTH}px)`);
+        expect(mainEl.style.transform).toBe('translateX(calc(100% + 0px))');
       });
 
       it('emits "start" when the start panel opens', () => {
@@ -194,7 +193,7 @@ describe('PrfSwipeItemComponent', () => {
         mouseSwipe(hostElement, 0, -60);
         fixture.detectChanges();
 
-        expect(mainEl.style.transform).toBe(`translateX(-${PANEL_WIDTH}px)`);
+        expect(mainEl.style.transform).toBe('translateX(calc(-100% + 0px))');
       });
 
       it('emits "end" when the end panel opens', () => {
@@ -293,6 +292,194 @@ describe('PrfSwipeItemComponent', () => {
       swipeItem.close();
 
       expect(host.openedValue).toBeNull();
+    });
+  });
+
+  describe('host state classes', () => {
+    it('has no state class by default', () => {
+      const { hostElement } = setupFixture(BothPanelsHostComponent);
+
+      expect(hostElement.classList).not.toContain('is-open-start');
+      expect(hostElement.classList).not.toContain('is-open-end');
+      expect(hostElement.classList).not.toContain('is-dragging');
+    });
+
+    it('adds is-dragging class once drag passes the threshold', () => {
+      const { fixture, hostElement } = setupFixture(BothPanelsHostComponent);
+
+      mouseDown(hostElement, 0);
+      document.dispatchEvent(new MouseEvent('mousemove', { clientX: 60, bubbles: true }));
+      fixture.detectChanges();
+
+      expect(hostElement.classList).toContain('is-dragging');
+    });
+
+    it('does not add is-dragging class for sub-threshold drag', () => {
+      const { fixture, hostElement } = setupFixture(BothPanelsHostComponent);
+
+      mouseDown(hostElement, 0);
+      document.dispatchEvent(new MouseEvent('mousemove', { clientX: 30, bubbles: true }));
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-dragging');
+    });
+
+    it('removes is-dragging class after drag ends', () => {
+      const { fixture, hostElement } = setupFixture(BothPanelsHostComponent);
+
+      mouseDown(hostElement, 0);
+      document.dispatchEvent(new MouseEvent('mousemove', { clientX: 60, bubbles: true }));
+      mouseUp();
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-dragging');
+    });
+
+    it('adds is-open-start class when swiped right past threshold', () => {
+      const { fixture, hostElement } = setupFixture(BothPanelsHostComponent);
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+
+      expect(hostElement.classList).toContain('is-open-start');
+      expect(hostElement.classList).not.toContain('is-open-end');
+      expect(hostElement.classList).not.toContain('is-dragging');
+    });
+
+    it('adds is-open-end class when swiped left past threshold', () => {
+      const { fixture, hostElement } = setupFixture(BothPanelsHostComponent);
+
+      mouseSwipe(hostElement, 0, -60);
+      fixture.detectChanges();
+
+      expect(hostElement.classList).toContain('is-open-end');
+      expect(hostElement.classList).not.toContain('is-open-start');
+      expect(hostElement.classList).not.toContain('is-dragging');
+    });
+
+    it('removes is-open-* classes immediately after close()', () => {
+      const { fixture, hostElement, swipeItem } = setupFixture(BothPanelsHostComponent);
+      jest.useFakeTimers();
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+
+      swipeItem.close();
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-open-start');
+      expect(hostElement.classList).not.toContain('is-open-end');
+
+      jest.useRealTimers();
+    });
+
+    it('adds is-closing class immediately after close()', () => {
+      const { fixture, hostElement, swipeItem } = setupFixture(BothPanelsHostComponent);
+      jest.useFakeTimers();
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+
+      swipeItem.close();
+      fixture.detectChanges();
+
+      expect(hostElement.classList).toContain('is-closing');
+
+      jest.useRealTimers();
+    });
+
+    it('removes is-closing class after the transition duration', () => {
+      const { fixture, hostElement, swipeItem } = setupFixture(BothPanelsHostComponent);
+      jest.useFakeTimers();
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+
+      swipeItem.close();
+      fixture.detectChanges();
+
+      jest.advanceTimersByTime(swipeItem['TRANSITION_DURATION_MS']);
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-closing');
+
+      jest.useRealTimers();
+    });
+
+    it('does not add is-opening class after close()', () => {
+      const { fixture, hostElement, swipeItem } = setupFixture(BothPanelsHostComponent);
+      jest.useFakeTimers();
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+      swipeItem.close();
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-opening');
+
+      jest.useRealTimers();
+    });
+  });
+
+  describe('is-opening class', () => {
+    it('adds is-opening class immediately when settled to open', () => {
+      const { fixture, hostElement, swipeItem } = setupFixture(BothPanelsHostComponent);
+      jest.useFakeTimers();
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+
+      expect(hostElement.classList).toContain('is-opening');
+
+      jest.useRealTimers();
+    });
+
+    it('removes is-opening class after transition duration', () => {
+      const { fixture, hostElement, swipeItem } = setupFixture(BothPanelsHostComponent);
+      jest.useFakeTimers();
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+
+      jest.advanceTimersByTime(swipeItem['TRANSITION_DURATION_MS']);
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-opening');
+      expect(hostElement.classList).toContain('is-open-start');
+
+      jest.useRealTimers();
+    });
+
+    it('does not add is-opening class when snap-back occurs (below threshold)', () => {
+      const { fixture, hostElement } = setupFixture(BothPanelsHostComponent);
+
+      mouseSwipe(hostElement, 0, 30);
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-opening');
+    });
+  });
+
+  describe('is-closing class', () => {
+    it('does not linger if close() is called again before timer expires', () => {
+      const { fixture, hostElement, swipeItem } = setupFixture(BothPanelsHostComponent);
+      jest.useFakeTimers();
+
+      mouseSwipe(hostElement, 0, 60);
+      fixture.detectChanges();
+      swipeItem.close();
+      fixture.detectChanges();
+
+      jest.advanceTimersByTime(swipeItem['TRANSITION_DURATION_MS'] / 2);
+      swipeItem.close();
+      fixture.detectChanges();
+
+      jest.advanceTimersByTime(swipeItem['TRANSITION_DURATION_MS']);
+      fixture.detectChanges();
+
+      expect(hostElement.classList).not.toContain('is-closing');
+
+      jest.useRealTimers();
     });
   });
 });

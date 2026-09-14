@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "export NVM_DIR=\"$HOME/.nvm\"; [ -s \"$(brew --prefix nvm 2>/dev/null)/nvm.sh\" ] && \\. \"$(brew --prefix nvm)/nvm.sh\"; [ -s \"$NVM_DIR/nvm.sh\" ] && \\. \"$NVM_DIR/nvm.sh\"; if [ -f .nvmrc ]; then v=$(cat .nvmrc); nvm install \"$v\" >/dev/null 2>&1; nvm use \"$v\"; fi",
+            "statusMessage": "Switching Node version via nvm..."
+          }
+        ]
+      }
+    ]
+  }
+}

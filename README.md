@@ -7,7 +7,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
-ng serve
+npm run start:star-wars-2e
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
@@ -31,17 +31,33 @@ ng generate --help
 To build the project run:
 
 ```bash
-ng build
+npm run build:star-wars-2e
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
 ## Running unit tests
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Unit tests run on [Jest](https://jestjs.io/) with Angular `TestBed` (via `jest-preset-angular`), not the `ng test`/Vitest setup Angular CLI scaffolds by default:
 
 ```bash
-ng test
+npm run test:star-wars-2e
+```
+
+To run a single test file or filter by test name:
+
+```bash
+npx jest path/to/file.spec.ts
+npx jest -t "test name"
+```
+
+## Linting and formatting
+
+```bash
+npm run lint          # eslint --fix
+npm run lint:check    # eslint, no autofix
+npm run format        # prettier --write
+npm run format:check  # prettier --check
 ```
 
 ## Running end-to-end tests
